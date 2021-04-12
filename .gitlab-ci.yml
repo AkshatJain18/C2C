@@ -1,0 +1,89 @@
+# Enginered by: Avinash Kumar<avinash.kumar@hashedin.com> & Satya Kumar <satya.kumar@hashedin.com>
+# image: docker:latest
+# services:
+#   - docker:dind
+
+stages:
+  - build_angular
+  - cloud_deploy
+
+cache:
+    paths:
+    - ./node_modules
+
+generate_artifact:
+ image: node:12-alpine
+ stage: build_angular
+ only:
+ - master
+ script:
+  - npm install -g @angular/cli --silent
+  - npm install --silent
+  - ng build --prod --output-hashing none
+ artifacts:
+  paths:
+    - dist/
+
+gcloud_deploy:
+  image: google/cloud-sdk:alpine
+  stage: cloud_deploy
+  environment: staging
+  only:
+  - master
+
+  before_script:
+  - "echo ${GITLAB_USER_LOGIN/./-}"
+  - "Servicename=${GITLAB_USER_LOGIN/./-}"
+  - "echo $Servicename"
+  - "ServiceName=${Servicename//-}"
+  - "echo $ServiceName"
+  - "echo $CI_PROJECT_NAME"
+  - |
+    cat <<EOF >> app.yaml
+    runtime: python27
+    service: $ServiceName
+    api_version: 1
+    threadsafe: true
+    handlers:
+    - url: /
+      static_files: dist/index.html
+      upload: dist/index.html
+    - url: /
+      static_dir: dist/
+
+    skip_files:
+      - e2e/
+      - node_modules/
+      - src/
+      - ^(.*/)?\..*$
+      - ^(.*/)?.*\.json$
+      - ^(.*/)?.*\.md$
+      - ^(.*/)?.*\.yaml$
+      - ^LICENSE
+    EOF
+  - "cat app.yaml"
+  - |
+    cat <<EOF >> $CI_PIPELINE_ID.json
+    {
+      "type": "service_account",
+      "project_id": "hu18-groupb-angular",
+      "private_key_id": "584c575cd841f545cde703e1237817313b106350",
+      "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDmQQxHLisjxpb6\nnVPmSVZWMwqvZY88MgfymHRND980b1XHL1HD2TGCUWmgF/RcPhWF8JxLu3K2F1P1\n1W9vq8yALQ9QYjeGZ+9QUhQTbzZjWLJJip86AAyKjNE+DzT/sVvyVMO5k1JPY4XF\nv6dvpxgF/u1v9I9tj7XVvtllf+Gw+JRL1E5jT1Xz53vkLcnzJvHThPBhODVraR1o\nYka9RezsoN6ngpogsVnE4JGTKpAApD+Bqr4CSGL8V3YZDU9+ZsXG0Rd4Qn/YBS7k\nVWY3GQWInLO9GAAUxmU3I5W71itvoREssAY0XLC8TA+0Ca0U1VCMHmprh1uDURm1\nvFVeFKp/AgMBAAECggEAZo7csCvRTUscXp6LC0zpJtXvUXa0GQTT42uiidyi99EL\nbQAXtFteoQQwPv3MevWwUot8ooLoslCrthkOXLgyC3mGk7BbuQM8ZhNZG9ryZ8fP\nCdCz4Xq6G1BjtvfBDI7sPIEi+Nq00+WpZQ5bvvC3U5xcF/zfkdZsELvES2Btn4wQ\n/SD60cxM6s3AT5p0QlbEYZAxyslwuPD6TgJsSAk8bYK+R3rWA2881SqYaIYhuLLx\n3FfBAhTzLZNQHaSsegEoAKGx7rKD55JtqN2huV6i/sEoKC69UZ64OgizVZKWry7g\nOt0jAKqm2TflD8xxBfxduzqjTpbKHZadDG4RwC/AMQKBgQD1xd9j5Lkq3EeJVdjW\n1Kn2BaTDQflWXQAS5KDchzsdcZHLpirv6QZCpYFSOLAztoDeBVnhFo13znw8JEs6\nOCjRl3LxuxFC8rA6+Uz8XakiPksLCMqN0VWLWpr1y0k9zCL6sd0R+nIPy4OB1+9v\nwSz04E7MeeRDTER7tnio22WSNwKBgQDv1dverLk9yeRXpIWEp/s4DM2LyKH7wa+M\nXp4hnoV6jlDgR1Mb6ncgczmy5RSRJZanvzcqD8iEtTbdcY37AvaPAmhTAWQvbvHu\nQA3ERCmlqUt8Xq8BmmSwSS8Ha9Qg1ILNZzGm2g575eBBq5MbW4VQ+/kF/LQpy5PT\nJFMZMVSl+QKBgFqzbZ+190gEBzp9vgp6bUboCkgs/tGKfM58JYl9NqnFEeMwLcRg\nIPlTjwhC93P+NEy7eNICuq6uO1cOpdyUgSvoUnk3akVkvvjkrC6ueg6zIoqt8eKo\nkINfKrTvEtaFkZsnLMjHvnRpzNyMTkbV6bttVGdNzJmxecyWKK1YWoG9AoGAV76t\nT11v9Ewt72awtqTig1IjzVVc9geZm0huoCwn93uj2TofDOKOLOAbJvkquiO/Z6XM\nn+XgXbUS2peV81TVMeMWme+zYKs9dgYXQ0wQ1JwIkvrtGjALUHel7hgkJtK4/D8Z\n6kpy7B9hGYWVL3gfYU6ef/NBUt05OxFaGahzqLkCgYEAl+nOrJLhEnxhwtdXAwpk\ns+uoWw6Rbb15IKwJmIgdF2d4Cr8EAG9EhLAFGkIHmFlKRCsfJlN4D/9i9o7jbcoY\nz4hvYimp/13EX4qlIU8p042mNI3Mfu5kyYm+PMVRUm+kDH1aCUrrPunZlZXkvr9e\nvXlh5coNj3xM15yXNmqcEPs=\n-----END PRIVATE KEY-----\n",
+      "client_email": "huappengine@hu18-groupb-angular.iam.gserviceaccount.com",
+      "client_id": "116778921371903909347",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/huappengine%40hu18-groupb-angular.iam.gserviceaccount.com"
+      }
+    EOF
+  - "cat $CI_PIPELINE_ID.json"
+
+  script:
+  - gcloud auth activate-service-account --key-file $CI_PIPELINE_ID.json
+  - gcloud --project hu18-groupb-angular app deploy --version v1 --appyaml app.yaml
+  - url=$(gcloud app services browse $ServiceName --no-launch-browser --project hu18-groupb-angular)
+  - echo $url
+
+  after_script:
+  - rm $CI_PIPELINE_ID.json
