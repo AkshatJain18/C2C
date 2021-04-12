@@ -1,0 +1,30 @@
+<div class="sign-in-page">
+  <div class="sign-in-container">
+    <p class="logo">C2C</p>
+    <div class="form-container">
+      <p class="header text-secondary">Welcome back!</p>
+      <p class="login-prompt">Login to your account</p>
+      <form [formGroup]="signInForm">
+        <div>
+          <label for="emailId">Email ID:</label><br>
+          <input type="text" formControlName="">
+        </div>
+        <div>
+          <label for="password">Password:</label><br>
+          <input type="password" formControlName="">
+        </div>
+        <button type="button" class="btn btn-primary">Login</button><br>
+      </form>
+      <a class="text-dark" href="">Create new account?</a>
+    </div>
+    <a class="forgot-password-link " href="">Forgot password?</a>
+  </div>
+  <div class="slideshow">
+    <div class="">
+      <img class="slideshow-image" src="../../assets/slideshow-image1.png" width="100%" >
+      <!-- <div class="text">Caption Three</div> -->
+    </div>
+
+  </div>
+
+</div>

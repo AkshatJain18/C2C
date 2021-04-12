@@ -1,0 +1,75 @@
+@import '../../styles.scss';
+
+.sign-in-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  @extend .font-verdana;
+
+  .sign-in-container {
+    display: grid;
+    width: 100%;
+    grid-template-rows: 20% 60% 20%;
+    //justify-content: center;
+    align-items: center;
+
+    p.logo {
+      margin-left: 10%;
+      @extend .text-x-large, .text-bold;
+    }
+
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .header {
+        @extend .text-small;
+      }
+
+      .login-prompt {
+        @extend .text-large, .text-bold;
+      }
+
+      form {
+        label {
+          @extend .text-x-small, .text-color-grey;
+        }
+
+        button {
+          border-radius: 45px;
+          width: 100%;
+          background-image: linear-gradient(to left,rgb(88,13,200), rgb(79,52,214),
+                          rgb(75,67,217), rgb(60,93,231),rgb(46,119,240));
+          box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+          margin-top: 2rem;
+          border: none;
+          @extend .text-small;
+        }
+
+        input {
+          border: none;
+          outline: none;
+          border-bottom: 0.12rem solid rgb(102, 187, 187);
+          // border-bottom: linear-gradient(to left,rgb(88,13,200), rgb(79,52,214),
+          // rgb(75,67,217), rgb(60,93,231),rgb(46,119,240));
+        }
+      }
+
+      .create-account-link {
+          margin-top: 1rem;
+          @extend .text-bold, .text-small;
+      }
+    }
+    .forgot-password-link {
+      text-align: center;
+      @extend .text-small, .text-color-grey;
+    }
+
+  }
+}
+
+
+
+
+
