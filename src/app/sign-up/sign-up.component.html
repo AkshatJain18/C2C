@@ -1,0 +1,62 @@
+<div class="box-container">
+
+  <div class="sign-up-page shadow-lg">
+
+    <div class="sign-up-container">
+      <p class="logo font-weight-bolder">C2C</p>
+      <div class="form-container">
+        <p class="header text-secondary">Welcome!</p>
+        <p class="login-prompt font-weight-bold">Create account to get started</p>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+          <div>
+            <label>First Name:</label><br>
+            <input type="text" formControlName="firstName"><br>
+            <span class="text-danger" *ngIf="!signUpForm.get('firstName')?.valid && signUpForm.get('firstName')?.touched">*This field is mandatory</span>
+          </div>
+          <div>
+            <label>Last Name:</label><br>
+            <input type="text" formControlName="lastName"><br>
+            <span class="text-danger" *ngIf="!signUpForm.get('lastName')?.valid && signUpForm.get('lastName')?.touched">*This field is mandatory</span>
+          </div>
+          <div>
+            <label>Email ID:</label><br>
+            <input type="text" formControlName="emailId"><br>
+            <span class="text-danger" *ngIf="!signUpForm.get('emailId')?.valid && signUpForm.get('emailId')?.touched">*Enter a valid Email ID</span>
+          </div>
+          <div>
+            <label>Address:</label><br>
+            <textarea rows="1" formControlName="address"></textarea><br>
+            <span class="text-danger" *ngIf="!signUpForm.get('address')?.valid && signUpForm.get('address')?.touched">*This field is mandatory</span>
+          </div>
+          <div>
+            <label>State:</label><br>
+            <input type="text" formControlName="state"><br>
+            <span class="text-danger" *ngIf="!signUpForm.get('state')?.valid && signUpForm.get('state')?.touched">*This field is mandatory</span>
+          </div>
+          <div>
+            <label>Pincode:</label><br>
+            <input type="text" formControlName="pinCode"><br>
+            <span class="text-danger" *ngIf="!signUpForm.get('pinCode')?.valid && signUpForm.get('pinCode')?.touched">*This field is mandatory</span>
+          </div>
+          <div>
+            <label>Set Password:</label><br>
+            <input type="password" formControlName="password"><br>
+            <span class="text-danger" *ngIf="!signUpForm.get('password')?.valid && signUpForm.get('password')?.touched">*Enter a valid password</span>
+          </div>
+          <div>
+            <label>Confirm Password:</label><br>
+            <input type="password" formControlName="confirmPassword"><br>
+            <span class="text-danger" *ngIf="!signUpForm.get('confirmPassword')?.valid && signUpForm.get('confirmPassword')?.touched">*Passwords dont match</span>
+          </div>
+          <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">Create Account</button><br>
+          <span class="text-danger" *ngIf="!signUpForm.valid && signUpForm.touched">Please enter valid data</span>
+        </form>
+        <a class="text-dark create-account-link font-weight-bold" routerLink='/'>Already a user?</a>
+      </div>
+    </div>
+
+    <app-carousel></app-carousel>
+
+  </div>
+
+</div>
