@@ -2,7 +2,7 @@
 
   <div class="sign-in-page shadow-lg">
 
-    <div class="sign-in-container">
+    <div class="sign-in-container w3-animate-top">
       <p class="logo font-weight-bolder">C2C</p>
       <div class="form-container">
         <p class="header text-secondary">Welcome back!</p>
@@ -18,14 +18,14 @@
             <input type="password" formControlName="password"><br>
             <span class="text-danger" *ngIf="!signInForm.get('password')?.valid && signInForm.get('password')?.touched">*Enter your password</span>
           </div>
-          <button type="submit" class="btn btn-primary submit" value="submit">Login</button><br>
+          <button type="submit" [disabled]="!signInForm.valid" class="btn btn-primary submit" value="submit">Login</button><br>
         </form>
         <a class="text-dark create-account-link font-weight-bold" routerLink="/signUp">Create new account?</a>
       </div>
       <a class="forgot-password-link " href="">Forgot password?</a>
     </div>
 
-    <app-carousel></app-carousel>
+    <app-carousel class="w3-animate-bottom"></app-carousel>
 
   </div>
 

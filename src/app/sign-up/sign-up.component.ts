@@ -27,15 +27,18 @@ export class SignUpComponent implements OnInit {
       address : new FormControl(user.address,[Validators.required,Validators.maxLength(50)]),
       state : new FormControl(user.state,Validators.required),
       pinCode : new FormControl(user.pinCode, Validators.required),
-      password : new FormControl(user.password,Validators.required),
-      confirmPassword : new FormControl(null, Validators.required)
+      password : new FormControl(user.password,[Validators.required, Validators.minLength(8)]),
+      confirmPassword : new FormControl(null),
+      checkBox : [false, Validators.requiredTrue]
     },{
       validator: MustMatch('password','confirmPassword')
     }
     )
   }
 
-  get f() { return this.signUpForm.controls; }
+  get f() {
+    return this.signUpForm.controls;
+  }
 
   onSubmit() {
     console.log(this.signUpForm.value);

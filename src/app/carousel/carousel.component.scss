@@ -1,7 +1,26 @@
+// .carousel {
+//   //height: 100%;
+//   .carousel-element {
+//     //height: 100%;
+
+//   }
+// }
+
 .carousel {
   height: 100%;
-  .carousel-element {
+
+  .carousel-inner {
     height: 100%;
 
+    .carousel-item {
+      height: 100%;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 }
+
+

@@ -1,5 +1,38 @@
-<div class="carousel">
-  <div class="carousel-element">
-    <img class="slideshow-image" src="../../assets/slideshow-image1.png" width="100%" height="100%">
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-interval="2000">
+      <img src="../../assets/slideshow-image-1.png" alt="slide-1">
+      <div class="carousel-caption d-none d-md-block">
+        <h3 class="font-weight-bolder">First slide label</h3>
+        <p class="font-weight">Paragraph paragraph paragraph 1</p>
+      </div>
+    </div>
+    <div class="carousel-item" data-interval="3000">
+      <img src="../../assets/slideshow-image-2.jpg" alt="slide-1">
+      <div class="carousel-caption d-none d-md-block">
+        <h3 class="font-weight-bolder">Second slide label</h3>
+        <p class="font-weight">Paragraph paragraph paragraph 2</p>
+      </div>
+    </div>
+    <div class="carousel-item" data-interval="3000">
+      <img src="../../assets/slideshow-image-3.jpg" alt="slide-1">
+      <div class="carousel-caption d-none d-md-block">
+        <h3 class="font-weight-bolder">Third slide label</h3>
+        <p class="font-weight">Paragraph paragraph paragraph 3</p>
+      </div>
+    </div>
   </div>
+  <a href="#myCarousel" class="carousel-control-prev" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a href="#myCarousel" class="carousel-control-next" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
 </div>
+
