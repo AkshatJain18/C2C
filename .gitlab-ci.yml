@@ -1,0 +1,23 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  before_script:
+    - echo "Installing NPM Dependencies and running Angular Application"
+  script:
+    #- fuser -k 4200/tcp
+    - npm install 
+    - nohup ng serve --host 0.0.0.0 --disable-host-check &
+#Obtain Public IP Address
+    - curl https://ipecho.net/plain ; echo
+  tags:
+    - frontend
+  only:
+    - master
+  cache:
+    key: install-cache
+    paths:
+      - node_modules/
+
+
