@@ -15,7 +15,20 @@
           </div>
           <div>
             <label for="password">Password:</label><br>
-            <input type="password" formControlName="password"><br>
+            <div class="input-group">
+              <input [type]="fieldTextType ? 'text' : 'password'" formControlName="password"><br>
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-lg"
+                  [ngClass]="{
+                    'fa-eye-slash': !fieldTextType,
+                    'fa-eye': fieldTextType
+                  }"
+                  (click)="toggleFieldTextType()"></i>
+                </span>
+             </div>
+            </div>
+
             <span class="text-danger" *ngIf="!signInForm.get('password')?.valid && signInForm.get('password')?.touched">*Enter your password</span>
           </div>
           <button type="submit" [disabled]="!signInForm.valid" class="btn btn-primary submit" value="submit">Login</button><br>

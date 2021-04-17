@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: linear-gradient(to left, rgb(216,223,235), rgb(232, 240, 255));
+  @extend .bg-light-grey;
 
   .sign-up-page {
     width: 70%;
@@ -14,7 +14,7 @@
     background-color: white;
     overflow-y: scroll;
     //box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
-    @extend .font-verdana;
+    @extend .font-mulish;
 
     .sign-up-container {
       display: grid;
@@ -41,9 +41,9 @@
           @extend .text-large, .text-bold;
         }
 
-        .login-prompt {
-          //@extend .text-large;
-        }
+        // .login-prompt {
+        //   //@extend .text-large;
+        // }
 
         form {
           width: 100%;
@@ -51,6 +51,10 @@
           flex-direction: column;
           align-items: center;
           justify-content: center;
+
+          label {
+            @extend .text-x-small, .text-grey;
+          }
 
           .input-fields {
             width: 70%;
@@ -71,25 +75,33 @@
               border-bottom: 0.12rem solid rgb(102, 187, 187);
             }
 
+            textarea::-webkit-scrollbar {
+              width: 0.4rem;
+            }
+
+            textarea::-webkit-scrollbar-thumb {
+              border-radius: 1rem;
+              @extend .bg-blue-purple;
+            }
+
             .checkBox {
               margin-top: 1rem;
             }
 
             span {
-              @extend .text-x-small, .font-verdana;
+              @extend .text-x-small;
             }
 
           }
 
           button {
             border-radius: 45px;
+            // background-color:#ff8700;
             width: 40%;
-            background-image: linear-gradient(to left,rgb(88,13,200), rgb(79,52,214),
-                            rgb(75,67,217), rgb(60,93,231),rgb(46,119,240));
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
             margin-top: 2rem;
             border: none;
-            @extend .text-small;
+            @extend .text-small, .bg-blue-purple;
           }
           button:hover {
             box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
@@ -100,7 +112,10 @@
           }
 
           span {
-            @extend .text-x-small, .font-verdana;
+            @extend .text-x-small;
+          }
+          .checkBox-container, .pw-validation-message {
+            width: 70%;
           }
         }
 
@@ -117,6 +132,7 @@
   }
   .sign-up-page::-webkit-scrollbar {
     width: 0.4rem;
+    height: 0.4rem;
   }
 
   // .sign-up-page::-webkit-scrollbar-track {
@@ -125,9 +141,7 @@
 
   .sign-up-page::-webkit-scrollbar-thumb {
     border-radius: 1rem;
-    background-color: #00d2ff;
-    background-image: linear-gradient(to top,rgb(88,13,200), rgb(79,52,214),
-                    rgb(75,67,217), rgb(60,93,231),rgb(46,119,240));
+    @extend .bg-blue-purple;
   }
 
 

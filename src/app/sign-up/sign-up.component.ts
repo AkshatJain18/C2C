@@ -24,10 +24,11 @@ export class SignUpComponent implements OnInit {
       firstName : new FormControl(user.firstName,[Validators.required,Validators.maxLength(20)]),
       lastName : new FormControl(user.lastName,[Validators.required,Validators.maxLength(20)]),
       emailId : new FormControl(user.emailId,[Validators.required,Validators.email]),
-      address : new FormControl(user.address,[Validators.required,Validators.maxLength(50)]),
-      state : new FormControl(user.state,Validators.required),
+      address : new FormControl(user.address,Validators.required),
+      phoneNumber : new FormControl(user.state,[Validators.required, Validators.maxLength(10)]),
       pinCode : new FormControl(user.pinCode, Validators.required),
-      password : new FormControl(user.password,[Validators.required, Validators.minLength(8)]),
+      password : new FormControl(user.password,[Validators.required, Validators.minLength(8),
+                    Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)]),
       confirmPassword : new FormControl(null),
       checkBox : [false, Validators.requiredTrue]
     },{

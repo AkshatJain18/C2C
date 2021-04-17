@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: linear-gradient(to left, rgb(216,223,235), rgb(232, 240, 255));
+  @extend .bg-light-grey;
 
   .sign-in-page {
     width: 70%;
@@ -14,7 +14,7 @@
     grid-template-columns: 1fr 1fr;
     background-color: white;
     //box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
-    @extend .font-verdana;
+    @extend .font-mulish;
 
     .sign-in-container {
       display: grid;
@@ -50,12 +50,10 @@
           button {
             border-radius: 45px;
             width: 100%;
-            background-image: linear-gradient(to left,rgb(88,13,200), rgb(79,52,214),
-                            rgb(75,67,217), rgb(60,93,231),rgb(46,119,240));
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
             margin-top: 2rem;
             border: none;
-            @extend .text-small;
+            @extend .text-small, .bg-blue-purple;
           }
 
           button:hover {
@@ -70,12 +68,20 @@
             border: none;
             outline: none;
             border-bottom: 0.12rem solid rgb(102, 187, 187);
-            // border-bottom: linear-gradient(to left,rgb(88,13,200), rgb(79,52,214),
-            // rgb(75,67,217), rgb(60,93,231),rgb(46,119,240));
+          }
+
+          .input-group-text {
+            border: none;
+            outline: none;
+            background-color: white;
+
+            i {
+              cursor: pointer;
+            }
           }
 
           span {
-            @extend .text-x-small, .font-verdana;
+            @extend .text-x-small;
           }
         }
 

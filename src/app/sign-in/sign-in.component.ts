@@ -11,6 +11,8 @@ export class SignInComponent implements OnInit {
 
   signInForm !: FormGroup;
 
+  fieldTextType: boolean = false;
+
   constructor() {
     this.buildSignInForm(new User({}));
    }
@@ -28,6 +30,10 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     console.log("here");
     console.log(this.signInForm.value);
+  }
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
   }
 
 }

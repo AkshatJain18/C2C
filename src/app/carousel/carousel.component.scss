@@ -1,13 +1,19 @@
-// .carousel {
-//   //height: 100%;
-//   .carousel-element {
-//     //height: 100%;
-
-//   }
-// }
+@import '../../styles.scss';
 
 .carousel {
   height: 100%;
+
+  .carousel-indicators {
+    li {
+      border-radius: 50%;
+      height: 0.7rem;
+      width: 0.7rem;
+    }
+    li.active {
+      height: 0.8rem;
+      width: 0.8rem;
+    }
+  }
 
   .carousel-inner {
     height: 100%;
@@ -15,12 +21,20 @@
     .carousel-item {
       height: 100%;
 
+      .carousel-caption {
+        @extend .font-mulish;
+      }
+
       img {
         height: 100%;
         width: 100%;
       }
     }
   }
+
+  // .carousel-control-prev, .carousel-control-next {
+  //   filter: invert(100%);
+  // }
 }
 
 

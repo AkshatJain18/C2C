@@ -1,5 +1,5 @@
-.font-verdana {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.font-mulish {
+  font-family:  'Mulish', sans-serif;
 }
 
 .text-small {
@@ -23,8 +23,43 @@
 }
 
 .text-grey {
-  color: grey;
+  color: rgb(150, 157, 167);
 }
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+.border-grey {
+  border-color: rgb(150, 157, 167);
+}
+
+.text-orange {
+  color: #ff8700;
+}
+
+.bg-orange {
+  background-color: #ff8700;
+}
+
+.border-orange {
+  border-color: #ff8700;
+}
+
+.bg-blue-purple {
+  background-image: linear-gradient(to left,rgb(88,13,200), rgb(79,52,214),
+  rgb(75,67,217), rgb(60,93,231),rgb(46,119,240));
+}
+
+.border-blue-purple {
+  border-color: rgb(75,67,217);
+}
+
+.text-blue-purple {
+  color: rgb(75,67,217);
+}
+
+.bg-light-orange {
+  background-image: linear-gradient(to left, rgb(255, 248, 227), rgb(252, 241, 222));
+}
+
+.bg-light-grey {
+  background-image: linear-gradient(to left, rgb(216,223,235), rgb(232, 240, 255));
+}
+

@@ -8,13 +8,15 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateAdComponent } from './create-ad/create-ad.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     CarouselComponent,
-    SignUpComponent
+    SignUpComponent,
+    CreateAdComponent
   ],
   imports: [
     BrowserModule,
