@@ -7,7 +7,7 @@ deploy:
     - echo "Installing NPM Dependencies and running Angular Application"
   script:
 #Kill existing process
-    #- fuser -k 4200/tcp
+    - fuser -k 4200/tcp
 #Install dependencies
     - npm install 
 #Run ng serve/ start angular project
