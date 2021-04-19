@@ -6,11 +6,14 @@ deploy:
   before_script:
     - echo "Installing NPM Dependencies and running Angular Application"
   script:
-    - fuser -k 4200/tcp
+#Kill existing process
+    #- fuser -k 4200/tcp
+#Install dependencies
     - npm install 
-    - nohup ng serve --host 0.0.0.0 --disable-host-check &
-#Obtain Public IP Address to view application
-    - curl https://ipecho.net/plain ; echo
+#Run ng serve/ start angular project
+    - nohup ng serve --host 0.0.0.0 </dev/null &>/dev/null &
+#Obtain Public IP to browse
+    - wget -qO- https://ipecho.net/plain ; echo
   tags:
     - frontend
   only:
