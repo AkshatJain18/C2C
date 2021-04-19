@@ -11,7 +11,8 @@ deploy:
 #Install dependencies
     - npm install 
 #Run ng serve/ start angular project
-    - nohup ng serve --host 0.0.0.0 </dev/null &>/dev/null &
+    - nohup ng serve --host 0.0.0.0 &
+    #- nohup ng serve --host 0.0.0.0 </dev/null &>/dev/null &
 #Obtain Public IP to browse
     - wget -qO- https://ipecho.net/plain ; echo
   tags:
