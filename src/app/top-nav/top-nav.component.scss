@@ -1,0 +1,83 @@
+@import "../../styles.scss";
+
+.top-nav-container{
+    background-color: blueviolet;
+
+    .top-nav{
+        padding: 10px 70px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content:space-between;
+        @extend .border-bottom;
+
+        .logo{
+            margin-top:auto;
+            margin-bottom: auto;
+            font-size: 24px;
+            font-style: italic;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+
+        .nav-items-container{
+            display: flex;
+            align-items: center;
+            column-gap: 40px;
+
+            .nav-item{
+                display: flex;
+                align-items: center;
+                column-gap: 15px;
+    
+                label{
+                    @extend .text-small,.text-darkgrey,.text-uppercase;
+                    color: white;
+                }
+
+                img{
+                    height: 20px;
+                    width: 25px;
+                }
+            }
+    
+            .create-ad-nav-button{
+                background-color: #ff8700;
+                color: #ffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                column-gap:5px;
+                border-radius: 5px;
+                height: 45px;
+                width: 140px;
+                cursor: pointer;
+
+                label{
+                    @extend .text-small,.text-light,.text-uppercase;
+                    color: white;
+                    cursor: pointer;
+                }
+                
+                .plus-icon{
+                    @extend .text-x-large;
+                    cursor: pointer;
+                }
+            }
+    
+            .my-profile-nav-item{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                row-gap: 5px;
+                color: white;
+    
+                img{
+                    height: 35px;
+                    width: 40px;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}

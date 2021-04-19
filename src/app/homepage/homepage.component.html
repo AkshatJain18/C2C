@@ -1,0 +1,89 @@
+<div class="homepage-container">
+    <ngb-carousel class="carousel">  
+        <ng-template ngbSlide>  
+            <img src="../../assets/cover1.png" class="w-100" alt="Delhi Metro">  
+            <div class="carousel-caption">  
+            </div>  
+        </ng-template>  
+        <ng-template ngbSlide>  
+            <img src="../../assets/cover2.png" class="w-100" alt="Bangalore Metro">  
+            <div class="carousel-caption">  
+            </div>  
+        </ng-template>    
+    </ngb-carousel> 
+
+    <div class="ads-section">
+        <div class="sub-container">
+            <div class="search-container d-none">
+                <label class="heading">Search for</label>
+                <div class="search-sub-container">
+                    <input>
+                    <select>
+                        <option>within company</option>
+                        <option>anywhere</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="ads-container mt-3">
+                <div class="ad-row">
+                    <label class="heading">Latest ads</label>
+                    <div class="ads-sub-container mt-4">
+                        <div *ngFor="let ad of ads" class="ad">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-75 h-75" src="../../assets/car.jpg">
+                            </div>
+                            <div class="ad-details">
+                                <div class="ad-details-container">
+                                    <label class="item-price">₹ {{ad.initialPrice}}</label>
+                                    <label class="item-name">{{ad.title}}</label>
+                                </div>
+                                <img height="20px" width="40px" src="../../assets/bookmarked-icon.png">
+                            </div>
+                        </div>
+                    </div>
+                    <label class="view-all mt-2">view all</label>
+                </div>
+
+                <div class="ad-row">
+                    <label class="heading">Trending ads</label>
+                    <div class="ads-sub-container mt-4">
+                        <div *ngFor="let ad of ads" class="ad h-100">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-75 h-75" src="../../assets/car.jpg">
+                            </div>
+                            
+                            <div class="ad-details">
+                                <div class="ad-details-container">
+                                    <label class="item-price">₹ {{ad.initialPrice}}</label>
+                                    <label class="item-name">{{ad.title}}</label>
+                                </div>
+                                <img height="20px" width="40px" src="../../assets/bookmarked-icon.png">
+                            </div>
+                        </div>
+                    </div>
+                    <label class="view-all mt-2">view all</label>
+                </div>
+                
+                <div class="ad-row">
+                    <label class="heading">Donation ads</label>
+                    <div class="ads-sub-container mt-4">
+                        <div *ngFor="let ad of ads" class="ad">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-75 h-75" src="../../assets/car.jpg">
+                            </div>
+                            <div class="ad-details">
+                                <div class="ad-details-container">
+                                    <label class="item-price">₹ {{ad.initialPrice}}</label>
+                                    <label class="item-name">{{ad.title}}</label>
+                                </div>
+                                <img height="20px" width="40px" src="../../assets/bookmarked-icon.png">
+                            </div>
+                        </div>
+                    </div>
+                    <label class="view-all mt-2">view all</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
