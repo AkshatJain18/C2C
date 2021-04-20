@@ -14,7 +14,7 @@ build_job:
   tags:
     - frontend
   only:
-    - masters
+    - master
   cache:
     key: install-cache
     paths:
@@ -31,7 +31,7 @@ gcloud_deploy:
   tags:
     - frontend
   only:
-    - masters
+    - master
   before_script:
   - |
     cat <<EOF >> $CI_PIPELINE_ID.json
