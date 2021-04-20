@@ -1,26 +1,62 @@
 stages:
+  - build
   - deploy
 
-deploy:
-  stage: deploy
+build_job:
+  image: node:12-alpine
+  stage: build
   before_script:
-    - echo "Installing NPM Dependencies and running Angular Application"
+    - echo "Installing NPM Dependencies and building Angular Application"
   script:
-#Kill existing process
-    - fuser -k 4200/tcp
-#Install dependencies
     - npm install 
-#Run ng serve/ start angular project
-    - nohup ng serve --host 0.0.0.0 </dev/null &>/dev/null &
-#Obtain Public IP to browse
-    - wget -qO- https://ipecho.net/plain ; echo
+    - npm install -g @angular/cli
+    - ng build --prod --output-hashing none
   tags:
     - frontend
   only:
-    - master
+    - masters
   cache:
     key: install-cache
     paths:
       - node_modules/
+  artifacts:
+    paths:
+      - dist/
+
+gcloud_deploy:
+  image: google/cloud-sdk:alpine
+  stage: deploy
+  dependencies: 
+    - build_job
+  tags:
+    - frontend
+  only:
+    - masters
+  before_script:
+  - |
+    cat <<EOF >> $CI_PIPELINE_ID.json
+    {
+      "type": "service_account",
+      "project_id": "hu18-groupa-angular",
+      "private_key_id": "$PRIVATE_KEY_ID",
+      "private_key": "$PRIVATE_KEY",
+      "client_email": "huappengine@hu18-groupa-angular.iam.gserviceaccount.com",
+      "client_id": "104726124207565481899",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/huappengine%40hu18-groupa-angular.iam.gserviceaccount.com"
+      }
+    EOF
+  - "cat $CI_PIPELINE_ID.json"
+  
+  script:
+  - gcloud auth activate-service-account --key-file $CI_PIPELINE_ID.json
+  - gcloud --project hu18-groupa-angular app deploy --version v1 --appyaml app.yaml
+  - url=$(gcloud app services browse c2c-marketplace-frontend --no-launch-browser --project hu18-groupa-angular)
+  - echo $url
+  
+  after_script:
+  - rm $CI_PIPELINE_ID.json
 
 
