@@ -33,3 +33,43 @@ html,body{
 .text-darkgrey{
     color: #b6bcc5;
 }
+
+.ad{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    cursor: pointer;
+    @extend .card;
+
+    .item-photo{
+      height: 180px;
+      width: 100%;
+    }
+
+    .ad-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background-color: white;
+
+      .ad-details-container {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+
+        .item-price {
+          @extend .text-dark, .text-x-large;
+          font: bold;
+        }
+
+        .item-name {
+          @extend .text-darkgrey, .text-medium;
+        }
+      }
+
+      img {
+        padding-right: 15px;
+      }
+    }
+  }

@@ -1,7 +1,9 @@
 @import "../../styles.scss";
 
 .top-nav-container{
-    background-color: blueviolet;
+    background-color:#3646a6;
+    color: white;
+    @extend .text-small,.text-uppercase;
 
     .top-nav{
         padding: 10px 70px;
@@ -17,7 +19,10 @@
             font-size: 24px;
             font-style: italic;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
+        }
+
+        .searchInput{
+            width: 250px;
         }
 
         .nav-items-container{
@@ -29,11 +34,6 @@
                 display: flex;
                 align-items: center;
                 column-gap: 15px;
-    
-                label{
-                    @extend .text-small,.text-darkgrey,.text-uppercase;
-                    color: white;
-                }
 
                 img{
                     height: 20px;
@@ -42,8 +42,7 @@
             }
     
             .create-ad-nav-button{
-                background-color: #ff8700;
-                color: #ffff;
+                background-color: orange;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -54,8 +53,7 @@
                 cursor: pointer;
 
                 label{
-                    @extend .text-small,.text-light,.text-uppercase;
-                    color: white;
+                    @extend .text-small,.text-dark,.text-uppercase;
                     cursor: pointer;
                 }
                 
@@ -70,7 +68,6 @@
                 flex-direction: column;
                 align-items: center;
                 row-gap: 5px;
-                color: white;
     
                 img{
                     height: 35px;

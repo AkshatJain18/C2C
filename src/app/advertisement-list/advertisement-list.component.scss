@@ -1,87 +1,118 @@
 @import "../../styles.scss";
 
-.filter-section{
-    width: 25%;
-    height: 100%;
-    overflow-y: scroll;
-    
-    .filter-container{
-        padding: 30px;
-        display: flex;
-        flex-direction: column;
-        row-gap: 30px;
+.ads-list-container{
+  display: flex;
+  @extend .bg-light;
 
-        .heading{
-            @extend .text-medium,.text-dark,.text-uppercase;
-            font-weight: bold
-        }
+  .filter-section{
+      width: 25%;
+      height: 100%;
+      overflow-y: scroll;
+      
+      .filter-container{
+          padding: 30px;
+          display: flex;
+          flex-direction: column;
+          row-gap: 30px;
 
-        .filter-name{
-            @extend .text-medium,.text-darkgrey,.text-capitalize;
-        }
+          .heading{
+              @extend .text-medium,.text-dark,.text-uppercase;
+              font-weight: bold
+          }
 
-        .filter-value{
-            @extend .text-medium,.text-dark,.text-capitalize;
-        }
+          .filter-name{
+              @extend .text-medium,.text-darkgrey,.text-capitalize;
+          }
 
-        .buy-donate-container{
-            display: flex;
-            flex-direction: column;
-            row-gap: 15px;
+          .filter-value{
+              @extend .text-medium,.text-dark,.text-capitalize;
+          }
 
-            .buy-donate-sub-container{
-                display: flex;
-                column-gap: 8px;
+          .buy-donate-container{
+              display: flex;
+              flex-direction: column;
+              row-gap: 15px;
 
-                .tab{
-                    border: 2px solid gray;
-                    @extend .text-center,.text-capitalize;
-                    padding: 5px;
-                    cursor: pointer;
-                }
+              .buy-donate-sub-container{
+                  display: flex;
+                  column-gap: 8px;
 
-                .active-tab{
-                    border:2px solid #ff8700;
-                    color: #ff8700;
-                }
-            }
-        }
+                  .tab{
+                      border: 2px solid gray;
+                      @extend .text-center,.text-capitalize;
+                      padding: 5px;
+                      cursor: pointer;
+                  }
 
-        .price-range-container{
-            display: flex;
-            flex-direction: column;
-            row-gap: 15px;
+                  .active-tab{
+                      border:2px solid #3646a6;
+                      color: #3646a6;
+                  }
+              }
+          }
 
-            .price-range-sub-container{
-                display: flex;
-                flex-direction: column;
-                row-gap: 5px;
-            }
-        }
+          .price-range-container{
+              display: flex;
+              flex-direction: column;
+              row-gap: 15px;
 
-        .category-container{
-            display: flex;
-            flex-direction: column;
-            row-gap: 15px;
+              .price-range-sub-container{
+                  display: flex;
+                  flex-direction: column;
+                  row-gap: 5px;
+              }
+          }
 
-            .category-sub-container{
-                display: flex;
-                flex-direction: column;
-                row-gap: 5px;
+          .category-container{
+              display: flex;
+              flex-direction: column;
+              row-gap: 15px;
 
-                .category-row{
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
+              .category-sub-container{
+                  display: flex;
+                  flex-direction: column;
+                  row-gap: 5px;
 
-                    .checkbox{
+                  .category-row{
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
 
-                    }
-                }
-            }
-        }
+                      .checkbox{
+
+                      }
+                  }
+              }
+          }
+      }
+  }
+
+  .ads-section{
+    width: 75%;
+   
+    .ads-container{
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      row-gap: 40px;
+      overflow-y: scroll;
+
+      .heading{
+        @extend .text-medium,.text-dark,.text-uppercase;
+        font-weight: bold
+      }
+
+      .ads-sub-container{
+        column-gap: 20px;
+        row-gap: 20px;
+        display: grid;
+        grid-template-columns: auto auto auto;
+      }
+
     }
+  }
 }
+
 
 // We need to use ::ng-deep to overcome view encapsulation
 ::ng-deep {
@@ -90,7 +121,7 @@
       height: 4px;
     }
     .custom-slider .ngx-slider .ngx-slider-selection {
-      background: #ff8700;
+      background: #3646a6;
     }
     .custom-slider .ngx-slider .ngx-slider-pointer {
       width: 15px;

@@ -1,17 +1,21 @@
 <div class="homepage-container">
-    <ngb-carousel class="carousel">  
-        <ng-template ngbSlide>  
-            <img src="../../assets/cover1.png" class="w-100" alt="Delhi Metro">  
-            <div class="carousel-caption">  
-            </div>  
-        </ng-template>  
-        <ng-template ngbSlide>  
-            <img src="../../assets/cover2.png" class="w-100" alt="Bangalore Metro">  
-            <div class="carousel-caption">  
-            </div>  
-        </ng-template>    
-    </ngb-carousel> 
 
+    <div id="myCarousel" class="carousel slide mt-3" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-interval="2000">
+            <img src="../../assets/cover1.png" class="w-100" alt="slide-1">
+          </div>
+          <div class="carousel-item" data-interval="4000">
+            <img src="../../assets/cover2.png" class="w-100" alt="slide-1">
+          </div>
+        </div>
+    </div>
+      
     <div class="ads-section">
         <div class="sub-container">
             <div class="search-container d-none">
@@ -30,15 +34,14 @@
                     <label class="heading">Latest ads</label>
                     <div class="ads-sub-container mt-4">
                         <div *ngFor="let ad of ads" class="ad">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <img class="w-75 h-75" src="../../assets/car.jpg">
+                            <div class="d-flex">
+                                <img class="item-photo" src="../../assets/car.jpg">
                             </div>
                             <div class="ad-details">
                                 <div class="ad-details-container">
                                     <label class="item-price">₹ {{ad.initialPrice}}</label>
                                     <label class="item-name">{{ad.title}}</label>
                                 </div>
-                                <img height="20px" width="40px" src="../../assets/bookmarked-icon.png">
                             </div>
                         </div>
                     </div>
@@ -49,16 +52,14 @@
                     <label class="heading">Trending ads</label>
                     <div class="ads-sub-container mt-4">
                         <div *ngFor="let ad of ads" class="ad h-100">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <img class="w-75 h-75" src="../../assets/car.jpg">
+                            <div class="d-flex">
+                                <img class="item-photo" src="../../assets/car.jpg">
                             </div>
-                            
                             <div class="ad-details">
                                 <div class="ad-details-container">
                                     <label class="item-price">₹ {{ad.initialPrice}}</label>
                                     <label class="item-name">{{ad.title}}</label>
                                 </div>
-                                <img height="20px" width="40px" src="../../assets/bookmarked-icon.png">
                             </div>
                         </div>
                     </div>
@@ -69,15 +70,14 @@
                     <label class="heading">Donation ads</label>
                     <div class="ads-sub-container mt-4">
                         <div *ngFor="let ad of ads" class="ad">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <img class="w-75 h-75" src="../../assets/car.jpg">
+                            <div class="d-flex">
+                                <img class="item-photo" src="../../assets/car.jpg">
                             </div>
                             <div class="ad-details">
                                 <div class="ad-details-container">
                                     <label class="item-price">₹ {{ad.initialPrice}}</label>
                                     <label class="item-name">{{ad.title}}</label>
                                 </div>
-                                <img height="20px" width="40px" src="../../assets/bookmarked-icon.png">
                             </div>
                         </div>
                     </div>

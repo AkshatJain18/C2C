@@ -1,4 +1,6 @@
+import { Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit } from '@angular/core';
+import { Advertisement } from 'src/models/advertisement';
 
 @Component({
   selector: 'app-advertisement-list',
@@ -7,9 +9,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvertisementListComponent implements OnInit {
 
-  constructor() { }
+  ads:Advertisement[] = [
+    {
+      title:'Car',
+      initialPrice:1000
+    },
+    {
+      title:'Bike',
+      initialPrice:1000
+    },
+    {
+      title:'Car',
+      initialPrice:1000
+    },
+    {
+      title:'Table',
+      initialPrice:1000
+    },
+    {
+      title:'Table',
+      initialPrice:1000
+    },
+    {
+      title:'Table',
+      initialPrice:1000
+    }
+  ];
 
-  ngOnInit(): void {
+  startPrice: number = 500;
+  endPrice: number = 100000;
+  options: Options = {
+    floor: 500,
+    ceil: 100000,
+    step: 1000,
+    showTicks: true
+  };
+
+  isBuy:boolean;
+  
+  constructor() {
+    this.isBuy = true;
   }
 
+  changeTab(){
+    this.isBuy = !this.isBuy;
+  }
+
+  ngOnInit(): void {
+
+  }
 }

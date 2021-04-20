@@ -75,43 +75,6 @@
             grid-template-columns: auto auto auto auto;
             row-gap: 20px;
             column-gap: 20px;
-
-            .ad {
-              display: flex;
-              flex-direction: column;
-              background-color: white;
-              height: 100%;
-              border: 1px solid lightseagreen;
-              cursor: pointer;
-    
-              .ad-details {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                border-top: 1px solid lightseagreen;
-                background-color: white;
-    
-                .ad-details-container {
-                  display: flex;
-                  flex-direction: column;
-                  padding: 15px;
-    
-                  .item-price {
-                    @extend .text-dark, .text-x-large;
-                    font: bold;
-                  }
-    
-                  .item-name {
-                    @extend .text-darkgrey, .text-medium;
-                  }
-                }
-    
-                img {
-                  padding-right: 15px;
-                }
-              }
-            }
           }
 
           .view-all{
