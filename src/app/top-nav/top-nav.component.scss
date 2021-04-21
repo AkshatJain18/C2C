@@ -3,7 +3,7 @@
 .top-nav-container{
     background-color:#3646a6;
     color: white;
-    @extend .text-small,.text-uppercase;
+    @extend .text-small,.text-uppercase,.fixed-top;
 
     .top-nav{
         padding: 10px 70px;
@@ -17,12 +17,19 @@
             margin-top:auto;
             margin-bottom: auto;
             font-size: 24px;
-            font-style: italic;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .searchInput{
             width: 250px;
+            background: none;
+            border:1px solid red;
+            color: white;
+        }
+
+        .searchInput::placeholder{
+            color: white;
+            padding: 10px;
         }
 
         .nav-items-container{

@@ -5,8 +5,9 @@
             <div class="buy-donate-container">
                 <label class="filter-name">Select One</label>
                 <div class="buy-donate-sub-container">
-                    <span class="tab" (click)="changeTab()" [ngClass]="{'active-tab':isBuy}">Buy</span>
-                    <span class="tab" (click)="changeTab()" [ngClass]="{'active-tab':!isBuy}">Accept Donation</span>
+                    <span class="tab" (click)="setAdType(1)" [ngClass]="{'active-tab':adType==1}">Buy</span>
+                    <span class="tab" (click)="setAdType(2)" [ngClass]="{'active-tab':adType==2}">Donation</span>
+                    <span class="tab" (click)="setAdType(3)" [ngClass]="{'active-tab':adType==3}">Auction</span>
                 </div>
             </div>
             <div class="price-range-container">
@@ -24,30 +25,10 @@
             <div class="category-container">
                 <label class="filter-name">Select Category</label>
                 <div class="category-sub-container">
-                    <div class="category-row">
-                        <label class="filter-value">Air Conditioner</label>
-                        <input type="checkbox">
+                    <div class="category-row" *ngFor="let category of categories">
+                        <label class="filter-value">{{category.categoryName}}</label>
+                        <input (change)="addOrRemoveCategory(category.categoryId)" type="checkbox">
                     </div>
-                    <div class="category-row">
-                        <label class="filter-value">Air Conditioner</label>
-                        <input type="checkbox">
-                    </div>
-                    <div class="category-row">
-                        <label class="filter-value">Air Conditioner</label>
-                        <input type="checkbox">
-                    </div>
-                    <div class="category-row">
-                        <label class="filter-value">Air Conditioner</label>
-                        <input type="checkbox">
-                    </div>
-                    <div class="category-row">
-                        <label class="filter-value">Air Conditioner</label>
-                        <input type="checkbox">
-                    </div>
-                    <div class="category-row">
-                        <label class="filter-value">Air Conditioner</label>
-                        <input type="checkbox">
-                    </div>  
                 </div>
             </div>
         </div>
@@ -55,19 +36,31 @@
 
     <div class="ads-section">
         <div class="ads-container">
-            <label class="heading">All ads</label>
+            <div class="d-flex justify-content-between">
+                <label class="heading">All ads</label>.
+                <div class="d-flex">
+                    <label class="heading">SORT BY</label>
+                    <select style="margin-left: 20px;background: none;border: none;">
+                        <option (click)="sortByTime()">Recenty Added</option>
+                        <option (click)="sortByViews()">Trending</option>
+                    </select>
+                </div>
+            </div>
+            
             <div class="ads-sub-container">
-                <div *ngFor="let ad of ads" class="ad">
-                    <div class="d-flex">
-                        <img class="item-photo" src="../../assets/car.jpg">
-                    </div>
-                    <div class="ad-details">
-                        <div class="ad-details-container">
-                            <label class="item-price">₹ {{ad.initialPrice}}</label>
-                            <label class="item-name">{{ad.title}}</label>
+                <ng-container *ngFor="let ad of ads">
+                    <div *ngIf="checkCategoryFilter(ad) && ad.initialPrice>=startPrice && ad.initialPrice<=endPrice && ad.adType == adType" class="ad">
+                        <div class="d-flex">
+                            <img class="item-photo" src="../../assets/car.jpg">
+                        </div>
+                        <div class="ad-details">
+                            <div class="ad-details-container">
+                                <label class="item-price">₹ {{ad.initialPrice}}</label>
+                                <label class="item-name">{{ad.adTitle}}</label>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>

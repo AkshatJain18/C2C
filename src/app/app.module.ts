@@ -9,6 +9,9 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { AdvertisementListComponent } from './advertisement-list/advertisement-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {HttpClientModule} from '@angular/common/http';
+import { AdvertisementDetailComponent } from './advertisement-detail/advertisement-detail.component';
+
 
 
 @NgModule({
@@ -18,12 +21,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TopNavComponent,
     SideNavComponent,
     AdvertisementListComponent,
+    AdvertisementDetailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxSliderModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@
 
 .ads-list-container{
   display: flex;
+  height: 100%;
   @extend .bg-light;
 
   .filter-section{
@@ -10,7 +11,8 @@
       overflow-y: scroll;
       
       .filter-container{
-          padding: 30px;
+          padding: 40px;
+          margin-bottom: 70px;
           display: flex;
           flex-direction: column;
           row-gap: 30px;
@@ -93,9 +95,8 @@
     .ads-container{
       display: flex;
       flex-direction: column;
-      padding: 30px;
+      padding: 40px;
       row-gap: 40px;
-      overflow-y: scroll;
 
       .heading{
         @extend .text-medium,.text-dark,.text-uppercase;
@@ -106,7 +107,7 @@
         column-gap: 20px;
         row-gap: 20px;
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 32% 32% 32%;
       }
 
     }

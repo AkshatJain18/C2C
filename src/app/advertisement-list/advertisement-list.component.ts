@@ -1,6 +1,8 @@
 import { Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit } from '@angular/core';
-import { Advertisement } from 'src/models/advertisement';
+import { Advertisement } from 'src/models/Advertisement';
+import { AdService } from 'src/services/ad.service';
+import { CategoryService } from 'src/services/category.service';
 
 @Component({
   selector: 'app-advertisement-list',
@@ -8,33 +10,6 @@ import { Advertisement } from 'src/models/advertisement';
   styleUrls: ['./advertisement-list.component.scss']
 })
 export class AdvertisementListComponent implements OnInit {
-
-  ads:Advertisement[] = [
-    {
-      title:'Car',
-      initialPrice:1000
-    },
-    {
-      title:'Bike',
-      initialPrice:1000
-    },
-    {
-      title:'Car',
-      initialPrice:1000
-    },
-    {
-      title:'Table',
-      initialPrice:1000
-    },
-    {
-      title:'Table',
-      initialPrice:1000
-    },
-    {
-      title:'Table',
-      initialPrice:1000
-    }
-  ];
 
   startPrice: number = 500;
   endPrice: number = 100000;
@@ -45,17 +20,45 @@ export class AdvertisementListComponent implements OnInit {
     showTicks: true
   };
 
-  isBuy:boolean;
+  adType:number;
+
+  ads: Advertisement[] = [];
+  selectedCategories:any[] = [];
+  categories:any[] = [];
   
-  constructor() {
-    this.isBuy = true;
+  constructor(private adService:AdService,private categoryService:CategoryService) {
+    this.adType = 1;
   }
 
-  changeTab(){
-    this.isBuy = !this.isBuy;
+  setAdType(adType:number){
+    this.adType = adType;
+  }
+
+  addOrRemoveCategory(id:any){
+    if(!this.selectedCategories.includes(id)){
+      this.selectedCategories.push(id);
+    }else{
+      this.selectedCategories = this.selectedCategories.filter(c=>c!=id);
+    }
+    console.log(this.selectedCategories);
+  }
+
+  checkCategoryFilter(ad:Advertisement){
+    const shouldExist:boolean = this.selectedCategories.includes(ad.categoryId) || this.selectedCategories.length==0;
+    console.log(shouldExist);
+    return shouldExist;
+  }
+
+  sortByTime(){
+    this.ads.sort();
+  }
+
+  sortByViews(){
+
   }
 
   ngOnInit(): void {
-
+    this.adService.getAds().subscribe(adList => this.ads = adList);
+    this.categoryService.getCategories().subscribe(categoryList => this.categories = categoryList);
   }
 }

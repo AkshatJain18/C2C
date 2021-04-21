@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Options } from "@angular-slider/ngx-slider";
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Advertisement } from 'src/models/advertisement';
+import { Advertisement } from 'src/models/Advertisement';
+import { AwsCloudMapServiceDiscovery } from 'aws-sdk/clients/appmesh';
+import { AdService } from 'src/services/ad.service';
 
 @Component({
   selector: 'app-homepage',
@@ -10,26 +12,9 @@ import { Advertisement } from 'src/models/advertisement';
 })
 export class HomepageComponent implements OnInit {
 
-  ads:Advertisement[] = [
-    {
-      title:'Car',
-      initialPrice:1000
-    },
-    {
-      title:'Bike',
-      initialPrice:1000
-    },
-    {
-      title:'Car',
-      initialPrice:1000
-    },
-    {
-      title:'Table',
-      initialPrice:1000
-    }
-  ];
+  ads:Advertisement[] = [];
   
-  constructor(config: NgbCarouselConfig) {  
+  constructor(config: NgbCarouselConfig,private adService:AdService) {  
     config.interval = 2500;  
     config.keyboard = false;  
     config.pauseOnHover = false;
@@ -37,7 +22,7 @@ export class HomepageComponent implements OnInit {
   }  
 
   ngOnInit(): void {
-
+    this.adService.getAds().subscribe(adList => this.ads = adList);
   }
 
 }
