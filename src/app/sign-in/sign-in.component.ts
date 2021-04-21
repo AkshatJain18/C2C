@@ -38,11 +38,15 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     console.log("sign in");
     console.log(this.signInForm.value);
-    this.http.post("http://35.200.192.67:8080/login",this.signInForm.value)
+    this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/login",this.signInForm.value)
     .subscribe(
       (data:any) => { console.log(data);
                       this.user = data;
-                      if(data===null){this.errorInSignIn=true;}},
+                      localStorage.setItem("userDetails",JSON.stringify(data));
+                      var userD = JSON.parse(localStorage.userDetails);
+                      console.log(userD.id);
+                      if(data===null){this.errorInSignIn=true;
+                      }},
       (err) => { this.errorInSignIn = true },
       () => console.log('done loading user')
     )

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Ad } from '../../model/Ad';
 import axios from 'axios';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 enum typeOfAd {
   donate = 1,
@@ -18,7 +19,7 @@ export class CreateAdComponent implements OnInit {
 
   createAdForm !: FormGroup;
 
-  categories : string[] = ['Vehicle', 'Mobile', 'Job', 'Apartment', 'Electronics','Accessories','Fashion','Others'];
+  http : HttpClient;
 
   adTypes = typeOfAd;
 
@@ -35,17 +36,23 @@ export class CreateAdComponent implements OnInit {
   url2 = "";
   url3 = "";
 
+  public categories: any;
+
   CLOUDINARY_URL = "	https://api.cloudinary.com/v1_1/hashedin/upload";
   CLOUDINARY_UPLOAD_PRESET = "cbtxrrbg";
+  userDetails = JSON.parse(localStorage.userDetails);
 
-  constructor(private formBuiler : FormBuilder) {
+  constructor(httpClient:HttpClient,private formBuiler : FormBuilder) {
     this.buildCreateAdForm(new Ad({}));
+    this.http = httpClient;
 
    }
 
   ngOnInit(): void {
     this.createAdForm.get('adType')?.setValue(this.adTypes.sell);
-    this.createAdForm.get('auctionDuration')?.setValue(0);
+    this.createAdForm.get('auctionDeadline')?.setValue("");
+    console.log(this.userDetails);
+    this.getCategories();
     //this.createAdForm.get('adType')?.updateValueAndValidity();
   }
 
@@ -58,10 +65,10 @@ export class CreateAdComponent implements OnInit {
       categoryId : new FormControl(ad.categoryId,Validators.required),
       description : new FormControl(ad.description, [Validators.required, Validators.maxLength(30)]),
       initialPrice : new FormControl(ad.initialPrice,Validators.required),
-      // sellerId : new FormControl(ad.sellerId,Validators.required),
+      sellerId : new FormControl(this.userDetails.id,Validators.required),
       productAge : new FormControl(ad.productAge),
-      auctionDuration : new FormControl(ad.auctionDuration,Validators.required),
-      img1Url : new FormControl(ad.img1Url,Validators.required),
+      auctionDeadline : new FormControl(ad.auctionDeadline),
+      img1Url : new FormControl(ad.img1Url, Validators.required),
       img2Url : new FormControl(ad.img2Url),
       img3Url : new FormControl(ad.img3Url)
     })
@@ -76,7 +83,7 @@ export class CreateAdComponent implements OnInit {
       this.isSell = true;
       this.isAuction = false;
       this.isDonate = false;
-      this.createAdForm.get('auctionDuration')?.setValue(0);
+      this.createAdForm.get('auctionDeadline')?.setValue("");
     }
     else if(type===this.adTypes.auction) {
       this.isAuction = true;
@@ -88,15 +95,28 @@ export class CreateAdComponent implements OnInit {
       this.isSell = false;
       this.isAuction = false;
       this.createAdForm.get('initialPrice')?.setValue(0);
-      this.createAdForm.get('auctionDuration')?.setValue(0);
+      this.createAdForm.get('auctionDeadline')?.setValue("");
     }
     this.createAdForm.get('adType')?.setValue(type);
     //this.createAdForm.get('adType')?.updateValueAndValidity();
     //this.setConditionalValidators;
   }
 
+  getCategories() {
+    this.http.get("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/category").subscribe(
+      data => { this.categories = data},
+      err => console.error(err),
+      () => console.log('done loading users')
+    )
+  }
+
   onSubmit() {
     console.log(this.createAdForm.value);
+    this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/insertAd",this.createAdForm.value)
+    .subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    )
   }
 
   onSelectFile1(e:any) {

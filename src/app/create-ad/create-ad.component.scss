@@ -102,6 +102,11 @@
       span {
         @extend .text-x-small;
       }
+
+      .date-input {
+        width: 13.8rem;
+        font-size: 1rem;
+      }
     }
 
     button {

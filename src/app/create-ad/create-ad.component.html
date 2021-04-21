@@ -28,7 +28,7 @@
         <label for="Type">Category:</label><br>
         <!-- <input type="text" formControlName="type"> -->
         <select formControlName="categoryId">
-          <option *ngFor="let category of categories" value="{{categories.indexOf(category)+1}}">{{category}}</option>
+          <option *ngFor="let category of categories" value="{{category.categoryId}}">{{category.categoryName}}</option>
         </select><br>
         <span class="text-danger" *ngIf="!createAdForm.get('categoryId')?.valid && createAdForm.get('categoryId')?.touched">Choose Category</span>
       </div>
@@ -49,8 +49,8 @@
       </div>
       <div *ngIf="isAuction">
         <label>Days Until Auction Ends:</label><br>
-        <input type="number" formControlName="auctionDuration"><br>
-        <span class="text-danger" *ngIf="!createAdForm.get('auctionDuration')?.valid && createAdForm.get('auctionDuration')?.touched">*This field is mandatory</span>
+        <input class="date-input" type="datetime-local" formControlName="auctionDeadline"><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('auctionDeadline')?.valid && createAdForm.get('auctionDeadline')?.touched">*This field is mandatory</span>
       </div>
       <div>
         <label>How old is the product (optional):</label><br>
