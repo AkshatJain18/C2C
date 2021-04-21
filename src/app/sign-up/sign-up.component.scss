@@ -25,7 +25,7 @@
       align-items: center;
       // overflow-y: auto;
 
-      p.logo {
+      .logo {
         margin-left: 10%;
         @extend .text-x-large;
       }
@@ -81,7 +81,7 @@
 
             textarea::-webkit-scrollbar-thumb {
               border-radius: 1rem;
-              @extend .bg-blue-purple;
+              @extend .bg-blue;
             }
 
             .checkBox {
@@ -101,7 +101,7 @@
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
             margin-top: 2rem;
             border: none;
-            @extend .text-small, .bg-blue-purple;
+            @extend .text-small, .bg-blue;
           }
           button:hover {
             box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
@@ -141,7 +141,7 @@
 
   .sign-up-page::-webkit-scrollbar-thumb {
     border-radius: 1rem;
-    @extend .bg-blue-purple;
+    @extend .bg-blue;
   }
 
 

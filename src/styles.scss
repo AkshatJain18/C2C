@@ -1,5 +1,7 @@
 .font-mulish {
-  font-family:  'Mulish', sans-serif;
+  //font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  //font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Mulish;
 }
 
 .text-small {
@@ -34,6 +36,10 @@
   color: #ff8700;
 }
 
+.text-blue {
+  color: rgb(0, 119, 255);
+}
+
 .bg-orange {
   background-color: #ff8700;
 }
@@ -42,17 +48,12 @@
   border-color: #ff8700;
 }
 
-.bg-blue-purple {
-  background-image: linear-gradient(to left,rgb(88,13,200), rgb(79,52,214),
-  rgb(75,67,217), rgb(60,93,231),rgb(46,119,240));
+.bg-blue {
+  background-image: linear-gradient(to left,rgb(0, 119, 255),rgb(0, 60, 255));
 }
 
-.border-blue-purple {
-  border-color: rgb(75,67,217);
-}
-
-.text-blue-purple {
-  color: rgb(75,67,217);
+.border-blue {
+  border-color: rgb(0, 119, 255);
 }
 
 .bg-light-orange {
@@ -63,3 +64,10 @@
   background-image: linear-gradient(to left, rgb(216,223,235), rgb(232, 240, 255));
 }
 
+.bg-black {
+  background-color: black;
+}
+
+.text-black {
+  color: black;
+}
