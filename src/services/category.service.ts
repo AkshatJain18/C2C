@@ -7,11 +7,11 @@ import { Observable, of } from 'rxjs';
 })
 export class CategoryService {
 
-  private readonly url = "https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com";
+  private readonly url = "https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/category";
 
   constructor(private httpClient:HttpClient) { }
 
   getCategories():Observable<any>{
-    return this.httpClient.get(this.url + "/category");
+    return this.httpClient.get(this.url);
   }
 }
