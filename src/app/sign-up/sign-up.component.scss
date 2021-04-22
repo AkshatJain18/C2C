@@ -1,0 +1,148 @@
+@import '../../styles.scss';
+
+.box-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  @extend .bg-light-grey;
+
+  .sign-up-page {
+    width: 70%;
+    max-height: 80%;
+    display: block;
+    background-color: white;
+    overflow-y: scroll;
+    //box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+    @extend .font-mulish;
+
+    .sign-up-container {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      grid-template-rows: 20% 80%;
+      //justify-content: center;
+      align-items: center;
+      // overflow-y: auto;
+
+      .logo {
+        margin-left: 10%;
+        @extend .text-x-large;
+      }
+
+
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .header {
+          margin-top: 1rem;
+          @extend .text-large, .text-bold;
+        }
+
+        // .login-prompt {
+        //   //@extend .text-large;
+        // }
+
+        form {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          label {
+            @extend .text-x-small, .text-grey;
+          }
+
+          .input-fields {
+            width: 70%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 15%;
+            // margin-left: 15%;
+            align-items: center;
+            // justify-content: center;
+
+            label {
+              @extend .text-x-small, .text-grey;
+            }
+
+            input, textarea {
+              border: none;
+              outline: none;
+              border-bottom: 0.12rem solid rgb(102, 187, 187);
+            }
+
+            textarea::-webkit-scrollbar {
+              width: 0.4rem;
+            }
+
+            textarea::-webkit-scrollbar-thumb {
+              border-radius: 1rem;
+              @extend .bg-blue;
+            }
+
+            .checkBox {
+              margin-top: 1rem;
+            }
+
+            span {
+              @extend .text-x-small;
+            }
+
+          }
+
+          button {
+            border-radius: 45px;
+            // background-color:#ff8700;
+            width: 40%;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            border: none;
+            @extend .text-small, .bg-blue;
+          }
+          button:hover {
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+          }
+
+          button:active {
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+          }
+
+          span {
+            @extend .text-x-small;
+          }
+          .checkBox-container, .pw-validation-message {
+            width: 70%;
+          }
+        }
+
+        .already-user-link {
+            cursor: pointer;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            @extend .text-small;
+        }
+      }
+
+    }
+
+  }
+  .sign-up-page::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+
+  // .sign-up-page::-webkit-scrollbar-track {
+  //   background: #eee;
+  // }
+
+  .sign-up-page::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    @extend .bg-blue;
+  }
+
+
+}
