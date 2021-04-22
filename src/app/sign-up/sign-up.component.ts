@@ -14,6 +14,8 @@ export class SignUpComponent implements OnInit {
 
   http : HttpClient;
 
+  user = new User({});
+
   constructor(httpClient:HttpClient,private formBuiler : FormBuilder) {
     this.buildSignUpForm(new User({}));
     this.http = httpClient;
@@ -49,7 +51,10 @@ export class SignUpComponent implements OnInit {
     console.log(this.signUpForm.value);
     this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/signup",this.signUpForm.value)
     .subscribe(
-      (res) => console.log(res),
+      (data:any) => { console.log(data);
+        this.user = data;
+        localStorage.setItem("userDetails",JSON.stringify(data));
+      },
       (err) => console.log(err)
     )
   }

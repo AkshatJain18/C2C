@@ -43,8 +43,6 @@ export class SignInComponent implements OnInit {
       (data:any) => { console.log(data);
                       this.user = data;
                       localStorage.setItem("userDetails",JSON.stringify(data));
-                      var userD = JSON.parse(localStorage.userDetails);
-                      console.log(userD.id);
                       if(data===null){this.errorInSignIn=true;
                       }},
       (err) => { this.errorInSignIn = true },
@@ -52,10 +50,6 @@ export class SignInComponent implements OnInit {
     )
     this.signedIn = true;
   }
-
-  // signIn() {
-
-  // }
 
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
