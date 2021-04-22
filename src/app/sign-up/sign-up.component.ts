@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { User } from '../../model/User';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +17,7 @@ export class SignUpComponent implements OnInit {
 
   user = new User({});
 
-  constructor(httpClient:HttpClient,private formBuiler : FormBuilder) {
+  constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private authService: AuthService) {
     this.buildSignUpForm(new User({}));
     this.http = httpClient;
   }
@@ -43,17 +44,13 @@ export class SignUpComponent implements OnInit {
     )
   }
 
-  get f() {
-    return this.signUpForm.controls;
-  }
-
   onSubmit() {
     console.log(this.signUpForm.value);
-    this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/signup",this.signUpForm.value)
+    this.authService.signUp(this.signUpForm.value)
     .subscribe(
       (data:any) => { console.log(data);
         this.user = data;
-        localStorage.setItem("userDetails",JSON.stringify(data));
+        localStorage.setItem("user",JSON.stringify(data));
       },
       (err) => console.log(err)
     )

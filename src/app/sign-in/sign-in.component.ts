@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../model/User';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,13 +16,10 @@ export class SignInComponent implements OnInit {
 
   user = new User({})
 
-  http : HttpClient;
-
   fieldTextType: boolean = false;
 
-  constructor(httpClient:HttpClient) {
+  constructor(private authService: AuthService) {
     this.buildSignInForm(new User({}));
-    this.http = httpClient;
    }
 
   ngOnInit(): void {
@@ -38,11 +35,11 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     console.log("sign in");
     console.log(this.signInForm.value);
-    this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/login",this.signInForm.value)
+    this.authService.signIn(this.signInForm.value)
     .subscribe(
       (data:any) => { console.log(data);
                       this.user = data;
-                      localStorage.setItem("userDetails",JSON.stringify(data));
+                      localStorage.setItem("user",JSON.stringify(data));
                       if(data===null){this.errorInSignIn=true;
                       }},
       (err) => { this.errorInSignIn = true },
