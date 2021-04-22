@@ -31,9 +31,16 @@ html,body{
 }
 
 .text-darkgrey{
-    color: #b6bcc5;
+    color: #6a817d;
 }
 
+.w-48{
+  width: 48%;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
 .ad{
     display: flex;
     flex-direction: column;
@@ -48,8 +55,7 @@ html,body{
 
     .ad-details {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
       width: 100%;
       background-color: white;
 
@@ -65,6 +71,15 @@ html,body{
 
         .item-name {
           @extend .text-darkgrey, .text-medium;
+        }
+      }
+
+      .card-footer{
+        background-color: #3646a6;
+
+        .detail{
+          color: white;
+          @extend .text-small;
         }
       }
 

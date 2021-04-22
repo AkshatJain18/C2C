@@ -33,9 +33,9 @@
                 <div class="ad-row">
                     <label class="heading">Latest ads</label>
                     <div class="ads-sub-container mt-4">
-                        <div *ngFor="let ad of ads | slice:0:4" class="ad">
+                        <div *ngFor="let ad of recentlyAddedAds | slice:0:4" (click)="navigateToAdDetail(ad.adId)" class="ad">
                             <div class="d-flex">
-                                <img class="item-photo" src="../../assets/car.jpg">
+                                <img class="item-photo" src={{ad.img1Url}}>
                             </div>
                             <div class="ad-details">
                                 <div class="ad-details-container">
@@ -44,16 +44,19 @@
                                 </div>
                             </div>
                         </div>
+                        <span *ngIf="ads.length<4" class="d-flex justify-content-center align-items-center">
+                            <label (click)="navigateToAllAds()" class="cursor-pointer" style="font-size: 30px; color: blueviolet;">See All =></label>
+                        </span>
                     </div>
-                    <label class="view-all mt-2">view all</label>
+                    <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
                 </div>
 
                 <div class="ad-row">
                     <label class="heading">Trending ads</label>
                     <div class="ads-sub-container mt-4">
-                        <div *ngFor="let ad of ads | slice:0:4" class="ad h-100">
+                        <div *ngFor="let ad of trendingAds | slice:0:4" (click)="navigateToAdDetail(ad.adId)" class="ad h-100">
                             <div class="d-flex">
-                                <img class="item-photo" src="../../assets/car.jpg">
+                                <img class="item-photo" src={{ad.img1Url}}>
                             </div>
                             <div class="ad-details">
                                 <div class="ad-details-container">
@@ -62,16 +65,19 @@
                                 </div>
                             </div>
                         </div>
+                        <span *ngIf="ads.length<4" class="d-flex justify-content-center align-items-center">
+                            <label (click)="navigateToAllAds()" class="cursor-pointer" style="font-size: 30px; color: blueviolet;">See All =></label>
+                        </span>
                     </div>
-                    <label class="view-all mt-2">view all</label>
+                    <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
                 </div>
                 
                 <div class="ad-row">
                     <label class="heading">Donation ads</label>
                     <div class="ads-sub-container mt-4">
-                        <div *ngFor="let ad of ads | slice:0:4" class="ad">
+                        <div *ngFor="let ad of donationAds | slice:0:4" (click)="navigateToAdDetail(ad.adId)" class="ad">
                             <div class="d-flex">
-                                <img class="item-photo" src="../../assets/car.jpg">
+                                <img class="item-photo" src={{ad.img1Url}}>
                             </div>
                             <div class="ad-details">
                                 <div class="ad-details-container">
@@ -80,8 +86,11 @@
                                 </div>
                             </div>
                         </div>
+                        <span *ngIf="ads.length<4" class="d-flex justify-content-center align-items-center">
+                            <label (click)="navigateToAllAds()" class="cursor-pointer" style="font-size: 30px; color: blueviolet;">See All =></label>
+                        </span>
                     </div>
-                    <label class="view-all mt-2">view all</label>
+                    <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
                 </div>
             </div>
         </div>

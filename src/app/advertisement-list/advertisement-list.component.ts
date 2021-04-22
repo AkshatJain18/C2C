@@ -1,8 +1,10 @@
 import { Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Advertisement } from 'src/models/Advertisement';
 import { AdService } from 'src/services/ad.service';
 import { CategoryService } from 'src/services/category.service';
+import { SearchService } from 'src/services/search.service';
 
 @Component({
   selector: 'app-advertisement-list',
@@ -21,13 +23,17 @@ export class AdvertisementListComponent implements OnInit {
   };
 
   adType:number;
+  sortOption:number;
 
   ads: Advertisement[] = [];
   selectedCategories:any[] = [];
   categories:any[] = [];
+  searchKeyword:string = "";
   
-  constructor(private adService:AdService,private categoryService:CategoryService) {
+  constructor(private adService:AdService,private categoryService:CategoryService,private searchService:SearchService,private router:Router) {
     this.adType = 1;
+    this.sortOption = 1;
+    this.sortList();
   }
 
   setAdType(adType:number){
@@ -43,21 +49,21 @@ export class AdvertisementListComponent implements OnInit {
     console.log(this.selectedCategories);
   }
 
-  checkCategoryFilter(ad:Advertisement){
-    const shouldExist:boolean = this.selectedCategories.includes(ad.categoryId) || this.selectedCategories.length==0;
-    console.log(shouldExist);
-    return shouldExist;
+  sortList(){
+    if(this.sortOption==1){
+      this.ads.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
+    }else{
+      this.ads.sort((x,y)=>y.views-x.views);
+    }
+    console.log(this.ads);
   }
 
-  sortByTime(){
-    this.ads.sort();
-  }
-
-  sortByViews(){
-
+  navigateToAdDetail(id:string){
+    this.router.navigateByUrl('ads/'+id);
   }
 
   ngOnInit(): void {
+    this.searchService.searchKeyword.subscribe(item => this.searchKeyword = item);
     this.adService.getAds().subscribe(adList => this.ads = adList);
     this.categoryService.getCategories().subscribe(categoryList => this.categories = categoryList);
   }

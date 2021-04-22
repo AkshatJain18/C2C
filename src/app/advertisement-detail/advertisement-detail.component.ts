@@ -1,4 +1,10 @@
+import { Unary } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Advertisement } from 'src/models/Advertisement';
+import { User } from 'src/models/User';
+import { AdService } from 'src/services/ad.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-advertisement-detail',
@@ -7,9 +13,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvertisementDetailComponent implements OnInit {
 
-  constructor() { }
+  slideConfig = {  
+    "slidesToShow": 3,  
+    "slidesToScroll": 3,  
+    "dots": true,  
+    "infinite": true  
+  }; 
 
-  ngOnInit(): void {
+  adId!:string;
+  ad!:Advertisement;
+  seller!:User;
+
+  constructor(private adService:AdService,private userService:UserService,private activatedRoute:ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.adId = params.get('adId') as string; 
+    });
   }
 
+  ngOnInit(): void {
+    this.adService.getAdById(this.adId).subscribe(adItem => {
+      this.ad = adItem;
+      this.userService.getUserById(this.ad.sellerId).subscribe(userItem => this.seller = userItem);
+    });
+
+    this.adService.postAdView(this.adId).subscribe();
+  }
 }

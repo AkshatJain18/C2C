@@ -11,6 +11,10 @@ import { AdvertisementListComponent } from './advertisement-list/advertisement-l
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 import { AdvertisementDetailComponent } from './advertisement-detail/advertisement-detail.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { FilterPipe } from 'src/pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -22,13 +26,17 @@ import { AdvertisementDetailComponent } from './advertisement-detail/advertiseme
     SideNavComponent,
     AdvertisementListComponent,
     AdvertisementDetailComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxSliderModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    SlickCarouselModule,
+    NgImageSliderModule,
+    FormsModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
