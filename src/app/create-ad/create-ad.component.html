@@ -103,7 +103,8 @@
         <label *ngIf="image3Selected" (click)="removeImage(3)" class="replace-button text-danger">Remove</label>
       </a>
     </div>
-    <span class="text-danger mt-2" *ngIf="!createAdForm.get('img1Url')?.valid && image1Touched">Please provide a cover photo</span>
+    <span class="text-success mt-2" *ngIf="!createAdForm.get('img1Url')?.valid && image1Touched && !imageRemoved">Loading image</span>
+    <span class="text-danger mt-2" *ngIf="!createAdForm.get('img1Url')?.valid && image1Touched && imageRemoved">Please provide a cover photo</span>
     <button type="submit" [disabled]="!createAdForm.valid" class="btn btn-primary">Post Ad</button>
     <span class="text-danger mt-2 mb-5" *ngIf="!createAdForm.valid && createAdForm.touched">*Please enter valid data</span>
   </form>

@@ -31,6 +31,7 @@ export class CreateAdComponent implements OnInit {
   image2Selected = false;
   image3Selected = false;
   image1Touched = false;
+  imageRemoved = false;
 
   url1 = "";
   url2 = "";
@@ -74,6 +75,23 @@ export class CreateAdComponent implements OnInit {
     })
   }
 
+  getCategories() {
+    this.http.get("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/category").subscribe(
+      data => { this.categories = data},
+      err => console.error(err),
+      () => console.log('done loading users')
+    )
+  }
+
+  onSubmit() {
+    console.log(this.createAdForm.value);
+    this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/insertAd",this.createAdForm.value)
+    .subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    )
+  }
+
   toggleAdType(type: number) {
     this.buildCreateAdForm(new Ad({}));
     this.removeImage(1);
@@ -102,27 +120,11 @@ export class CreateAdComponent implements OnInit {
     //this.setConditionalValidators;
   }
 
-  getCategories() {
-    this.http.get("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/category").subscribe(
-      data => { this.categories = data},
-      err => console.error(err),
-      () => console.log('done loading users')
-    )
-  }
-
-  onSubmit() {
-    console.log(this.createAdForm.value);
-    this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/insertAd",this.createAdForm.value)
-    .subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
-    )
-  }
-
   onSelectFile1(e:any) {
     var file = e.target.files[0];
     var formData = new FormData;
     formData.append('file',file);
+    this.imageRemoved = false;
     formData.append('upload_preset', this.CLOUDINARY_UPLOAD_PRESET);
     this.image1Touched = true
     axios({
@@ -191,6 +193,7 @@ export class CreateAdComponent implements OnInit {
       this.image1Selected = false;
       this.url1 = "";
       this.createAdForm.get('img1Url')?.setValue(this.url1);
+      this.imageRemoved = true;
     }
     else if(i===2) {
       this.image2Selected = false;
