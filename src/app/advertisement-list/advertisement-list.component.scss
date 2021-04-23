@@ -1,0 +1,159 @@
+@import "../../styles.scss";
+
+.ads-list-container{
+  display: flex;
+  height: 100%;
+  @extend .bg-light;
+
+  .filter-section{
+      width: 25%;
+      height: 100%;
+      overflow-y: scroll;
+      
+      .filter-container{
+          padding: 40px;
+          margin-bottom: 70px;
+          display: flex;
+          flex-direction: column;
+          row-gap: 30px;
+
+          .heading{
+              @extend .text-medium,.text-dark,.text-uppercase;
+              font-weight: bold
+          }
+
+          .filter-name{
+              @extend .text-medium,.text-darkgrey,.text-capitalize;
+          }
+
+          .filter-value{
+              @extend .text-medium,.text-dark,.text-capitalize;
+          }
+
+          .buy-donate-container{
+              display: flex;
+              flex-direction: column;
+              row-gap: 15px;
+
+              .buy-donate-sub-container{
+                  display: flex;
+                  column-gap: 8px;
+
+                  .tab{
+                      border: 2px solid gray;
+                      @extend .text-center,.text-capitalize;
+                      padding: 5px;
+                      cursor: pointer;
+                  }
+
+                  .active-tab{
+                      border:2px solid #3646a6;
+                      color: #3646a6;
+                  }
+              }
+          }
+
+          .price-range-container{
+              display: flex;
+              flex-direction: column;
+              row-gap: 15px;
+
+              .price-range-sub-container{
+                  display: flex;
+                  flex-direction: column;
+                  row-gap: 5px;
+              }
+          }
+
+          .category-container{
+              display: flex;
+              flex-direction: column;
+              row-gap: 15px;
+
+              .category-sub-container{
+                  display: flex;
+                  flex-direction: column;
+                  row-gap: 5px;
+
+                  .category-row{
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                  }
+              }
+          }
+      }
+  }
+
+  .ads-section{
+    width: 75%;
+   
+    .ads-container{
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+      row-gap: 40px;
+
+      .heading{
+        @extend .text-medium,.text-dark,.text-uppercase;
+        font-weight: bold
+      }
+
+      .ads-sub-container{
+        column-gap: 20px;
+        row-gap: 20px;
+        display: grid;
+        grid-template-columns: 32% 32% 32%;
+      }
+
+    }
+  }
+}
+
+
+// We need to use ::ng-deep to overcome view encapsulation
+::ng-deep {
+    .custom-slider .ngx-slider .ngx-slider-bar {
+      background: lightblue;
+      height: 4px;
+    }
+    .custom-slider .ngx-slider .ngx-slider-selection {
+      background: #3646a6;
+    }
+    .custom-slider .ngx-slider .ngx-slider-pointer {
+      width: 15px;
+      height: 16px;
+      margin-top: 7px;
+      box-shadow: 1px 1px lightgray;
+      background-color: white;
+      border-radius:50%;
+      border: 1px solid lightgray;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-pointer:after {
+      display: none;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-bubble {
+      bottom: 14px;
+      display: none;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-limit {
+      font-weight: bold;
+      color: orange;
+    }
+  
+    .custom-slider .ngx-slider .ngx-slider-tick {
+      width: 1px;
+      height: 0px;
+      margin-left: 4px;
+      border-radius: 0;
+      background: #ffe4d1;
+      top: -1px;
+    }
+    .custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+      background: orange;
+    }
+}
+  

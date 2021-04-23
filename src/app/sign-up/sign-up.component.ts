@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { User } from '../../model/User';
+import { User } from '../../models/User';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,12 +18,13 @@ export class SignUpComponent implements OnInit {
 
   user = new User({});
 
-  constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private authService: AuthService) {
+  constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private authService: AuthService,private router:Router) {
     this.buildSignUpForm(new User({}));
     this.http = httpClient;
   }
 
   ngOnInit(): void {
+
   }
 
   buildSignUpForm(user:User){
@@ -51,6 +53,7 @@ export class SignUpComponent implements OnInit {
       (data:any) => { console.log(data);
         this.user = data;
         localStorage.setItem("user",JSON.stringify(data));
+        this.router.navigateByUrl('/homepage');
       },
       (err) => console.log(err)
     )

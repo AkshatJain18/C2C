@@ -30,9 +30,9 @@
             </div>
             <span class="text-danger" *ngIf="!signInForm.get('password')?.valid && signInForm.get('password')?.touched">*Enter your password</span>
           </div>
-          <button  type="submit" [disabled]="!signInForm.valid" class="btn btn-primary submit" value="submit">Login</button><br>
+          <button type="submit" [disabled]="!signInForm.valid" class="btn btn-primary submit" value="submit">Login</button><br>
         </form>
-        <a class="text-dark create-account-link font-weight-bold" routerLink="/signUp">Create new account?</a>
+        <a class="text-dark create-account-link font-weight-bold" routerLink="/sign-up">Create new account?</a>
       </div>
       <a class="forgot-password-link " href="">Forgot password?</a>
     </div>

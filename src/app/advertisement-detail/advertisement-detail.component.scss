@@ -1,0 +1,44 @@
+@import "../../styles.scss";
+
+.ad-detail{
+    @extend .bg-light;
+    height: 100%;
+
+    .ad-detail-container{
+        padding: 40px;
+        display: flex;
+
+        .carousel{
+            height: 400px;
+            width: 700px;
+            background-color: white;
+            @extend .card;
+
+            img{
+                height: 400px;
+                width: 700px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        .ad-detail-sub-container{
+            display: flex;
+            flex-direction: column;
+            padding: 20px 20px;
+            margin-left: 50px;
+            width: 40%;
+            @extend .card,.bg-light;
+
+            .item-price{
+                @extend .text-dark;
+                font-size: 25px;
+            }
+
+            .item-name{
+                @extend .text-medium;
+                color: #6a817d;
+            }
+        }
+    }
+}

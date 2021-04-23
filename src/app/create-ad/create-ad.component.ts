@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Ad } from '../../model/Ad';
+import { Ad } from '../../models/Ad';
 import axios from 'axios';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CategoryService } from 'src/services/category.service';
+import { AdService } from 'src/services/ad.service';
 
 enum typeOfAd {
   donate = 1,
@@ -18,8 +20,6 @@ enum typeOfAd {
 export class CreateAdComponent implements OnInit {
 
   createAdForm !: FormGroup;
-
-  http : HttpClient;
 
   adTypes = typeOfAd;
 
@@ -41,19 +41,17 @@ export class CreateAdComponent implements OnInit {
 
   CLOUDINARY_URL = "	https://api.cloudinary.com/v1_1/hashedin/upload";
   CLOUDINARY_UPLOAD_PRESET = "cbtxrrbg";
-  userDetails = JSON.parse(localStorage.userDetails);
+  userDetails = JSON.parse(localStorage.user);
 
-  constructor(httpClient:HttpClient,private formBuiler : FormBuilder) {
+  constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private categoryService:CategoryService,private adService:AdService) {
     this.buildCreateAdForm(new Ad({}));
-    this.http = httpClient;
-
    }
 
   ngOnInit(): void {
     this.createAdForm.get('adType')?.setValue(this.adTypes.sell);
     this.createAdForm.get('auctionDeadline')?.setValue("");
     console.log(this.userDetails);
-    this.getCategories();
+    this.categoryService.getCategories().subscribe(categoryList => this.categories = categoryList);
     //this.createAdForm.get('adType')?.updateValueAndValidity();
   }
 
@@ -75,21 +73,18 @@ export class CreateAdComponent implements OnInit {
     })
   }
 
-  getCategories() {
-    this.http.get("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/category").subscribe(
-      data => { this.categories = data},
-      err => console.error(err),
-      () => console.log('done loading users')
-    )
-  }
-
   onSubmit() {
-    console.log(this.createAdForm.value);
-    this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/insertAd",this.createAdForm.value)
-    .subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
-    )
+    if(this.createAdForm.valid){
+      this.adService.postAd(this.createAdForm.value).subscribe(
+        (res)=>{
+          console.log(res);
+          alert("ad added!");
+        },
+        (err)=>{
+          alert(err);
+        }
+      );
+    }
   }
 
   toggleAdType(type: number) {
