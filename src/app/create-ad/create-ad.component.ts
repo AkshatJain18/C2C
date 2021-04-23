@@ -39,8 +39,10 @@ export class CreateAdComponent implements OnInit {
   userDetails = JSON.parse(localStorage.user);
 
   constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private categoryService:CategoryService,private adService:AdService) {
-    this.buildCreateAdForm(new Ad({adType:this.adTypes.sell,
-                                    auctionDealdine:""}));
+    this.buildCreateAdForm(new Ad({
+      adType:this.adTypes.sell,
+      auctionDealdine:""
+    }));
    }
 
   ngOnInit(): void {
