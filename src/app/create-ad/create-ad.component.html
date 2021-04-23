@@ -72,7 +72,7 @@
           <img  [src]="url1" alt="">
         </div>
         <input id="file-upload-1" type="file" (change)="onSelectFile1($event)">
-        <label *ngIf="image1Selected" (click)="removeImage(1)" class="replace-button text-danger">Remove</label>
+        <label *ngIf="image1Selected" for="file-upload-1"  class="replace-button text-primary">Replace</label>
       </a>
 
       <a class="image-link text-secondary">

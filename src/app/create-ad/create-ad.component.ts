@@ -126,7 +126,7 @@ export class CreateAdComponent implements OnInit {
     formData.append('file',file);
     this.imageRemoved = false;
     formData.append('upload_preset', this.CLOUDINARY_UPLOAD_PRESET);
-    this.image1Touched = true
+    this.image1Touched = true;
     axios({
       url: this.CLOUDINARY_URL,
       method: 'POST',
