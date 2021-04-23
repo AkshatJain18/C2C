@@ -1,1 +1,148 @@
+.font-mulish {
+  //font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  //font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Mulish;
+}
+
+.text-x-small{
+  font-size: 12px;
+}
+
+.text-small{
+  font-size: 14px;
+}
+
+.text-medium{
+  font-size: 16px;
+}
+
+.text-large{
+  font-size: 18px;
+}
+
+.text-x-large{
+  font-size: 20px;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-grey {
+  color: rgb(150, 157, 167);
+}
+
+.border-grey {
+  border-color: rgb(150, 157, 167);
+}
+
+.text-orange {
+  color: #ff8700;
+}
+
+.text-blue {
+  color: rgb(0, 119, 255);
+}
+
+.bg-orange {
+  background-color: #ff8700;
+}
+
+.border-orange {
+  border-color: #ff8700;
+}
+
+.bg-blue {
+  background-image: linear-gradient(to left,rgb(0, 119, 255),rgb(0, 60, 255));
+}
+
+.border-blue {
+  border-color: rgb(0, 119, 255);
+}
+
+.bg-light-orange {
+  background-image: linear-gradient(to left, rgb(255, 248, 227), rgb(252, 241, 222));
+}
+
+.bg-light-grey {
+  background-image: linear-gradient(to left, rgb(216,223,235), rgb(232, 240, 255));
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.text-black {
+  color: black;
+}
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+*{
+    font-family: 'Mulish', sans-serif;
+}
+
+
+.text-darkgrey{
+    color: #6a817d;
+}
+
+.w-48{
+  width: 48%;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+.ad{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    cursor: pointer;
+    @extend .card;
+
+    .item-photo{
+      height: 180px;
+      width: 100%;
+    }
+
+    .ad-details {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: white;
+
+      .ad-details-container {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+
+        .item-price {
+          @extend .text-dark, .text-x-large;
+          font: bold;
+        }
+
+        .item-name {
+          @extend .text-darkgrey, .text-medium;
+        }
+      }
+
+      .card-footer{
+        background-color: #3646a6;
+
+        .detail{
+          color: white;
+          @extend .text-small;
+        }
+      }
+
+      img {
+        padding-right: 15px;
+      }
+    }
+  }

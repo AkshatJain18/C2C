@@ -1,0 +1,228 @@
+@import '../../styles.scss';
+
+.create-ad-page {
+  @extend .font-mulish, .text-large;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  .main-header {
+    padding: 0.5rem 0.5rem 0;
+    //@extend .text-x-large;
+    font-size: 2rem;
+  }
+
+  .choose-type-header {
+    width: 100%;
+    border-top: 1px solid grey;
+    text-align: center;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    @extend .text-large;
+  }
+
+  .ad-type-buttons {
+    // display: flex;
+    justify-content: space-around;
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 35%;
+    margin-bottom: 2rem;
+
+    .active {
+      @extend .text-blue, .border-blue;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      @extend .text-grey, .border-grey;
+      background: transparent;
+      border-radius: 0%;
+      border-width: 0.15rem;
+      outline: none;
+      box-shadow: none;
+    }
+    button:hover {
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      @extend .text-blue, .border-blue;
+    }
+
+    button:focus, button:active {
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    }
+  }
+  .enter-details-header {
+    width: 100%;
+    border-top: 1px solid grey;
+    text-align: center;
+    padding-top: 1.5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 3rem;
+
+    .input-fields {
+      width: 50%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 25%;
+      margin-left: 3rem;
+      padding-bottom: 3rem;
+
+      label {
+        @extend .text-small, .text-grey;
+      }
+
+      input, textarea {
+        border: none;
+        outline: none;
+        border-bottom: 0.1rem solid rgb(160, 160, 160);
+      }
+
+      textarea::-webkit-scrollbar {
+        width: 0.2rem;
+      }
+
+      textarea::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        @extend .bg-orange;
+      }
+
+      select {
+        @extend input;
+        width: 13.8rem;
+      }
+
+      span {
+        @extend .text-x-small;
+      }
+
+      .date-input {
+        width: 13.8rem;
+        font-size: 1rem;
+      }
+    }
+
+    button {
+      border-radius: 5px;
+      // background-color:#ff8700;
+      width: 20%;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 2.5rem;
+      border: none;
+      @extend .text-small, .bg-blue;
+    }
+    button:hover {
+      box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    button:active {
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    span {
+      @extend .text-x-small;
+    }
+
+    .upload-images-header {
+      width: 100%;
+      border-top: 1px solid grey;
+      text-align: center;
+      padding-top: 1.5rem;
+      padding-bottom: 1rem;
+    }
+
+    .upload-images-tab {
+      display: flex;
+      width: 40%;
+      justify-content: space-between;
+
+      .image-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        text-decoration: none;
+
+        input[type="file"] {
+          display: none;
+        }
+        .custom-file-upload {
+            cursor: pointer;
+            height: 100%;
+
+            i {
+              padding: 1rem;
+              width: 7.5rem;
+              height: 7rem;
+              border: 0.1rem solid grey;
+              border-radius: 10px;
+              @extend .bg-light-grey;
+
+              p {
+                margin-top: 0.5rem;
+                @extend .text-small, .font-mulish;
+              }
+            }
+        }
+
+        .custom-file-upload:hover {
+          color: rgba(7, 7, 7, 0.651)
+        }
+
+        label {
+          @extend .text-x-small, .text-grey;
+        }
+
+        i {
+          padding: 1rem;
+          width: 7.5rem;
+          height: 7rem;
+          border: 0.1rem solid grey;
+          border-radius: 10px;
+          @extend .bg-light-grey;
+
+          p {
+            margin-top: 0.5rem;
+            @extend .text-small, .font-mulish;
+          }
+        }
+
+        .images {
+          width: 7.5rem;
+          height: 7rem;
+          border: 0.1rem solid grey;
+          border-radius: 10px;
+          @extend .bg-black;
+          overflow: hidden;
+
+          img {
+            //max-width: 100%;
+            //max-height: 100%;
+            height: 115px;
+            width: 100%;
+          }
+        }
+
+        .replace-button {
+          cursor: pointer;
+          text-decoration: underline;
+          margin-top: 0.2rem;
+          padding: 0.1rem;
+          font-size: medium;
+        }
+
+      }
+
+    }
+  }
+}
+.create-ad-page::-webkit-scrollbar {
+  width: 1px;
+}

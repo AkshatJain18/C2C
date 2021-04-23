@@ -1,0 +1,112 @@
+<div class="create-ad-page mt-3">
+  <p class="main-header font-weight-bolder">Post Your Ad</p>
+  <p class="choose-type-header font-weight-bold">What do you want to do with your product ?</p>
+  <div class="ad-type-buttons">
+    <button class="btn btn-primary" (click)="toggleAdType(adTypes.sell)" [ngClass]="{'active':isSell}">Sell</button>
+    <button class="btn btn-primary" (click)="toggleAdType(adTypes.auction)" [ngClass]="{'active':isAuction}">Auction</button>
+    <button class="btn btn-primary" (click)="toggleAdType(adTypes.donate)" [ngClass]="{'active':isDonate}">Donate</button>
+  </div>
+  <p class="enter-details-header font-weight-bold">Enter some details</p>
+  <form [formGroup]="createAdForm" (ngSubmit)="onSubmit()">
+    <div class="input-fields">
+      <div>
+        <label>Title:</label><br>
+        <input type="text" formControlName="adTitle"><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('adTitle')?.valid && createAdForm.get('adTitle')?.touched">*Title should be 5-20 characters</span>
+      </div>
+      <div>
+        <label>Product Name:</label><br>
+        <input type="text" formControlName="productName"><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('productName')?.valid && createAdForm.get('productName')?.touched">*This field is mandatory</span>
+      </div>
+      <div>
+        <label>Brand Name:</label><br>
+        <input type="text" formControlName="brandName"><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('brandName')?.valid && createAdForm.get('brandName')?.touched">*This field is mandatory</span>
+      </div>
+      <div>
+        <label for="Type">Category:</label><br>
+        <!-- <input type="text" formControlName="type"> -->
+        <select formControlName="categoryId">
+          <option *ngFor="let category of categories" value="{{category.categoryId}}">{{category.categoryName}}</option>
+        </select><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('categoryId')?.valid && createAdForm.get('categoryId')?.touched">Choose Category</span>
+      </div>
+      <div>
+        <label>Enter Description:</label><br>
+        <textarea rows="1" formControlName="description"></textarea><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('description')?.valid && createAdForm.get('description')?.touched">*Description is mandatory</span>
+      </div>
+      <div *ngIf="isSell">
+        <label>Selling Price (₹):</label><br>
+        <input type="number" formControlName="initialPrice"><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('initialPrice')?.valid && createAdForm.get('initialPrice')?.touched">*This field is mandatory</span>
+      </div>
+      <div *ngIf="isAuction">
+        <label>Set a starting bid (₹):</label><br>
+        <input type="number" formControlName="initialPrice"><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('initialPrice')?.valid && createAdForm.get('initialPrice')?.touched">*This field is mandatory</span>
+      </div>
+      <div *ngIf="isAuction">
+        <label>Days Until Auction Ends:</label><br>
+        <input class="date-input" type="datetime-local" formControlName="auctionDeadline"><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('auctionDeadline')?.valid && createAdForm.get('auctionDeadline')?.touched">*This field is mandatory</span>
+      </div>
+      <div>
+        <label>How old is the product (optional):</label><br>
+        <input type="string" formControlName="productAge"><br>
+        <span class="text-danger" *ngIf="!createAdForm.get('productAge')?.valid && createAdForm.get('productAge')?.touched">*This field is mandatory</span>
+      </div>
+    </div>
+    <p class="upload-images-header font-weight-bold">Upload between 1-3 images</p>
+    <div class="upload-images-tab">
+
+      <a class="image-link text-secondary">
+        <label>Image 1 (Cover Photo):</label>
+        <label for="file-upload-1" *ngIf="!image1Selected" class="custom-file-upload">
+          <i  class="fa fa-camera fa-5x">
+            <p>Click to add</p>
+          </i>
+        </label>
+        <div class="images" *ngIf="image1Selected">
+          <img  [src]="url1" alt="">
+        </div>
+        <input id="file-upload-1" type="file" (change)="onSelectFile1($event)">
+        <label *ngIf="image1Selected" (click)="removeImage(1)" class="replace-button text-danger">Remove</label>
+      </a>
+
+      <a class="image-link text-secondary">
+        <label>Image 2:</label>
+        <label for="file-upload-2" *ngIf="!image2Selected" class="custom-file-upload">
+          <i  class="fa fa-camera fa-5x">
+            <p>Click to add</p>
+          </i>
+        </label>
+        <div class="images" *ngIf="image2Selected">
+          <img  [src]="url2" alt="">
+        </div>
+        <input id="file-upload-2" type="file" (change)="onSelectFile2($event)">
+        <label *ngIf="image2Selected" (click)="removeImage(2)" class="replace-button text-danger">Remove</label>
+      </a>
+
+      <a class="image-link text-secondary">
+        <label>Image 3:</label>
+        <label for="file-upload-3" *ngIf="!image3Selected" class="custom-file-upload">
+          <i  class="fa fa-camera fa-5x">
+            <p>Click to add</p>
+          </i>
+        </label>
+        <div class="images" *ngIf="image3Selected">
+          <img  [src]="url3" alt="">
+        </div>
+        <input id="file-upload-3" type="file" (change)="onSelectFile3($event)">
+        <label *ngIf="image3Selected" (click)="removeImage(3)" class="replace-button text-danger">Remove</label>
+      </a>
+    </div>
+    <span class="text-success mt-2" *ngIf="!createAdForm.get('img1Url')?.valid && image1Touched && !imageRemoved">Loading image</span>
+    <span class="text-danger mt-2" *ngIf="!createAdForm.get('img1Url')?.valid && image1Touched && imageRemoved">Please provide a cover photo</span>
+    <button type="submit" [disabled]="!createAdForm.valid" class="btn btn-primary">Post Ad</button>
+    <span class="text-danger mt-2 mb-5" *ngIf="!createAdForm.valid && createAdForm.touched">*Please enter valid data</span>
+  </form>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
