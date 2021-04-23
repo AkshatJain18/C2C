@@ -49,7 +49,7 @@
             
             <div class="ads-sub-container">
                 <ng-container *ngFor="let ad of ads | filter : searchKeyword: adType : selectedCategories : startPrice : endPrice">
-                    <div (click)="navigateToAdDetail(ad.adId)" class="ad">
+                    <div routerLink={{ad.adId}} class="ad">
                         <div class="d-flex">
                             <img class="item-photo" src={{ad.img1Url}}>
                         </div>

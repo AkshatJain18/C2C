@@ -26,13 +26,13 @@ export class AdvertisementListComponent implements OnInit {
   sortOption:number;
 
   ads: Ad[] = [];
-  selectedCategories:any[] = [];
+  selectedCategories:number[] = [];
   categories:any[] = [];
   searchKeyword:string = "";
   
   constructor(private adService:AdService,private categoryService:CategoryService,private searchService:SearchService,private router:Router) {
     this.adType = 2;
-    this.sortOption = 2;
+    this.sortOption = 1;
     this.sortList();
   }
 
@@ -64,7 +64,9 @@ export class AdvertisementListComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchService.searchKeyword.subscribe(item => this.searchKeyword = item);
-    this.adService.getAds().subscribe(adList => {this.ads = adList; console.log(this.ads)});
+    this.adService.getAds().subscribe(adList => {
+      this.ads = adList;this.ads.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
+    });
     this.categoryService.getCategories().subscribe(categoryList => this.categories = categoryList);
   }
 }

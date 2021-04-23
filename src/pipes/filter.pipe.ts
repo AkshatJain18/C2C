@@ -22,15 +22,20 @@ export class FilterPipe implements PipeTransform {
         return ads.filter(ad=>ad.adType == adType);
     }
 
-    categoriesFilter(ads:Ad[],selectedCategories:any[]){
-        console.log(selectedCategories);
+    categoriesFilter(ads:Ad[],selectedCategories:number[]){
         if(selectedCategories.length == 0){
             return ads;
         }
         
-        return ads.filter(
-            ad => selectedCategories.includes((c:any)=>c.categoryId==ad.categoryId)
+        const list =  ads.filter(
+            ad => {
+                if(selectedCategories.findIndex(c=>c==ad.categoryId)!=-1){
+                    return true;
+                }
+                return false;
+            }
         )
+        return list;
     }
 
     priceFilter(ads:Ad[],startPrice:number,endPrice:number){
@@ -39,10 +44,9 @@ export class FilterPipe implements PipeTransform {
         )
     }
 
-    transform(ads: Ad[], searchKeyword: string, adType:number,selectedCategories:any[],startPrice:number,endPrice:number): any[]{     
+    transform(ads: Ad[], searchKeyword: string, adType:number,selectedCategories:number[],startPrice:number,endPrice:number): any[]{     
         ads = this.searchFilter(ads,searchKeyword);
         ads = this.categoriesFilter(ads,selectedCategories);
-        console.log(ads);
         ads = this.adTypeFilter(ads,adType);
         ads = this.priceFilter(ads,startPrice,endPrice);
 
