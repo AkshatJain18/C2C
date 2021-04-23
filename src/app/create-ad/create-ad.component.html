@@ -28,7 +28,7 @@
         <label for="Type">Category:</label><br>
         <!-- <input type="text" formControlName="type"> -->
         <select formControlName="categoryId">
-          <option *ngFor="let category of categories" value="{{category.categoryId}}">{{category.categoryName}}</option>
+          <option *ngFor="let category of categories" value={{category.categoryId}}>{{category.categoryName}}</option>
         </select><br>
         <span class="text-danger" *ngIf="!createAdForm.get('categoryId')?.valid && createAdForm.get('categoryId')?.touched">Choose Category</span>
       </div>

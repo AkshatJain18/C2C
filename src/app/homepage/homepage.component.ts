@@ -16,9 +16,9 @@ export class HomepageComponent implements OnInit {
   ads!:Ad[];
   isLoggedIn!:boolean;
 
-  trendingAds!:Ad[];
-  recentlyAddedAds!:Ad[];
-  donationAds!:Ad[];
+  trendingAds:Ad[] = [];
+  recentlyAddedAds:Ad[] = [];
+  donationAds:Ad[] = [];
   
   constructor(private adService:AdService,private router:Router) {  
     this.isLoggedIn = localStorage.getItem('user')!=null;
@@ -36,13 +36,16 @@ export class HomepageComponent implements OnInit {
     this.adService.getAds().subscribe(adList => {
 
       this.ads = adList;
-      this.trendingAds = this.ads;
-      this.recentlyAddedAds = this.ads;
-      this.donationAds = this.ads;
+      this.ads.forEach(ad=>this.trendingAds.push(ad));
+      this.ads.forEach(ad=>this.recentlyAddedAds.push(ad));
+      this.ads.forEach(ad=>this.donationAds.push(ad));
 
       this.trendingAds.sort((x,y)=>y.views-x.views);
-      this.recentlyAddedAds.sort((x,y)=>new Date(x.adCreated).getTime()-new Date(y.adCreated).getTime());
+      this.recentlyAddedAds.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
       this.donationAds = this.donationAds.filter(ad=>ad.adType==3);
+
+      console.log(this.trendingAds);
+      console.log(this.recentlyAddedAds);
     });
   }
 }

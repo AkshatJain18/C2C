@@ -35,6 +35,10 @@ export class TopNavComponent implements OnInit {
     }
   }
 
+  onLogOutClick(){
+    localStorage.clear();
+  }
+
   onCreateAdClick(){
     if(this.isLoggedIn){
       this.router.navigateByUrl('/create-ad');

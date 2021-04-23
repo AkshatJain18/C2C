@@ -58,13 +58,10 @@ export class AdvertisementListComponent implements OnInit {
     console.log(this.ads);
   }
 
-  navigateToAdDetail(id:string){
-    this.router.navigateByUrl('ads/'+id);
-  }
-
   ngOnInit(): void {
     this.searchService.searchKeyword.subscribe(item => this.searchKeyword = item);
     this.adService.getAds().subscribe(adList => {
+      console.log(adList);
       this.ads = adList;this.ads.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
     });
     this.categoryService.getCategories().subscribe(categoryList => this.categories = categoryList);

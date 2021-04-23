@@ -1,14 +1,14 @@
 <div class="top-nav-container">
     <div class="top-nav">
         <div class="d-flex w-50">
-            <span class="logo">Peddler</span>
+            <span routerLink="/homepage" class="logo cursor-pointer">Peddler</span>
             <div class="d-flex align-items-center" style="margin-left: 25px;"> 
                 <input *ngIf="isSearchInputVisible" type="search" style="margin-left: 10px;" (keyup)="updateKeyword()" [(ngModel)]="searchKeyword" placeholder="Search for items" class="searchInput ml-2" >
                 <img style="cursor: pointer;margin-left: 20px;" *ngIf="!isSearchInputVisible"  (click)="isSearchInputVisible=true" height="20px" width="20px" src="../../assets/search.ico">
             </div>
         </div>
         <div class="nav-items-container">
-            <div class="nav-item">
+            <div class="nav-item" *ngIf="isLoggedIn">
                 <img src="../../assets/bookmark-icon-white.png">
                 <label>saved ads</label>
             </div>
@@ -18,8 +18,9 @@
             </div>
             <div class="my-profile-nav-item">
                 <label class="cursor-pointer" *ngIf="isLoggedIn">My Profile</label>
-                <label class="cursor-pointer" routerLink = "/sign-in" *ngIf="!isLoggedIn">Login</label>
             </div>
+            <label class="cursor-pointer" routerLink = "/sign-in" *ngIf="!isLoggedIn">Login</label>
+            <label class="cursor-pointer" (click)="onLogOutClick()" routerLink = "/sign-in" *ngIf="isLoggedIn">Logout</label>
         </div>
     </div>
 </div>

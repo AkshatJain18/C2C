@@ -75,13 +75,14 @@ export class CreateAdComponent implements OnInit {
 
   onSubmit() {
     if(this.createAdForm.valid){
+      console.log(this.createAdForm.value);
       this.adService.postAd(this.createAdForm.value).subscribe(
         (res)=>{
           console.log(res);
           alert("ad added!");
         },
         (err)=>{
-          alert(err);
+          console.log(err);
         }
       );
     }
