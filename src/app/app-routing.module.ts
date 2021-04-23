@@ -6,6 +6,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AdvertisementDetailComponent } from './advertisement-detail/advertisement-detail.component';
 import { AdvertisementListComponent } from './advertisement-list/advertisement-list.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'sign-in', component: SignInComponent},
   {path:'sign-up', component: SignUpComponent},
   {path:'create-ad', component: CreateAdComponent},
+  {path:'carousel', component: CarouselComponent},
   { path: '**', component: HomepageComponent },
 ];
 
