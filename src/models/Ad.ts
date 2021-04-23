@@ -1,4 +1,5 @@
 export class Ad {
+  adId: number;
   adType : number;
   adTitle : string;
   productName : string;
@@ -17,6 +18,7 @@ export class Ad {
   img3Url : string;
 
   constructor (ad : any) {
+    this.adId = ad.adId;
     this.adType = ad.adType;
     this.adTitle = ad.adTitle;
     this.productName = ad.productName;
