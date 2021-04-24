@@ -17,10 +17,8 @@ import { AdvertisementListComponent } from './advertisement-list/advertisement-l
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdvertisementDetailComponent } from './advertisement-detail/advertisement-detail.component';
 //import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { NgImageSliderModule } from 'ng-image-slider';
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -46,9 +44,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgxSliderModule,
     NgbModule,
     HttpClientModule,
-    NgImageSliderModule,
     FormsModule,
-    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

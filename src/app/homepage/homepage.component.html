@@ -4,7 +4,6 @@
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active" data-interval="4000">
@@ -44,9 +43,6 @@
                                 </div>
                             </div>
                         </div>
-                        <span *ngIf="ads.length<4" class="d-flex justify-content-center align-items-center">
-                            <label (click)="navigateToAllAds()" class="cursor-pointer" style="font-size: 30px; color: blueviolet;">See All =></label>
-                        </span>
                     </div>
                     <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
                 </div>
@@ -65,9 +61,6 @@
                                 </div>
                             </div>
                         </div>
-                        <span *ngIf="ads.length<4" class="d-flex justify-content-center align-items-center">
-                            <label (click)="navigateToAllAds()" class="cursor-pointer" style="font-size: 30px; color: blueviolet;">See All =></label>
-                        </span>
                     </div>
                     <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
                 </div>
@@ -86,11 +79,8 @@
                                 </div>
                             </div>
                         </div>
-                        <span *ngIf="ads.length<4" class="d-flex justify-content-center align-items-center">
-                            <label (click)="navigateToAllAds()" class="cursor-pointer" style="font-size: 30px; color: blueviolet;">See All =></label>
-                        </span>
                     </div>
-                    <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
+                    <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-3">view all</label>
                 </div>
             </div>
         </div>

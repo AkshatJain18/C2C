@@ -10,17 +10,17 @@
         <div class="nav-items-container">
             <div class="nav-item" *ngIf="isLoggedIn">
                 <img src="../../assets/bookmark-icon-white.png">
-                <label>saved ads</label>
+                <a>saved ads</a>
             </div>
-            <div class="create-ad-nav-button" *ngIf="isLoggedIn" (click)="onCreateAdClick()">
-                <label class="plus-icon">+</label>
-                <label>create ads</label>
-            </div>
+            <button class="create-ad-nav-button" *ngIf="isLoggedIn" (click)="onCreateAdClick()">
+                <a class="plus-icon">+</a>
+                <a>create ads</a>
+            </button>
             <div class="my-profile-nav-item">
-                <label class="cursor-pointer" *ngIf="isLoggedIn">My Profile</label>
+                <a class="cursor-pointer text-light" *ngIf="isLoggedIn">My Profile</a>
             </div>
-            <label class="cursor-pointer" routerLink = "/sign-in" *ngIf="!isLoggedIn">Login</label>
-            <label class="cursor-pointer" (click)="onLogOutClick()" routerLink = "/sign-in" *ngIf="isLoggedIn">Logout</label>
+            <a class="cursor-pointer text-light" routerLink = "/sign-in" *ngIf="!isLoggedIn">Login</a>
+            <a class="cursor-pointer text-light" (click)="onLogOutClick()" routerLink = "/sign-in" *ngIf="isLoggedIn">Logout</a>
         </div>
     </div>
 </div>

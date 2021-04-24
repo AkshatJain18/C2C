@@ -66,7 +66,7 @@
                 width: 140px;
                 cursor: pointer;
 
-                label{
+                a{
                     @extend .text-small,.text-dark,.text-uppercase;
                     cursor: pointer;
                 }
@@ -83,6 +83,9 @@
                 align-items: center;
                 row-gap: 5px;
     
+                a{
+                    @extend .text-light;
+                }
                 img{
                     height: 35px;
                     width: 40px;
