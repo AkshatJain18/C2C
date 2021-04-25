@@ -1,34 +1,34 @@
 <div class="homepage-container">
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-interval="4000">
-            <img src="../../assets/cover2.png" class="w-100" alt="slide-1">
-          </div>
-          <div class="carousel-item" data-interval="4000">
-            <img src="../../assets/cover1.png" class="w-100" alt="slide-1">
-          </div>
+    <div>
+        <div id="myCarousel" class="carousel slide border" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active bg-navyblue"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active border" data-interval="4000">
+                  <div class="d-flex align-items-center justify-content-center" style="height: 300px;">
+                    <span class="text-dark text-x-large text-capitalize mt-4" style="font-size: 25px;">
+                        <span class="text-navyblue">buy,sell and find</span> great things from us
+                    </span>
+                  </div>
+              </div>
+              <div class="carousel-item border" data-interval="4000">
+                <div class="d-flex align-items-center justify-content-center" style="height: 300px;">
+                    <span class="text-dark text-x-large text-capitalize mt-4" style="font-size: 25px;">
+                        <span class="text-navyblue">conduct auctions</span> and get the best price
+                    </span>
+                </div>
+              </div>
+            </div>
         </div>
     </div>
+
       
     <div class="ads-section">
         <div class="sub-container">
-            <div class="search-container d-none">
-                <label class="heading">Search for</label>
-                <div class="search-sub-container">
-                    <input>
-                    <select>
-                        <option>within company</option>
-                        <option>anywhere</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="ads-container mt-3">
+            <div class="ads-container mt-1">
                 <div class="ad-row">
                     <label class="heading">Latest ads</label>
                     <div class="ads-sub-container mt-4">
@@ -41,10 +41,16 @@
                                     <label class="item-price">₹ {{ad.initialPrice}}</label>
                                     <label class="item-name">{{ad.adTitle}}</label>
                                 </div>
+                                <div class="card-footer">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span class="detail">{{ad.adCreated | date}}</span>
+                                        <span class="detail">{{ad.views}} views</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
+                    <label (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
                 </div>
 
                 <div class="ad-row">
@@ -58,6 +64,12 @@
                                 <div class="ad-details-container">
                                     <label class="item-price">₹ {{ad.initialPrice}}</label>
                                     <label class="item-name">{{ad.adTitle}}</label>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span class="detail">{{ad.adCreated | date}}</span>
+                                        <span class="detail">{{ad.views}} views</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,6 +88,12 @@
                                 <div class="ad-details-container">
                                     <label class="item-price">₹ {{ad.initialPrice}}</label>
                                     <label class="item-name">{{ad.adTitle}}</label>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span class="detail">{{ad.adCreated | date}}</span>
+                                        <span class="detail">{{ad.views}} views</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -41,8 +41,10 @@ export class HomepageComponent implements OnInit {
       this.ads.forEach(ad=>this.donationAds.push(ad));
 
       this.trendingAds.sort((x,y)=>y.views-x.views);
+      this.trendingAds = this.trendingAds.filter(ad=>ad.adType!=1);
       this.recentlyAddedAds.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
-      this.donationAds = this.donationAds.filter(ad=>ad.adType==3);
+      this.recentlyAddedAds = this.recentlyAddedAds.filter(ad=>ad.adType!=1);
+      this.donationAds = this.donationAds.filter(ad=>ad.adType==1);
 
       console.log(this.trendingAds);
       console.log(this.recentlyAddedAds);

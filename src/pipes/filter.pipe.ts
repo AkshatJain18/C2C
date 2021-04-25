@@ -48,8 +48,10 @@ export class FilterPipe implements PipeTransform {
         ads = this.searchFilter(ads,searchKeyword);
         ads = this.categoriesFilter(ads,selectedCategories);
         ads = this.adTypeFilter(ads,adType);
+        if(adType == 1){
+            return ads;
+        }
         ads = this.priceFilter(ads,startPrice,endPrice);
-
         return ads;
     }
 }

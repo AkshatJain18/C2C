@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="nav-items-container">
-            <div class="nav-item" *ngIf="isLoggedIn">
+            <div class="nav-item" *ngIf="false">
                 <img src="../../assets/bookmark-icon-white.png">
                 <a>saved ads</a>
             </div>
@@ -16,7 +16,7 @@
                 <a class="plus-icon">+</a>
                 <a>create ads</a>
             </button>
-            <div class="my-profile-nav-item">
+            <div *ngIf="false" class="my-profile-nav-item">
                 <a class="cursor-pointer text-light" *ngIf="isLoggedIn">My Profile</a>
             </div>
             <a class="cursor-pointer text-light" routerLink = "/sign-in" *ngIf="!isLoggedIn">Login</a>
