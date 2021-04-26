@@ -1,4 +1,4 @@
-<div class="ads-list-container">
+<div class="ads-list-container pt-2">
     <div class="filter-section border">
         <div class="filter-container">
             <label class="heading">Ads Filter</label>
@@ -10,7 +10,7 @@
                     <span class="tab" (click)="setAdType(3)" [ngClass]="{'active-tab':adType==3}">Auction</span>
                 </div>
             </div>
-            <div class="price-range-container">
+            <div class="price-range-container" *ngIf="adType!=1">
                 <label class="filter-name">Price range</label>
                 <div class="price-range-sub-container">
                     <div class="custom-slider">

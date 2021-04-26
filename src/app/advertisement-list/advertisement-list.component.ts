@@ -13,11 +13,11 @@ import { SearchService } from 'src/services/search.service';
 })
 export class AdvertisementListComponent implements OnInit {
 
-  startPrice: number = 500;
-  endPrice: number = 100000;
+  startPrice: number = 50;
+  endPrice: number = 10000000;
   options: Options = {
-    floor: 500,
-    ceil: 100000,
+    floor: 100,
+    ceil: 1000000,
     step: 1000,
     showTicks: true
   };

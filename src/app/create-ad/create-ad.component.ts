@@ -5,6 +5,7 @@ import axios from 'axios';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CategoryService } from 'src/services/category.service';
 import { AdService } from 'src/services/ad.service';
+import { Router } from '@angular/router';
 
 enum adtypes {
   donate = 1,
@@ -38,11 +39,12 @@ export class CreateAdComponent implements OnInit {
   CLOUDINARY_UPLOAD_PRESET = "cbtxrrbg";
   userDetails = JSON.parse(localStorage.user);
 
-  constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private categoryService:CategoryService,private adService:AdService) {
+  constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private router:Router,private categoryService:CategoryService,private adService:AdService) {
     this.buildCreateAdForm(new Ad({
       adType:this.adTypes.sell,
-      auctionDealdine:""
+      auctionDealdine:"",
     }));
+    console.log(this.createAdForm.value);
    }
 
   ngOnInit(): void {
@@ -67,6 +69,7 @@ export class CreateAdComponent implements OnInit {
       img2Url : new FormControl(ad.img2Url),
       img3Url : new FormControl(ad.img3Url)
     })
+    
   }
 
   onSubmit() {
@@ -76,6 +79,7 @@ export class CreateAdComponent implements OnInit {
         (res)=>{
           console.log(res);
           alert("ad added!");
+          this.router.navigateByUrl('ads/'+res.adId);
         },
         (err)=>{
           console.log(err);
