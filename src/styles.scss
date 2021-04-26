@@ -28,7 +28,7 @@
   font-weight: bold;
 }
 
-.text-navyblue{
+.text-blue{
   color:#3646a6;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .bg-blue {
-  background-image: linear-gradient(to left,rgb(0, 119, 255),rgb(0, 60, 255));
+  background-image: #b32cf2;
 }
 
 .border-blue {
@@ -88,6 +88,14 @@
   background-image: linear-gradient(to right, #f5f7fa    ,  #c3cfe2 );
 }
 
+.w-32{
+  width: 32%;
+}
+
+.circle{
+  border-radius: 50%;
+}
+
 .text-black {
   color: black;
 }
@@ -115,6 +123,7 @@ html,body{
 .cursor-pointer{
   cursor: pointer;
 }
+
 .ad{
     display: flex;
     flex-direction: column;
@@ -137,10 +146,11 @@ html,body{
         display: flex;
         flex-direction: column;
         padding: 15px;
+        padding-bottom: 5px;
 
         .item-price {
           @extend .text-dark, .text-x-large;
-          font: bold;
+          font-weight: 700;
         }
 
         .item-name {

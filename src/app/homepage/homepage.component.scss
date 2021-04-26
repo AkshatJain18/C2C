@@ -1,15 +1,17 @@
 @import "../../styles.scss";
 
 .homepage-container {
-  @extend .bg-light,.h-100,.w-100;
+  @extend .h-100,.w-100;
+  background-color: #f1f1f1;
+  padding:30px 40px;
 
   .ads-section {
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding-top: 30px;
 
     .sub-container {
-      padding: 10px 30px;      
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -18,30 +20,33 @@
       .ads-container {
         display: flex;
         flex-direction: column;
-        row-gap: 40px;
-        padding: 10px;
+        row-gap: 30px;
 
         .ad-row{
           display: flex;
           flex-direction: column;
           width: 100%;
+          padding: 20px 30px;
+          @extend .card;
 
           .heading{
-            @extend .text-x-large,.text-dark;
+            @extend .text-large,.text-dark;
+          }
+
+          .view-all{
+            @extend .text-small,.text-light;
+            background-color: #B32CF2;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
           }
   
           .ads-sub-container{
             display: grid;
             grid-template-columns: 24% 24% 24% 24%;
-            row-gap: 20px;
+            row-gap: 40px;
             column-gap: 20px;
-          }
-
-          .view-all{
-            @extend .text-medium;
-            color: blueviolet;
-            cursor: pointer;
-            margin-left: auto;
+            padding:10px;
           }
         }
       }

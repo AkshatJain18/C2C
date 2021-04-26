@@ -15,7 +15,7 @@ export class HomepageComponent implements OnInit {
 
   ads!:Ad[];
   isLoggedIn!:boolean;
-
+  
   trendingAds:Ad[] = [];
   recentlyAddedAds:Ad[] = [];
   donationAds:Ad[] = [];
