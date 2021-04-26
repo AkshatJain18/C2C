@@ -1,0 +1,26 @@
+<div class="top-nav-container">
+    <div class="top-nav">
+        <div class="d-flex w-50">
+            <img routerLink = "/homepage" class="cursor-pointer" src="../../assets/peddler-logo-orange.png" height="50px" width="150px">
+            <div class="d-flex align-items-center" style="margin-left: 25px;"> 
+                <input *ngIf="isSearchInputVisible" type="search" style="margin-left: 10px;" (keyup)="updateKeyword()" [(ngModel)]="searchKeyword" placeholder="Search for items" class="searchInput ml-2" >
+                <img style="cursor: pointer;margin-left: 20px;" *ngIf="!isSearchInputVisible"  (click)="isSearchInputVisible=true" height="20px" width="20px" src="../../assets/search.ico">
+            </div>
+        </div>
+        <div class="nav-items-container">
+            <div class="nav-item" *ngIf="false">
+                <img src="../../assets/bookmark-icon-white.png">
+                <a>saved ads</a>
+            </div>
+            <button class="create-ad-nav-button" *ngIf="isLoggedIn" (click)="onCreateAdClick()">
+                <a class="plus-icon">+</a>
+                <a>create ads</a>
+            </button>
+            <div *ngIf="false" class="my-profile-nav-item">
+                <a class="cursor-pointer text-light" *ngIf="isLoggedIn">My Profile</a>
+            </div>
+            <a class="cursor-pointer text-light" routerLink = "/sign-in" *ngIf="!isLoggedIn">Login</a>
+            <a class="cursor-pointer text-light" (click)="onLogOutClick()" routerLink = "/sign-in" *ngIf="isLoggedIn">Logout</a>
+        </div>
+    </div>
+</div>

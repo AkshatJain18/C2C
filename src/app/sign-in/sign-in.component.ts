@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../model/User';
-import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { NavbarService } from 'src/services/navbar.service';
+import { User } from '../../models/User';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,11 +20,12 @@ export class SignInComponent implements OnInit {
 
   fieldTextType: boolean = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,private router:Router) {
     this.buildSignInForm(new User({}));
    }
 
   ngOnInit(): void {
+    
   }
 
   buildSignInForm(user:User){
@@ -37,11 +40,16 @@ export class SignInComponent implements OnInit {
     console.log(this.signInForm.value);
     this.authService.signIn(this.signInForm.value)
     .subscribe(
-      (data:any) => { console.log(data);
-                      this.user = data;
-                      localStorage.setItem("user",JSON.stringify(data));
-                      if(data===null){this.errorInSignIn=true;
-                      }},
+      (data:any) => {
+        console.log(data);
+        this.user = data;
+        localStorage.setItem("user",JSON.stringify(data));
+        if(data===null){
+          this.errorInSignIn=true; 
+        }else{
+          this.router.navigateByUrl('/homepage');
+        }
+      },
       (err) => { this.errorInSignIn = true },
       () => console.log('done loading user')
     )

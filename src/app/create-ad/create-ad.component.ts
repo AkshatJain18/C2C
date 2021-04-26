@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Ad } from '../../model/Ad';
+import { Ad } from '../../models/Ad';
 import axios from 'axios';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CategoryService } from 'src/services/category.service';
+import { AdService } from 'src/services/ad.service';
+import { Router } from '@angular/router';
 
-enum typeOfAd {
+enum adtypes {
   donate = 1,
   sell = 2,
   auction = 3
@@ -19,41 +22,34 @@ export class CreateAdComponent implements OnInit {
 
   createAdForm !: FormGroup;
 
-  http : HttpClient;
+  adTypes = adtypes;
 
-  adTypes = typeOfAd;
+  adType = adtypes.sell;
 
-  isSell = true;
-  isAuction = false;
-  isDonate = false;
+  imageSelected : boolean[] =[false,false,false,false];
 
-  image1Selected = false;
-  image2Selected = false;
-  image3Selected = false;
   image1Touched = false;
   imageRemoved = false;
 
-  url1 = "";
-  url2 = "";
-  url3 = "";
+  url: string[] = [];
 
   public categories: any;
 
   CLOUDINARY_URL = "	https://api.cloudinary.com/v1_1/hashedin/upload";
   CLOUDINARY_UPLOAD_PRESET = "cbtxrrbg";
-  userDetails = JSON.parse(localStorage.userDetails);
+  userDetails = JSON.parse(localStorage.user);
 
-  constructor(httpClient:HttpClient,private formBuiler : FormBuilder) {
-    this.buildCreateAdForm(new Ad({}));
-    this.http = httpClient;
-
+  constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private router:Router,private categoryService:CategoryService,private adService:AdService) {
+    this.buildCreateAdForm(new Ad({
+      adType:this.adTypes.sell,
+      auctionDealdine:"",
+    }));
+    console.log(this.createAdForm.value);
    }
 
   ngOnInit(): void {
-    this.createAdForm.get('adType')?.setValue(this.adTypes.sell);
-    this.createAdForm.get('auctionDeadline')?.setValue("");
     console.log(this.userDetails);
-    this.getCategories();
+    this.categoryService.getCategories().subscribe(categoryList => this.categories = categoryList);
     //this.createAdForm.get('adType')?.updateValueAndValidity();
   }
 
@@ -73,48 +69,43 @@ export class CreateAdComponent implements OnInit {
       img2Url : new FormControl(ad.img2Url),
       img3Url : new FormControl(ad.img3Url)
     })
-  }
-
-  getCategories() {
-    this.http.get("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/category").subscribe(
-      data => { this.categories = data},
-      err => console.error(err),
-      () => console.log('done loading users')
-    )
+    
   }
 
   onSubmit() {
-    console.log(this.createAdForm.value);
-    this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/insertAd",this.createAdForm.value)
-    .subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
-    )
+    if(this.createAdForm.valid){
+      console.log(this.createAdForm.value);
+      this.adService.postAd(this.createAdForm.value).subscribe(
+        (res)=>{
+          console.log(res);
+          alert("ad added!");
+          this.router.navigateByUrl('ads/'+res.adId);
+        },
+        (err)=>{
+          console.log(err);
+        }
+      );
+    }
   }
 
   toggleAdType(type: number) {
-    this.buildCreateAdForm(new Ad({}));
-    this.removeImage(1);
-    this.removeImage(2);
-    this.removeImage(3);
+    this.buildCreateAdForm(new Ad({adType:type}));
+    for(var i=1;i<=3;i++) {
+      this.removeImage(i);
+    }
     if(type===this.adTypes.sell) {
-      this.isSell = true;
-      this.isAuction = false;
-      this.isDonate = false;
+      this.adType = this.adTypes.sell;
       this.createAdForm.get('auctionDeadline')?.setValue("");
     }
     else if(type===this.adTypes.auction) {
-      this.isAuction = true;
-      this.isDonate = false;
-      this.isSell = false;
+      this.adType = this.adTypes.auction;
     }
     else {
-      this.isDonate = true;
-      this.isSell = false;
-      this.isAuction = false;
+     this.adType = this.adTypes.donate;
       this.createAdForm.get('initialPrice')?.setValue(0);
       this.createAdForm.get('auctionDeadline')?.setValue("");
     }
+<<<<<<< HEAD
     this.createAdForm.get('adType')?.setValue(type);
     //this.createAdForm.get('adType')?.updateValueAndValidity();
     //this.setConditionalValidators;
@@ -164,9 +155,11 @@ export class CreateAdComponent implements OnInit {
       }).catch(function(err) {
         console.log(err);
       });
+=======
+>>>>>>> 59c3b843f1c2ec7d0eaf6012c5a72bbecf80c025
   }
 
-  onSelectFile3(e:any) {
+  onSelectFile(e:any, i: number) {
     var file = e.target.files[0];
     var formData = new FormData;
     formData.append('file',file);
@@ -180,34 +173,35 @@ export class CreateAdComponent implements OnInit {
       data: formData
       }).then((res) => {
         console.log(res);
-        this.image3Selected = true;
-        this.url3 = res.data.secure_url;
-        this.createAdForm.get('img3Url')?.setValue(this.url3);
+        this.url[i] = res.data.secure_url;
+        this.imageSelected[i] = true;
+        if(i==1) {
+          this.createAdForm.get('img1Url')?.setValue(this.url[i]);
+          this.image1Touched = true;
+        }
+        else if(i==2) {
+          this.createAdForm.get('img2Url')?.setValue(this.url[i]);
+        }
+        else {
+          this.createAdForm.get('img3Url')?.setValue(this.url[i]);
+        }
       }).catch(function(err) {
         console.log(err);
       });
   }
 
   removeImage(i:number) {
+    this.url[i] = "";
+    this.imageSelected[i] = false;
     if(i===1) {
-      this.image1Selected = false;
-      this.url1 = "";
-      this.createAdForm.get('img1Url')?.setValue(this.url1);
+      this.createAdForm.get('img1Url')?.setValue(this.url[i]);
       this.imageRemoved = true;
     }
     else if(i===2) {
-      this.image2Selected = false;
-      this.url2 = "";
-      this.createAdForm.get('img2Url')?.setValue(this.url2);
+      this.createAdForm.get('img2Url')?.setValue(this.url[i]);
     }
     else {
-      this.image3Selected = false;
-      this.url3 = "";
-      this.createAdForm.get('img3Url')?.setValue(this.url3);
+      this.createAdForm.get('img3Url')?.setValue(this.url[i]);
     }
-
   }
-
-
-
 }

@@ -1,0 +1,93 @@
+@import "../../styles.scss";
+
+.top-nav-container{
+    background-color:#3646a6;
+    color: white;
+    @extend .text-small,.text-uppercase,.fixed-top;
+
+    .top-nav{
+        padding:20px 40px;
+        padding-right: 50px;
+        display: flex;
+        align-items: center;
+        justify-content:space-between;
+        @extend .border-bottom;
+
+        .logo{
+            margin-top:auto;
+            margin-bottom: auto;
+            font-size: 24px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .searchInput{
+            width: 250px;
+            background: none;
+            border:1px solid red;
+            border: none;
+            border-bottom: 1px solid white;
+            color: white;
+            padding: 5px 10px;
+        }
+
+        .searchInput::placeholder{
+            color: white;
+        }
+
+        .searchInput:focus{
+            outline: none;
+        }
+
+        .nav-items-container{
+            display: flex;
+            align-items: center;
+            column-gap: 40px;
+
+            .nav-item{
+                display: flex;
+                align-items: center;
+                column-gap: 15px;
+
+                img{
+                    height: 15px;
+                    width: 20px;
+                }
+            }
+    
+            .create-ad-nav-button{
+                background-color: orange;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                column-gap:5px;
+                border-radius: 5px;
+                height: 45px;
+                width: 140px;
+                cursor: pointer;
+
+                a{
+                    @extend .text-small,.text-dark,.text-uppercase;
+                    cursor: pointer;
+                }
+                
+                .plus-icon{
+                    @extend .text-x-large;
+                    cursor: pointer;
+                }
+            }
+    
+            .my-profile-nav-item{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                row-gap: 5px;
+
+                img{
+                    height: 35px;
+                    width: 40px;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}

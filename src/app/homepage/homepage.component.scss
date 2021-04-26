@@ -1,0 +1,50 @@
+@import "../../styles.scss";
+
+.homepage-container {
+  @extend .bg-light,.h-100,.w-100;
+
+  .ads-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .sub-container {
+      padding: 40px 30px;      
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+
+      .ads-container {
+        display: flex;
+        flex-direction: column;
+        row-gap: 40px;
+        padding: 10px;
+
+        .ad-row{
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+
+          .heading{
+            @extend .text-x-large,.text-dark;
+          }
+  
+          .ads-sub-container{
+            display: grid;
+            grid-template-columns: 24% 24% 24% 24%;
+            row-gap: 20px;
+            column-gap: 20px;
+          }
+
+          .view-all{
+            @extend .text-medium;
+            color: blueviolet;
+            cursor: pointer;
+            margin-left: auto;
+          }
+        }
+      }
+    }
+  }
+}

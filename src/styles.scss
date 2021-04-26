@@ -4,24 +4,32 @@
   font-family: Mulish;
 }
 
-.text-small {
-  font-size: small;
+.text-x-small{
+  font-size: 12px;
 }
 
-.text-large {
-  font-size: large;
+.text-small{
+  font-size: 14px;
+}
+
+.text-medium{
+  font-size: 16px;
+}
+
+.text-large{
+  font-size: 18px;
+}
+
+.text-x-large{
+  font-size: 20px;
 }
 
 .text-bold {
   font-weight: bold;
 }
 
-.text-x-large {
-  font-size:x-large;
-}
-
-.text-x-small {
-  font-size: x-small;
+.text-navyblue{
+  color:#3646a6;
 }
 
 .text-grey {
@@ -68,6 +76,89 @@
   background-color: black;
 }
 
+.bg-navyblue{
+  background-color: #3646a6;
+}
+
+.bg-white{
+  background-color:#ffff;
+}
+
+.bg-carousel{
+  background-image: linear-gradient(to right, #f5f7fa    ,  #c3cfe2 );
+}
+
 .text-black {
   color: black;
 }
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+*{
+    font-family: 'Mulish', sans-serif;
+}
+
+
+.text-darkgrey{
+    color: #6a817d;
+}
+
+.w-48{
+  width: 48%;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+.ad{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    cursor: pointer;
+    @extend .card;
+
+    .item-photo{
+      height: 180px;
+      width: 100%;
+    }
+
+    .ad-details {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: white;
+
+      .ad-details-container {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+
+        .item-price {
+          @extend .text-dark, .text-x-large;
+          font: bold;
+        }
+
+        .item-name {
+          @extend .text-darkgrey, .text-medium;
+        }
+      }
+
+      .card-footer{
+        background-color: #3646a6;
+
+        .detail{
+          color: white;
+          @extend .text-small;
+        }
+      }
+
+      img {
+        padding-right: 15px;
+      }
+    }
+  }

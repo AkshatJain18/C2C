@@ -1,4 +1,5 @@
 export class Ad {
+  adId: number;
   adType : number;
   adTitle : string;
   productName : string;
@@ -11,12 +12,13 @@ export class Ad {
   productAge: string;
   auctionDeadline : string;
   adCreated : string;
-  viewCount : number;
+  views : number;
   img1Url : string;
   img2Url : string;
   img3Url : string;
 
   constructor (ad : any) {
+    this.adId = ad.adId;
     this.adType = ad.adType;
     this.adTitle = ad.adTitle;
     this.productName = ad.productName;
@@ -32,6 +34,6 @@ export class Ad {
     this.img3Url = ad.img3Url;
     this.currentBidPrice = ad.currentBidPrice;
     this.adCreated = ad.adCreated;
-    this.viewCount = ad.viewCount;
+    this.views = ad.views;
   }
 }

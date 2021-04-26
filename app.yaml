@@ -1,0 +1,24 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+service: c2c-marketplace-frontend
+instance_class: B1
+manual_scaling:
+        instances: 1
+handlers:
+  - url: /
+    static_files: dist/c2c-marketplace/index.html
+    upload: dist/c2c-marketplace/index.html
+
+  - url: /
+    static_dir: dist/c2c-marketplace/
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE

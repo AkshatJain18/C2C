@@ -1,0 +1,104 @@
+<div class="homepage-container">
+    <div>
+        <div id="myCarousel" class="carousel slide bg-carousel" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active bg-navyblue"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active border" data-interval="4000">
+                  <div class="d-flex align-items-center justify-content-center" style="height: 300px;">
+                    <span class="text-dark text-x-large text-capitalize mt-4" style="font-size: 25px;">
+                        <span class="text-navyblue">buy,sell and find</span> great things from us
+                    </span>
+                  </div>
+              </div>
+              <div class="carousel-item border" data-interval="4000">
+                <div class="d-flex align-items-center justify-content-center" style="height: 300px;">
+                    <span class="text-dark text-x-large text-capitalize mt-4" style="font-size: 25px;">
+                        <span class="text-navyblue">conduct auctions</span> and get the best price
+                    </span>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ads-section">
+        <div class="sub-container">
+            <div class="ads-container mt-1">
+                <div class="ad-row">
+                    <label class="heading">Latest ads</label>
+                    <div class="ads-sub-container mt-4">
+                        <div *ngFor="let ad of recentlyAddedAds | slice:0:4" (click)="navigateToAdDetail(ad.adId)" class="ad">
+                            <div class="d-flex">
+                                <img class="item-photo" src={{ad.img1Url}}>
+                            </div>
+                            <div class="ad-details">
+                                <div class="ad-details-container">
+                                    <label class="item-price">₹ {{ad.initialPrice}}</label>
+                                    <label class="item-name">{{ad.adTitle}}</label>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span class="detail">{{ad.adCreated | date}}</span>
+                                        <span class="detail">{{ad.views}} views</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
+                </div>
+
+                <div class="ad-row">
+                    <label class="heading">Trending ads</label>
+                    <div class="ads-sub-container mt-4">
+                        <div *ngFor="let ad of trendingAds | slice:0:4" (click)="navigateToAdDetail(ad.adId)" class="ad h-100">
+                            <div class="d-flex">
+                                <img class="item-photo" src={{ad.img1Url}}>
+                            </div>
+                            <div class="ad-details">
+                                <div class="ad-details-container">
+                                    <label class="item-price">₹ {{ad.initialPrice}}</label>
+                                    <label class="item-name">{{ad.adTitle}}</label>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span class="detail">{{ad.adCreated | date}}</span>
+                                        <span class="detail">{{ad.views}} views</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
+                </div>
+                
+                <div class="ad-row">
+                    <label class="heading">Donation ads</label>
+                    <div class="ads-sub-container mt-4">
+                        <div *ngFor="let ad of donationAds | slice:0:4" (click)="navigateToAdDetail(ad.adId)" class="ad">
+                            <div class="d-flex">
+                                <img class="item-photo" src={{ad.img1Url}}>
+                            </div>
+                            <div class="ad-details">
+                                <div class="ad-details-container">
+                                    <label class="item-price">₹ {{ad.initialPrice}}</label>
+                                    <label class="item-name">{{ad.adTitle}}</label>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span class="detail">{{ad.adCreated | date}}</span>
+                                        <span class="detail">{{ad.views}} views</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label *ngIf="ads.length>=4" (click)="navigateToAllAds()" class="view-all mt-3">view all</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
