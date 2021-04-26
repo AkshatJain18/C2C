@@ -14,13 +14,6 @@ import { UserService } from 'src/services/user.service';
 })
 export class AdvertisementDetailComponent implements OnInit {
 
-  slideConfig = {  
-    "slidesToShow": 3,  
-    "slidesToScroll": 3,  
-    "dots": true,  
-    "infinite": true  
-  }; 
-
   adId!:string;
   ad!:Ad;
   seller!:User;
@@ -35,7 +28,6 @@ export class AdvertisementDetailComponent implements OnInit {
   ngOnInit(): void {
     this.adService.getAdById(this.adId).subscribe(adItem => {
       this.ad = adItem;
-      console.log(this.ad);
       this.categoryService.getCategories().subscribe((categories)=>{
          this.category =  categories.find((c:any)=>c.categoryId == this.ad.categoryId);
       })
