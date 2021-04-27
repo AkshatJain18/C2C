@@ -3,15 +3,16 @@
 .ads-list-container{
   display: flex;
   height: 100%;
-  @extend .bg-light;
+  background-color: #f1f1f1;
+  padding: 40px 40px;
 
   .filter-section{
       width: 25%;
       height: 100%;
-      overflow-y: scroll;
+      padding: 30px;
+      @extend .card,.shadow;
       
       .filter-container{
-          padding: 40px;
           margin-bottom: 70px;
           display: flex;
           flex-direction: column;
@@ -47,8 +48,8 @@
                   }
 
                   .active-tab{
-                      border:2px solid #3646a6;
-                      color: #3646a6;
+                      border:2px solid #B32CF2;
+                      color: #B32CF2;
                   }
               }
           }
@@ -87,11 +88,13 @@
 
   .ads-section{
     width: 75%;
-   
+    margin-left: 20px;
+    padding: 30px;
+    @extend .card,.shadow;
+
     .ads-container{
       display: flex;
       flex-direction: column;
-      padding: 40px;
       row-gap: 40px;
 
       .heading{
@@ -100,10 +103,10 @@
       }
 
       .ads-sub-container{
-        column-gap: 20px;
-        row-gap: 20px;
+        column-gap: 30px;
+        row-gap: 30px;
         display: grid;
-        grid-template-columns: 32% 32% 32%;
+        grid-template-columns: 31% 31% 31%;
       }
 
     }
@@ -118,7 +121,7 @@
       height: 4px;
     }
     .custom-slider .ngx-slider .ngx-slider-selection {
-      background: #3646a6;
+      background: #B32CF2;
     }
     .custom-slider .ngx-slider .ngx-slider-pointer {
       width: 15px;

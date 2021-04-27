@@ -1,5 +1,5 @@
-<div class="ads-list-container pt-2">
-    <div class="filter-section border">
+<div class="ads-list-container">
+    <div class="filter-section">
         <div class="filter-container">
             <label class="heading">Ads Filter</label>
             <div class="buy-donate-container">
@@ -59,12 +59,12 @@
                                 <label class="item-name">{{ad.adTitle}}</label>
                                 <label class="item-name" *ngIf="ad.adType==3">Auction Deadline - {{ad.auctionDeadline | date}}</label>
                             </div>
-                            <div class="card-footer">
+                            <!--div class="card-footer">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <span class="detail">{{ad.adCreated | date}}</span>
                                     <span class="detail">{{ad.views}} views</span>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </ng-container>

@@ -5,6 +5,7 @@ import { AwsCloudMapServiceDiscovery } from 'aws-sdk/clients/appmesh';
 import { AdService } from 'src/services/ad.service';
 import { Router } from '@angular/router';
 import { Ad } from 'src/models/Ad';
+import { CategoryService } from 'src/services/category.service';
 
 @Component({
   selector: 'app-homepage',
@@ -19,8 +20,10 @@ export class HomepageComponent implements OnInit {
   trendingAds:Ad[] = [];
   recentlyAddedAds:Ad[] = [];
   donationAds:Ad[] = [];
-  
-  constructor(private adService:AdService,private router:Router) {  
+
+  categories:any = [];
+
+  constructor(private adService:AdService,private categoryService:CategoryService,private router:Router) {  
     this.isLoggedIn = localStorage.getItem('user')!=null;
   }  
 
@@ -45,9 +48,15 @@ export class HomepageComponent implements OnInit {
       this.recentlyAddedAds.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
       this.recentlyAddedAds = this.recentlyAddedAds.filter(ad=>ad.adType!=1);
       this.donationAds = this.donationAds.filter(ad=>ad.adType==1);
-
-      console.log(this.trendingAds);
-      console.log(this.recentlyAddedAds);
     });
+
+    this.categoryService.getCategories().subscribe(
+      (categoryList)=>{
+        this.categories = categoryList;
+        this.categories = this.categories.slice(0,5);
+      },
+      (error)=>{
+        console.log(error);
+      })
   }
 }

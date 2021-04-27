@@ -120,6 +120,10 @@ html,body{
   width: 48%;
 }
 
+.w-32{
+  width: 32%;
+}
+
 .cursor-pointer{
   cursor: pointer;
 }
@@ -129,7 +133,7 @@ html,body{
     flex-direction: column;
     background-color: white;
     cursor: pointer;
-    @extend .card;
+    @extend .card,.shadow-sm;
 
     .item-photo{
       height: 180px;
@@ -159,10 +163,7 @@ html,body{
       }
 
       .card-footer{
-        background-color: #3646a6;
-
         .detail{
-          color: white;
           @extend .text-small;
         }
       }

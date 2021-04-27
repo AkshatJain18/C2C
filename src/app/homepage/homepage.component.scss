@@ -5,11 +5,19 @@
   background-color: #f1f1f1;
   padding:30px 40px;
 
+  .carousel{
+
+    img{
+      width: 32%;
+      height: 170px;
+    }
+  }
+
   .ads-section {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-top: 30px;
+    padding-top: 20px;
 
     .sub-container {
       display: flex;
@@ -20,22 +28,22 @@
       .ads-container {
         display: flex;
         flex-direction: column;
-        row-gap: 30px;
+        row-gap: 20px;
 
         .ad-row{
           display: flex;
           flex-direction: column;
           width: 100%;
-          padding: 20px 30px;
-          @extend .card;
+          padding: 30px 30px;
+          @extend .card,.shadow;
 
           .heading{
             @extend .text-large,.text-dark;
+            font-weight: 700;
           }
 
           .view-all{
-            @extend .text-small,.text-light;
-            background-color: #B32CF2;
+            @extend .text-small,.text-blue;
             padding: 8px;
             border-radius: 5px;
             cursor: pointer;

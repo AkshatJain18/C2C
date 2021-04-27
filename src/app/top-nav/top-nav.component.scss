@@ -30,5 +30,13 @@
         .searchInput:focus{
             outline: none;
         }
+
+        button{
+            background-color: #B32CF2;
+            padding: 8px;
+            border-radius: 5px;
+            color: white;
+            border: none;
+        }
     }
 }

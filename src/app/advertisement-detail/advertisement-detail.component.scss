@@ -28,7 +28,7 @@
             padding: 20px 20px;
             margin-left: 50px;
             width: 40%;
-            @extend .card,.bg-light;
+            @extend .card,.shadow;
 
             .item-price{
                 @extend .text-dark;
