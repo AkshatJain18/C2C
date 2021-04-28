@@ -45,63 +45,36 @@
                 <div class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Latest ads</label>
-                        <label (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
+                        <label routerLink = "/ads" class="view-all mt-2">view all</label>
                     </div>
                     <div class="ads-sub-container mt-2">
-                        <div *ngFor="let ad of recentlyAddedAds | slice:0:4" (click)="navigateToAdDetail(ad.adId)"
-                            class="ad">
-                            <div class="d-flex">
-                                <img class="item-photo" src={{ad.img1Url}}>
-                            </div>
-                            <div class="ad-details">
-                                <div class="ad-details-container">
-                                    <label class="item-price">₹ {{ad.initialPrice}}</label>
-                                    <label class="item-name">{{ad.adTitle}}</label>
-                                </div>
-                            </div>
-                        </div>
+                        <ng-container *ngFor="let ad of recentlyAddedAds | slice:0:4">
+                            <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
+                        </ng-container>
                     </div>
                 </div>
 
                 <div class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Trending ads</label>
-                        <label (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
+                        <label routerLink = "/ads" class="view-all mt-2">view all</label>
                     </div>
                     <div class="ads-sub-container mt-2">
-                        <div *ngFor="let ad of trendingAds | slice:0:4" (click)="navigateToAdDetail(ad.adId)"
-                            class="ad h-100">
-                            <div class="d-flex">
-                                <img class="item-photo" src={{ad.img1Url}}>
-                            </div>
-                            <div class="ad-details">
-                                <div class="ad-details-container">
-                                    <label class="item-price">₹ {{ad.initialPrice}}</label>
-                                    <label class="item-name">{{ad.adTitle}}</label>
-                                </div>
-                            </div>
-                        </div>
+                        <ng-container *ngFor="let ad of trendingAds | slice:0:4">
+                            <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
+                        </ng-container>
                     </div>
                 </div>
 
                 <div class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Donation ads</label>
-                        <label (click)="navigateToAllAds()" class="view-all mt-2">view all</label>
+                        <label routerLink = "/ads" class="view-all mt-2">view all</label>
                     </div>
                     <div class="ads-sub-container mt-2">
-                        <div *ngFor="let ad of donationAds | slice:0:4" (click)="navigateToAdDetail(ad.adId)"
-                            class="ad">
-                            <div class="d-flex">
-                                <img class="item-photo" src={{ad.img1Url}}>
-                            </div>
-                            <div class="ad-details">
-                                <div class="ad-details-container">
-                                    <label class="item-price">₹ {{ad.initialPrice}}</label>
-                                    <label class="item-name">{{ad.adTitle}}</label>
-                                </div>
-                            </div>
-                        </div>
+                        <ng-container *ngFor="let ad of donationAds | slice:0:4">
+                            <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
+                        </ng-container>
                     </div>
                 </div>
             </div>

@@ -22,6 +22,14 @@ export class AdService {
     return this.httpClient.get(this.url+"/"+id);
   }
 
+  saveAdForUser(adId:any,userId:any):Observable<any>{
+    return this.httpClient.post(this.url+'/save',{adId:adId,userId:userId});
+  }
+
+  unsaveAdForUser(adId:any,userId:any):Observable<any>{
+    return this.httpClient.post(this.url+"/unsave",{adId:adId,userId:userId});
+  }
+
   postAd(ad:Ad):Observable<any>{
     return this.httpClient.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/insertAd",ad);
   }

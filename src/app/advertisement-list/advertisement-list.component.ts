@@ -2,8 +2,10 @@ import { Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ad } from 'src/models/Ad';
+import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
 import { CategoryService } from 'src/services/category.service';
+import { DataService } from 'src/services/data.service';
 import { SearchService } from 'src/services/search.service';
 
 @Component({
@@ -25,19 +27,27 @@ export class AdvertisementListComponent implements OnInit {
   adType:number;
   sortOption:number;
 
+  user!:User;
+
   ads: Ad[] = [];
   selectedCategories:number[] = [];
   categories:any[] = [];
   searchKeyword:string = "";
   
-  constructor(private adService:AdService,private categoryService:CategoryService,private searchService:SearchService,private router:Router) {
+  constructor(private adService:AdService,private categoryService:CategoryService,private searchService:SearchService,private router:Router,public dataService:DataService) {
     this.adType = 2;
     this.sortOption = 1;
+    this.user = JSON.parse(localStorage.getItem('user')!) as User;
     this.sortList();
   }
 
   setAdType(adType:number){
     this.adType = adType;
+  }
+
+  setAdCard(ad:Ad){
+    this.dataService.setAd(ad);
+    return true;
   }
 
   addOrRemoveCategory(id:any){
@@ -55,7 +65,6 @@ export class AdvertisementListComponent implements OnInit {
     }else{
       this.ads.sort((x,y)=>y.views-x.views);
     }
-    console.log(this.ads);
   }
 
   ngOnInit(): void {

@@ -17,6 +17,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdvertisementDetailComponent } from './advertisement-detail/advertisement-detail.component';
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { MomentModule } from 'ngx-moment';
+import { AdCardComponent } from './ad-card/ad-card.component';
+import { AdDetailedCardComponent } from './ad-detailed-card/ad-detailed-card.component';
+import { SavedAdsComponent } from './saved-ads/saved-ads.component';
 
 
 
@@ -31,7 +35,10 @@ import { FormsModule } from '@angular/forms';
     TopNavComponent,
     AdvertisementListComponent,
     AdvertisementDetailComponent,
-    FilterPipe
+    FilterPipe,
+    AdCardComponent,
+    AdDetailedCardComponent,
+    SavedAdsComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +50,7 @@ import { FormsModule } from '@angular/forms';
     NgbModule,
     HttpClientModule,
     FormsModule,
+    MomentModule
   ],
   providers: [],
   bootstrap: [AppComponent]

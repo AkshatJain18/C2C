@@ -6,6 +6,9 @@ import { AdService } from 'src/services/ad.service';
 import { Router } from '@angular/router';
 import { Ad } from 'src/models/Ad';
 import { CategoryService } from 'src/services/category.service';
+import { UserService } from 'src/services/user.service';
+import { User } from 'src/models/User';
+import { DataService } from 'src/services/data.service';
 
 @Component({
   selector: 'app-homepage',
@@ -21,23 +24,24 @@ export class HomepageComponent implements OnInit {
   recentlyAddedAds:Ad[] = [];
   donationAds:Ad[] = [];
 
-  categories:any = [];
+  savedAds:Ad[] = [];
 
-  constructor(private adService:AdService,private categoryService:CategoryService,private router:Router) {  
+  categories:any = [];
+  user!:User;
+
+  constructor(private adService:AdService,private categoryService:CategoryService,private userService:UserService,private dataService:DataService,private router:Router) {  
     this.isLoggedIn = localStorage.getItem('user')!=null;
+    this.user = JSON.parse(localStorage.getItem('user')!) as User;
+    console.log(this.user);
   }  
 
-  navigateToAllAds(){
-    this.router.navigateByUrl('ads');
-  }
-
-  navigateToAdDetail(id:number){
-    this.router.navigateByUrl('ads/'+id);
+  setAdCard(ad:Ad){
+    this.dataService.setAd(ad);
+    return true;
   }
 
   ngOnInit(): void {
-    this.adService.getAds().subscribe(adList => {
-
+    this.adService.getAds().subscribe((adList) => {
       this.ads = adList;
       this.ads.forEach(ad=>this.trendingAds.push(ad));
       this.ads.forEach(ad=>this.recentlyAddedAds.push(ad));
@@ -48,15 +52,17 @@ export class HomepageComponent implements OnInit {
       this.recentlyAddedAds.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
       this.recentlyAddedAds = this.recentlyAddedAds.filter(ad=>ad.adType!=1);
       this.donationAds = this.donationAds.filter(ad=>ad.adType==1);
+    },(error) =>{
+      console.log(error);
     });
 
     this.categoryService.getCategories().subscribe(
-      (categoryList)=>{
-        this.categories = categoryList;
-        this.categories = this.categories.slice(0,5);
-      },
-      (error)=>{
-        console.log(error);
-      })
+    (categoryList)=>{
+      this.categories = categoryList;
+      this.categories = this.categories.slice(0,5);
+    },
+    (error)=>{
+      console.log(error);
+    })
   }
 }

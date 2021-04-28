@@ -14,7 +14,10 @@ export class UserService {
   }
 
   getUserById(id:any):Observable<any>{
-    console.log("called!");
     return this.httpClient.get(this.url+"/"+id);
+  }
+
+  getSavedAdsByUserId(userId:any):Observable<any>{
+    return this.httpClient.get(this.url+"/"+userId+"/saved-ads");
   }
 }

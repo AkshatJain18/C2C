@@ -18,11 +18,40 @@ export class AdvertisementDetailComponent implements OnInit {
   ad!:Ad;
   seller!:User;
   category!:any;
+  savedAds:Ad[]=[];
+  user!:User;
+  isLoggedIn: boolean;
 
   constructor(private adService:AdService,private userService:UserService,private categoryService:CategoryService,private activatedRoute:ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.adId = params.get('adId') as string; 
     });
+    this.isLoggedIn = localStorage.getItem('user')!=null;
+    this.user = JSON.parse(localStorage.getItem('user')!) as User;
+  }
+
+  saveAd(ad:any){
+    this.adService.saveAdForUser(ad.adId,this.user.id).subscribe((flag)=>{
+      if(flag){
+        this.savedAds.push(ad);
+      }else{
+        alert("ad could not be saved");
+      } 
+    });
+  }
+
+  unSaveAd(adId:any){
+    this.adService.unsaveAdForUser(adId,this.user.id).subscribe((flag)=>{
+      if(flag){
+        this.savedAds = this.savedAds.filter(adItem=>adItem.adId!=adId);
+      }else{
+        alert("ad could not be unsaved");
+      }
+    });
+  }
+
+  isAdSaved(adId:any){
+    return this.savedAds.findIndex(ad=>ad.adId==adId)!=-1;
   }
 
   ngOnInit(): void {
@@ -35,5 +64,9 @@ export class AdvertisementDetailComponent implements OnInit {
     });
 
     this.adService.postAdView(this.adId).subscribe();
+
+    this.userService.getSavedAdsByUserId(this.user.id).subscribe((savedAds)=>{
+      this.savedAds = savedAds;
+    });
   }
 }

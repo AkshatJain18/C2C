@@ -4,6 +4,10 @@
   font-family: Mulish;
 }
 
+.font-700{
+  font-weight: 700;
+}
+
 .text-x-small{
   font-size: 12px;
 }
@@ -105,10 +109,11 @@
 html,body{
     height: 100%;
     width: 100%;
+    background-color: #f1f1f1;
 }
 
 *{
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 
@@ -127,49 +132,3 @@ html,body{
 .cursor-pointer{
   cursor: pointer;
 }
-
-.ad{
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    cursor: pointer;
-    @extend .card,.shadow-sm;
-
-    .item-photo{
-      height: 180px;
-      width: 100%;
-    }
-
-    .ad-details {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      background-color: white;
-
-      .ad-details-container {
-        display: flex;
-        flex-direction: column;
-        padding: 15px;
-        padding-bottom: 5px;
-
-        .item-price {
-          @extend .text-dark, .text-x-large;
-          font-weight: 700;
-        }
-
-        .item-name {
-          @extend .text-darkgrey, .text-medium;
-        }
-      }
-
-      .card-footer{
-        .detail{
-          @extend .text-small;
-        }
-      }
-
-      img {
-        padding-right: 15px;
-      }
-    }
-  }
