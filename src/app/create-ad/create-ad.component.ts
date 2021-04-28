@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit,ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Ad } from '../../models/Ad';
 import axios from 'axios';
@@ -19,6 +19,11 @@ enum adtypes {
   styleUrls: ['./create-ad.component.scss']
 })
 export class CreateAdComponent implements OnInit {
+
+  @ViewChild('myInput1') myInputVariable1: ElementRef | any;
+  @ViewChild('myInput2') myInputVariable2: ElementRef | any;
+  @ViewChild('myInput3') myInputVariable3: ElementRef | any;
+
 
   createAdForm !: FormGroup;
 
@@ -69,7 +74,7 @@ export class CreateAdComponent implements OnInit {
       img2Url : new FormControl(ad.img2Url),
       img3Url : new FormControl(ad.img3Url)
     })
-    
+
   }
 
   onSubmit() {
@@ -105,58 +110,6 @@ export class CreateAdComponent implements OnInit {
       this.createAdForm.get('initialPrice')?.setValue(0);
       this.createAdForm.get('auctionDeadline')?.setValue("");
     }
-<<<<<<< HEAD
-    this.createAdForm.get('adType')?.setValue(type);
-    //this.createAdForm.get('adType')?.updateValueAndValidity();
-    //this.setConditionalValidators;
-  }
-
-  onSelectFile1(e:any) {
-    var file = e.target.files[0];
-    var formData = new FormData;
-    formData.append('file',file);
-    this.imageRemoved = false;
-    formData.append('upload_preset', this.CLOUDINARY_UPLOAD_PRESET);
-    this.image1Touched = true;
-    axios({
-      url: this.CLOUDINARY_URL,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: formData
-      }).then((res) => {
-        console.log(res);
-        this.image1Selected = true;
-        this.url1 = res.data.secure_url;
-        this.createAdForm.get('img1Url')?.setValue(this.url1);
-      }).catch(function(err) {
-        console.log(err);
-      });
-  }
-
-  onSelectFile2(e:any) {
-    var file = e.target.files[0];
-    var formData = new FormData;
-    formData.append('file',file);
-    formData.append('upload_preset', this.CLOUDINARY_UPLOAD_PRESET);
-    axios({
-      url: this.CLOUDINARY_URL,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: formData
-      }).then((res) => {
-        console.log(res);
-        this.image2Selected = true;
-        this.url2 = res.data.secure_url;
-        this.createAdForm.get('img2Url')?.setValue(this.url2);
-      }).catch(function(err) {
-        console.log(err);
-      });
-=======
->>>>>>> 59c3b843f1c2ec7d0eaf6012c5a72bbecf80c025
   }
 
   onSelectFile(e:any, i: number) {
@@ -196,12 +149,15 @@ export class CreateAdComponent implements OnInit {
     if(i===1) {
       this.createAdForm.get('img1Url')?.setValue(this.url[i]);
       this.imageRemoved = true;
+      this.myInputVariable1.nativeElement.value = '';
     }
     else if(i===2) {
       this.createAdForm.get('img2Url')?.setValue(this.url[i]);
+      this.myInputVariable2.nativeElement.value = '';
     }
     else {
       this.createAdForm.get('img3Url')?.setValue(this.url[i]);
+      this.myInputVariable3.nativeElement.value = '';
     }
   }
 }
