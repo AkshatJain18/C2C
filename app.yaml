@@ -26,6 +26,22 @@ handlers:
     static_files: dist/covid-app/\1
     upload: dist/c2c-marketplace/(.+\.svg)
 
+  - url: /(.+\.eot)
+    static_files: dist/covid-app/\1
+    upload: dist/c2c-marketplace/(.+\.eot)
+
+  - url: /(.+\.ttf)
+    static_files: dist/covid-app/\1
+    upload: dist/c2c-marketplace/(.+\.ttf)
+
+  - url: /(.+\.woff)
+    static_files: dist/covid-app/\1
+    upload: dist/c2c-marketplace/(.+\.woff)
+
+  - url: /(.+\.woff2)
+    static_files: dist/covid-app/\1
+    upload: dist/c2c-marketplace/(.+\.woff2)
+    
   - url: /favicon.ico
     static_files: dist/covid-app/favicon.ico
     upload: dist/c2c-marketplace/favicon.ico
