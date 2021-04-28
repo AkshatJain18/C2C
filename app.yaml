@@ -6,7 +6,6 @@ instance_class: B1
 manual_scaling:
         instances: 1
 handlers:
-handlers:
   - url: /(.+\.js)
     static_files: dist/covid-app/\1
     upload: dist/c2c-marketplace/(.+\.js)
