@@ -6,12 +6,41 @@ instance_class: B1
 manual_scaling:
         instances: 1
 handlers:
-  - url: /
+  - url: /(.+\.js)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.js)
+
+  - url: /(.+\.css)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.css)
+
+  - url: /(.+\.png)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.png)
+
+  - url: /(.+\.jpg)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.jpg)
+
+  - url: /(.+\.svg)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.svg)
+
+  - url: /favicon.ico
+    static_files: dist/c2c-marketplace/favicon.ico
+    upload: dist/c2c-marketplace/favicon.ico
+
+  - url: /(.+\.json)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.json)
+
+  - url: /(.+)
     static_files: dist/c2c-marketplace/index.html
     upload: dist/c2c-marketplace/index.html
 
   - url: /
-    static_dir: dist/c2c-marketplace/
+    static_files: dist/c2c-marketplace/index.html
+    upload: dist/c2c-marketplace/index.html
 
 skip_files:
   - e2e/
