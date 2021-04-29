@@ -21,6 +21,8 @@ import { MomentModule } from 'ngx-moment';
 import { AdCardComponent } from './ad-card/ad-card.component';
 import { AdDetailedCardComponent } from './ad-detailed-card/ad-detailed-card.component';
 import { SavedAdsComponent } from './saved-ads/saved-ads.component';
+import { MyAdsComponent } from './my-ads/my-ads.component';
+import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.component';
 
 
 
@@ -39,6 +41,8 @@ import { SavedAdsComponent } from './saved-ads/saved-ads.component';
     AdCardComponent,
     AdDetailedCardComponent,
     SavedAdsComponent,
+    MyAdsComponent,
+    SlideoutPanelComponent,
   ],
   imports: [
     BrowserModule,

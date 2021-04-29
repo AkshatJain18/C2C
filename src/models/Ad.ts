@@ -8,7 +8,7 @@ export class Ad {
   description : string;
   initialPrice : number;
   currentBidPrice : string;
-  sellerId : number;
+  sellerId : string;
   productAge: string;
   auctionDeadline : string;
   adCreated : string;

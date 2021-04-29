@@ -17,10 +17,11 @@ export class TopNavComponent implements OnInit {
   ads!:Ad[];
   isSearchInputVisible!:boolean;
   isLoggedIn!:boolean;
+  isMenuOpen!:boolean;
 
   constructor(private adService:AdService,private searchService:SearchService,private router:Router) {
     this.isLoggedIn = localStorage.getItem('user')!=null;
-    console.log(localStorage.getItem('user'));
+    this.isMenuOpen = false;
   }
 
   search(){

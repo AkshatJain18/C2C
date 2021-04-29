@@ -1,4 +1,4 @@
-<div class="card d-flex flex-column shadow p-4 w-100 h-100">
+<div routerLink="/ads/{{ad.adId}}" class="card cursor-pointer d-flex flex-column shadow p-4 w-100 h-100">
     <div class="d-flex w-100 h-100">
         <img class="item-image" src={{ad.img1Url}}>
         <div class="d-flex flex-column justify-content-between w-100" style="margin-left: 40px;height: inherit;">
@@ -7,11 +7,14 @@
                     <span class="text-medium text-dark">{{ad.productName}}</span>
                     <span class="text-medium text-darkgrey mt-1">{{ad.adTitle}}</span>
                 </div>
-                <span (click)="unsaveAd(ad.adId)" class=""><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTS0xLjUuNWgxNXYxNWgtMTV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0MyQzJDMiIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMSAxMy44MzNjMCAuOTE3Ljc1IDEuNjY3IDEuNjY3IDEuNjY3aDYuNjY2Yy45MTcgMCAxLjY2Ny0uNzUgMS42NjctMS42Njd2LTEwSDF2MTB6bTEwLjgzMy0xMi41SDguOTE3TDguMDgzLjVIMy45MTdsLS44MzQuODMzSC4xNjdWM2gxMS42NjZWMS4zMzN6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=" class="_2Nq6Qc cursor-pointer"></span>
+                <img (click)="unsaveAd(ad.adId)" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTS0xLjUuNWgxNXYxNWgtMTV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0MyQzJDMiIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMSAxMy44MzNjMCAuOTE3Ljc1IDEuNjY3IDEuNjY3IDEuNjY3aDYuNjY2Yy45MTcgMCAxLjY2Ny0uNzUgMS42NjctMS42Njd2LTEwSDF2MTB6bTEwLjgzMy0xMi41SDguOTE3TDguMDgzLjVIMy45MTdsLS44MzQuODMzSC4xNjdWM2gxMS42NjZWMS4zMzN6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=" class="_2Nq6Qc cursor-pointer">
             </div>
             <div class="d-flex flex-column mt-3">
                 <span class="text-x-large text-dark font-700">₹ {{ad.initialPrice}}</span>
-                <span class="text-medium text-dark mt-1">Product originally was bought {{ad.adCreated | amTimeAgo}}</span>
+                <div class="d-flex justify-content-between mt-1">
+                    <span class="text-medium text-dark">{{ad.description}}</span>
+                    <span class="text-small text-darkgrey">{{ad.adCreated | amTimeAgo}}</span>
+                </div>
             </div>
         </div>
     </div>

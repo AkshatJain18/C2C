@@ -1,0 +1,19 @@
+<div class="d-flex p-5" style="background-color: #f1f1f1;">
+    <div class="d-flex flex-column card shadow h-100 w-25">
+        <div class="p-3 border-bottom tab cursor-pointer d-flex align-items-center justify-content-between">
+            <span>My Profile</span>
+        </div>
+        <div class="p-3 border-bottom tab cursor-pointer active-tab d-flex align-items-center justify-content-between">
+            <span>My Ads</span>
+        </div>
+        <div class="p-3 border-bottom tab cursor-pointer d-flex align-items-center justify-content-between">
+            <span>Saved Ads</span>
+        </div>
+        <div class="p-3 border-bottom tab cursor-pointer d-flex align-items-center justify-content-between">
+            <span>Dashboard</span>
+        </div>
+    </div>
+    <div class="ml-5 w-75">
+        <app-my-ads *ngIf="true"></app-my-ads>
+    </div>
+</div>

@@ -7,6 +7,8 @@ import { CreateAdComponent } from './create-ad/create-ad.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SavedAdsComponent } from './saved-ads/saved-ads.component';
+import { MyAdsComponent } from './my-ads/my-ads.component';
+import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.component';
 
 const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },
@@ -15,7 +17,8 @@ const routes: Routes = [
   {path: 'sign-in', component: SignInComponent},
   {path:'sign-up', component: SignUpComponent},
   {path:'create-ad', component: CreateAdComponent},
-  {path:'saved-ads', component: SavedAdsComponent},
+  {path:'saved-ads', component: SlideoutPanelComponent},
+  {path:'my-ads', component: SlideoutPanelComponent},
   { path: '**', component: HomepageComponent },
 ];
 
