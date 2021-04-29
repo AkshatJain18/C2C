@@ -1,19 +1,20 @@
 <div class="d-flex p-5" style="background-color: #f1f1f1;">
     <div class="d-flex flex-column card shadow h-100 w-25">
-        <div class="p-3 border-bottom tab cursor-pointer d-flex align-items-center justify-content-between">
+        <div [ngClass]="{'active-tab':currentTab==1}" class="tab" (click)="setCurrentTab(1)">
             <span>My Profile</span>
         </div>
-        <div class="p-3 border-bottom tab cursor-pointer active-tab d-flex align-items-center justify-content-between">
+        <div [ngClass]="{'active-tab':currentTab==2}" class="tab" (click)="setCurrentTab(2)">
             <span>My Ads</span>
         </div>
-        <div class="p-3 border-bottom tab cursor-pointer d-flex align-items-center justify-content-between">
+        <div [ngClass]="{'active-tab':currentTab==3}" class="tab" (click)="setCurrentTab(3)">
             <span>Saved Ads</span>
         </div>
-        <div class="p-3 border-bottom tab cursor-pointer d-flex align-items-center justify-content-between">
+        <div [ngClass]="{'active-tab':currentTab==4}" class="tab" (click)="setCurrentTab(4)">
             <span>Dashboard</span>
         </div>
     </div>
     <div class="ml-5 w-75">
-        <app-my-ads *ngIf="true"></app-my-ads>
+        <app-my-ads *ngIf="currentTab==2"></app-my-ads>
+        <app-saved-ads *ngIf="currentTab==3"></app-saved-ads>
     </div>
 </div>

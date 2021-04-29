@@ -14,8 +14,8 @@
             <div class="d-flex flex-column align-items-center ml-5">
                 <a (click)="isMenuOpen=!isMenuOpen" class="cursor-pointer text-dark">My Profile</a>
                 <div *ngIf="isMenuOpen" class="card mt-4 shadow" style="position:absolute;z-index: 1;width: 12%;">
-                    <span (click)="isMenuOpen=false" routerLink = '/my-ads' class="p-3 border-bottom menu-item text-dark cursor-pointer">My Ads</span>
-                    <span (click)="isMenuOpen=false" *ngIf="isLoggedIn" routerLink = '/saved-ads' class="cursor-pointer menu-item text-dark p-3 border-bottom text-dark">Saved Ads</span>
+                    <span (click)="isMenuOpen=false" routerLink = '/my-stats/action/2' class="p-3 border-bottom menu-item text-dark cursor-pointer">My Ads</span>
+                    <span (click)="isMenuOpen=false" *ngIf="isLoggedIn" routerLink = '/my-stats/action/3' class="cursor-pointer menu-item text-dark p-3 border-bottom text-dark">Saved Ads</span>
                     <span (click)="isMenuOpen=false" class="p-3 text-dark border-bottom cursor-pointer menu-item">Write to us </span>
                     <span (click)="isMenuOpen=false" class="cursor-pointer text-dark p-3 menu-item" *ngIf="isLoggedIn" (click)="onLogOutClick()" routerLink = "/sign-in">Logout</span>
                 </div>

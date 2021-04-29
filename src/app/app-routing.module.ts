@@ -17,8 +17,7 @@ const routes: Routes = [
   {path: 'sign-in', component: SignInComponent},
   {path:'sign-up', component: SignUpComponent},
   {path:'create-ad', component: CreateAdComponent},
-  {path:'saved-ads', component: SlideoutPanelComponent},
-  {path:'my-ads', component: SlideoutPanelComponent},
+  {path:'my-stats/action/:actionNo', component: SlideoutPanelComponent},
   { path: '**', component: HomepageComponent },
 ];
 

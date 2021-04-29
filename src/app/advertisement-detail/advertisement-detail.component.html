@@ -2,7 +2,7 @@
     <div class="ad-detail-container">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-              <li *ngIf="ad.img1Url!=null" data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li *ngIf="ad.img2Url!=null || ad.img3Url!=null" data-target="#myCarousel" data-slide-to="0" class="active"></li>
               <li *ngIf="ad.img2Url!=null" data-target="#myCarousel" data-slide-to="1"></li>
               <li *ngIf="ad.img3Url!=null" data-target="#myCarousel" data-slide-to="2"></li>
             </ol>

@@ -32,7 +32,6 @@ export class HomepageComponent implements OnInit {
   constructor(private adService:AdService,private categoryService:CategoryService,private userService:UserService,private dataService:DataService,private router:Router) {  
     this.isLoggedIn = localStorage.getItem('user')!=null;
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
-    console.log(this.user);
   }  
 
   setAdCard(ad:Ad){

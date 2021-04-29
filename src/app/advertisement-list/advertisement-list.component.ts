@@ -15,12 +15,12 @@ import { SearchService } from 'src/services/search.service';
 })
 export class AdvertisementListComponent implements OnInit {
 
-  startPrice: number = 50;
-  endPrice: number = 10000000;
+  startPrice: number = 100;
+  endPrice: number = 1000000;
   options: Options = {
     floor: 100,
-    ceil: 1000000,
-    step: 1000,
+    ceil: 100000,
+    step: 2000,
     showTicks: true
   };
 
@@ -70,7 +70,6 @@ export class AdvertisementListComponent implements OnInit {
   ngOnInit(): void {
     this.searchService.searchKeyword.subscribe(item => this.searchKeyword = item);
     this.adService.getAds().subscribe(adList => {
-      console.log(adList);
       this.ads = adList;this.ads.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
     });
     this.categoryService.getCategories().subscribe(categoryList => this.categories = categoryList);
