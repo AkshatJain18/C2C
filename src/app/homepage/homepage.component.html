@@ -32,8 +32,7 @@
                 <div class="ad-row">
                     <label class="heading">Categories</label>
                     <div class="d-flex align-items-center justify-content-between mt-4" style="column-gap: 50px;">
-                        <div *ngFor="let category of categories"
-                            class="cursor-pointer d-flex flex-column align-items-center">
+                        <div routerLink = "/ads/category/{{category.categoryId}}" *ngFor="let category of categories" class="cursor-pointer d-flex flex-column align-items-center">
                             <div class="p-3 d-flex align-items-center flex-column shadow">
                                 <img height=120px width=140px src="../../assets/car-category.jpg">
                                 <label class="mt-1 font-bold text-large">{{category.categoryName}}</label>

@@ -1,6 +1,7 @@
 import { Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NumberAttributeValue } from 'aws-sdk/clients/clouddirectory';
 import { Ad } from 'src/models/Ad';
 import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
@@ -34,11 +35,17 @@ export class AdvertisementListComponent implements OnInit {
   categories:any[] = [];
   searchKeyword:string = "";
   
-  constructor(private adService:AdService,private categoryService:CategoryService,private searchService:SearchService,private router:Router,public dataService:DataService) {
+  constructor(private adService:AdService,private categoryService:CategoryService,private searchService:SearchService,private router:Router,public dataService:DataService,private activatedRoute:ActivatedRoute) {
     this.adType = 2;
     this.sortOption = 1;
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
-    this.sortList();
+
+    this.activatedRoute.paramMap.subscribe(params => {
+      if(params.has('categoryId')){
+        const categoryId = params.get('categoryId') as unknown as number; 
+        this.selectedCategories.push(categoryId);
+      }
+    });
   }
 
   setAdType(adType:number){
@@ -50,13 +57,16 @@ export class AdvertisementListComponent implements OnInit {
     return true;
   }
 
-  addOrRemoveCategory(id:any){
-    if(!this.selectedCategories.includes(id)){
+  addOrRemoveCategory(id:number){
+    if(this.selectedCategories.findIndex(c=>c==id)==-1){
       this.selectedCategories.push(id);
     }else{
       this.selectedCategories = this.selectedCategories.filter(c=>c!=id);
     }
-    console.log(this.selectedCategories);
+  }
+
+  isCategorySelected(categoryId:number){
+    return this.selectedCategories.findIndex(c=>c==categoryId)!=-1;
   }
 
   sortList(){

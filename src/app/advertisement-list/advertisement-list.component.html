@@ -27,7 +27,7 @@
                 <div class="category-sub-container">
                     <div class="category-row" *ngFor="let category of categories">
                         <label class="filter-value">{{category.categoryName}}</label>
-                        <input (change)="addOrRemoveCategory(category.categoryId)" type="checkbox">
+                        <input [checked]="isCategorySelected(category.categoryId)" (change)="addOrRemoveCategory(category.categoryId)" type="checkbox">
                     </div>
                 </div>
             </div>

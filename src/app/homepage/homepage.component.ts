@@ -59,6 +59,7 @@ export class HomepageComponent implements OnInit {
     (categoryList)=>{
       this.categories = categoryList;
       this.categories = this.categories.slice(0,5);
+      this.categories = this.categories.sort((x:any,y:any)=>y.adCountInCategory-x.adCountInCategory);
     },
     (error)=>{
       console.log(error);

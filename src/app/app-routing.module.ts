@@ -13,6 +13,7 @@ import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.componen
 const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },
   { path: 'ads', component: AdvertisementListComponent},
+  { path: 'ads/category/:categoryId', component: AdvertisementListComponent},
   { path: 'ads/:adId', component: AdvertisementDetailComponent},
   {path: 'sign-in', component: SignInComponent},
   {path:'sign-up', component: SignUpComponent},
