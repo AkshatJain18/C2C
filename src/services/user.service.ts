@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private readonly url = "https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/users";
+  private readonly url = "https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com";
 
   constructor(private httpClient:HttpClient){
 
@@ -15,6 +15,15 @@ export class UserService {
 
   getUserById(id:any):Observable<any>{
     console.log("called!");
-    return this.httpClient.get(this.url+"/"+id);
+    return this.httpClient.get(this.url+"/users/"+id);
   }
+
+  editProfile(data:any):Observable<any>{
+    return this.httpClient.patch(this.url+"/user/update",data);
+  }
+
+  sendMail(data:any):Observable<any>{
+    return this.httpClient.post('https://formspree.io/f/mwkavovy',data);
+  }
+
 }

@@ -35,6 +35,7 @@ export class CreateAdComponent implements OnInit {
 
   image1Touched = false;
   imageRemoved = false;
+  imageLoading = false;
 
   url: string[] = [];
 
@@ -113,6 +114,7 @@ export class CreateAdComponent implements OnInit {
   }
 
   onSelectFile(e:any, i: number) {
+    this.imageLoading = true;
     var file = e.target.files[0];
     var formData = new FormData;
     formData.append('file',file);
@@ -125,6 +127,7 @@ export class CreateAdComponent implements OnInit {
       },
       data: formData
       }).then((res) => {
+        this.imageLoading = false;
         console.log(res);
         this.url[i] = res.data.secure_url;
         this.imageSelected[i] = true;
@@ -147,17 +150,17 @@ export class CreateAdComponent implements OnInit {
     this.url[i] = "";
     this.imageSelected[i] = false;
     if(i===1) {
-      this.createAdForm.get('img1Url')?.setValue(this.url[i]);
+      this.createAdForm.get('img1Url')?.setValue(null);
       this.imageRemoved = true;
-      this.myInputVariable1.nativeElement.value = '';
+      this.myInputVariable1.nativeElement.value = null;
     }
     else if(i===2) {
-      this.createAdForm.get('img2Url')?.setValue(this.url[i]);
-      this.myInputVariable2.nativeElement.value = '';
+      this.createAdForm.get('img2Url')?.setValue(null);
+      this.myInputVariable2.nativeElement.value = null;
     }
     else {
-      this.createAdForm.get('img3Url')?.setValue(this.url[i]);
-      this.myInputVariable3.nativeElement.value = '';
+      this.createAdForm.get('img3Url')?.setValue(null);
+      this.myInputVariable3.nativeElement.value = null;
     }
   }
 }

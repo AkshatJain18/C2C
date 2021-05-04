@@ -55,7 +55,8 @@
             <label class="checkBox text-dark"><input type="checkbox" formControlName="checkBox"> Accept <a class="font-weight-bold terms-link" href="#">terms and conditions</a></label><br>
             <span class="text-danger mt-n4" *ngIf="signUpForm.hasError('required', 'checkBox') && signUpForm.get('checkBox')?.touched">*Required</span>
           </div>
-          <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">Create Account</button>
+          <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">
+            <i class="fa fa-user-plus"></i> Create Account</button>
           <span class="text-danger mt-2" *ngIf="!signUpForm.valid && signUpForm.touched">*Please enter valid data</span>
         </form>
         <a class="text-dark already-user-link font-weight-bold" routerLink='/'>Already a user?</a>
@@ -65,3 +66,4 @@
   </div>
 
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

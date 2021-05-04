@@ -19,6 +19,8 @@ import { AdvertisementDetailComponent } from './advertisement-detail/advertiseme
 //import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HelpComponent } from './help/help.component';
 
 
 
@@ -33,7 +35,9 @@ import { FormsModule } from '@angular/forms';
     TopNavComponent,
     AdvertisementListComponent,
     AdvertisementDetailComponent,
-    FilterPipe
+    FilterPipe,
+    UserProfileComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
