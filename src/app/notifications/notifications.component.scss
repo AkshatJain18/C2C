@@ -1,0 +1,63 @@
+@import "../../styles.scss";
+
+.notifications {
+
+  .notification-icon {
+    cursor: pointer;
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+
+    i {
+      color: black;
+    }
+    .badge {
+      margin-left: 0.2rem;
+      position: absolute;
+      color: rgb(179, 25, 25);
+      font-size:x-large;
+    }
+
+  }
+  .notification-icon:hover,  .notification-icon.active{
+    i {
+      @extend .text-purple;
+    }
+  }
+
+  .notifications-tab {
+    position: absolute;
+    z-index: 1;
+    width: 25%;
+    margin-top: 0.8rem;
+    margin-left: -4rem;
+
+    .menu-item {
+      cursor: pointer;
+      border-left: 3px solid transparent;
+
+      .title {
+        @extend .text-grey;
+      }
+      .time {
+        @extend .text-grey;
+        font-size: xx-small;
+        float: right;
+        margin-bottom: 0%;
+      }
+    }
+
+    .menu-item:hover {
+      border-left: 3px solid rgb(162,33,221);
+    }
+
+    .menu-item.unseen {
+      p {
+        @extend .text-black;
+        font-weight: bold;
+      }
+    }
+
+  }
+
+}

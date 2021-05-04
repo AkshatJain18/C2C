@@ -1,0 +1,16 @@
+<div class="notifications">
+  <a (click)="notificationsOpened=!notificationsOpened"  class="notification-icon" [ngClass]="{'active':notificationsOpened}">
+    <i class="fa fa-bell-o fa-lg" aria-hidden="true"></i>
+    <span *ngIf="unseenNotifications" class="badge">
+      •
+    </span>
+  </a>
+  <div *ngIf="notificationsOpened" class="notifications-tab card">
+    <span  *ngFor="let notification of notifications" (click)="openNotification(notification.adId, notification.notificationId)"
+    [ngClass]="{'unseen bg-light':!notification.viewed}" class="menu-item p-3 border-bottom text-dark">
+      <p class="title" >{{notification.title}}</p>
+      <p class="time">{{notification.notificationTime | amTimeAgo }}</p>
+    </span>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

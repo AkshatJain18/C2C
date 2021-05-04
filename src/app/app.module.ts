@@ -21,6 +21,8 @@ import { FilterPipe } from 'src/pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HelpComponent } from './help/help.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { MomentModule } from 'ngx-moment';
 
 
 
@@ -37,7 +39,8 @@ import { HelpComponent } from './help/help.component';
     AdvertisementDetailComponent,
     FilterPipe,
     UserProfileComponent,
-    HelpComponent
+    HelpComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { HelpComponent } from './help/help.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
+    MomentModule
   ],
   providers: [],
   bootstrap: [AppComponent]

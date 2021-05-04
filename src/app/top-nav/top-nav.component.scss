@@ -2,7 +2,7 @@
 
 .top-nav-container{
     background-color:#3646a6;
-    color: white;
+    color: black;
     @extend .text-small,.text-uppercase,.fixed-top;
 
     .top-nav{
@@ -53,7 +53,7 @@
                     width: 20px;
                 }
             }
-    
+
             .create-ad-nav-button{
                 background-color: orange;
                 display: flex;
@@ -69,13 +69,13 @@
                     @extend .text-small,.text-dark,.text-uppercase;
                     cursor: pointer;
                 }
-                
+
                 .plus-icon{
                     @extend .text-x-large;
                     cursor: pointer;
                 }
             }
-    
+
             .my-profile-nav-item{
                 display: flex;
                 flex-direction: column;

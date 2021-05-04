@@ -28,7 +28,7 @@ export class TopNavComponent implements OnInit {
       return;
     }
     const index = this.ads.findIndex(
-      ad => ad.productName.toLowerCase().includes(this.searchKeyword) 
+      ad => ad.productName.toLowerCase().includes(this.searchKeyword)
     );
     if(index!=-1){
       this.router.navigateByUrl('/ads');
