@@ -45,7 +45,7 @@ export class CreateAdComponent implements OnInit {
   CLOUDINARY_UPLOAD_PRESET = "cbtxrrbg";
   userDetails = JSON.parse(localStorage.user);
 
-  constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private router:Router,private categoryService:CategoryService,private adService:AdService) {
+  constructor(private formBuiler : FormBuilder,private router:Router,private categoryService:CategoryService,private adService:AdService) {
     this.buildCreateAdForm(new Ad({
       adType:this.adTypes.sell,
       auctionDealdine:"",

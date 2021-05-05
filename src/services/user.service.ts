@@ -21,6 +21,14 @@ export class UserService {
     return this.httpClient.get(this.url+"/"+userId+"/saved-ads");
   }
 
+  getSoldAdsByUserId(userId:any):Observable<any>{
+    return this.httpClient.get("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/user"+"/"+userId+"/sold-ads");
+  }
+
+  getBoughtAdsByUserId(userId:any):Observable<any>{
+    return this.httpClient.get("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/user"+"/"+userId+"/bought-ads");
+  }
+
   editProfile(data:any):Observable<any>{
     return this.httpClient.patch(this.url+"/user/update",data);
   }

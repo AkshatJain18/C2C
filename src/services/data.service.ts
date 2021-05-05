@@ -7,9 +7,10 @@ import { Ad } from 'src/models/Ad';
 export class DataService {
 
   ad!:Ad;
+  isNotificationsVisible!:boolean;
 
   constructor() { 
-    
+    this.isNotificationsVisible = false;
   }
 
   setAd(ad:Ad){
@@ -18,5 +19,13 @@ export class DataService {
   
   getAd(){
     return this.ad;
+  }
+
+  showNotifications(){
+    this.isNotificationsVisible = true;
+  }
+
+  hideNotifications(){
+    this.isNotificationsVisible = false;
   }
 }

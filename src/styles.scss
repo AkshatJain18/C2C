@@ -14,7 +14,7 @@ html,body{
 .font-mulish {
   //font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   //font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-family: Mulish;
+  font-family: 'Roboto', sans-serif;
 }
 
 .font-700{
@@ -143,6 +143,22 @@ html,body{
 
 .w-32{
   width: 32%;
+}
+
+.btn-theme {
+  background-color: #b32cf2;
+  padding: 8px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+}
+
+.btn-second-theme {
+  border:2px solid #b32cf2;
+  background-color: white;
+  padding: 8px;
+  border-radius: 5px;
+  color: #b32cf2;
 }
 
 .cursor-pointer{

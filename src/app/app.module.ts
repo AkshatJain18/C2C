@@ -28,6 +28,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 //import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HelpComponent } from './help/help.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 
@@ -50,7 +51,8 @@ import { HelpComponent } from './help/help.component';
     SlideoutPanelComponent,
     DashboardComponent,
     UserProfileComponent,
-    HelpComponent
+    HelpComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,

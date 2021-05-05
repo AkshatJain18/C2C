@@ -3,6 +3,7 @@ import { Ad } from 'src/models/Ad';
 import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
 import { DataService } from 'src/services/data.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +17,7 @@ export class DashboardComponent implements OnInit {
   user:User;
   isSoldOpen:boolean = true;
 
-  constructor(private dataService:DataService,private adService:AdService) { 
+  constructor(private dataService:DataService,private userService:UserService,private adService:AdService) { 
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
   }
 
@@ -26,9 +27,12 @@ export class DashboardComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.adService.getAds().subscribe((ads:Ad[])=>{
-      this.soldAds = ads.filter(ad=>ad.sellerId = this.user.id);
-      this.boughtAds = ads.filter(ad=>true);
-    })
+    this.userService.getSoldAdsByUserId(this.user.id).subscribe((ads)=>{
+      this.soldAds = ads;
+    });
+
+    this.userService.getBoughtAdsByUserId(this.user.id).subscribe((ads)=>{
+      this.boughtAds = ads;
+    });
   }
 }

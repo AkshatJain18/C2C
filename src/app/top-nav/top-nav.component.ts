@@ -2,8 +2,11 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ad } from 'src/models/Ad';
+import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
+import { DataService } from 'src/services/data.service';
 import { NavbarService } from 'src/services/navbar.service';
+import { NotificationsService } from 'src/services/notifications.service';
 import { SearchService } from 'src/services/search.service';
 
 @Component({
@@ -15,13 +18,19 @@ export class TopNavComponent implements OnInit {
 
   searchKeyword!:string;
   ads!:Ad[];
+  user!:User;
   isSearchInputVisible!:boolean;
   isLoggedIn!:boolean;
   isMenuOpen!:boolean;
+  isNotificationsOpen!:boolean;
+  unseenNotifications!: boolean;
 
-  constructor(private adService:AdService,private searchService:SearchService,private router:Router,private eRef: ElementRef) {
+  constructor(private adService:AdService,public dataService:DataService,private notificationService:NotificationsService,private searchService:SearchService,private router:Router,private eRef: ElementRef) {
     this.isLoggedIn = localStorage.getItem('user')!=null;
     this.isMenuOpen = false;
+    this.isNotificationsOpen = false;
+    this.user = JSON.parse(localStorage.getItem('user')!) as User;
+    this.unseenNotifications = false;
   }
 
   search(){
@@ -29,7 +38,7 @@ export class TopNavComponent implements OnInit {
       return;
     }
     const index = this.ads.findIndex(
-      ad => ad.productName.toLowerCase().includes(this.searchKeyword) 
+      ad => ad.productName.toLowerCase().includes(this.searchKeyword)
     );
     if(index!=-1){
       this.router.navigateByUrl('/ads');
@@ -61,12 +70,24 @@ export class TopNavComponent implements OnInit {
     } else {
       //clicked outside top nav
       this.isMenuOpen = false;
+      this.isNotificationsOpen = false;
     }
   }
   
+  closePopUps(){
+    this.isMenuOpen = false;
+    this.isNotificationsOpen = false;
+  }
+
   ngOnInit(): void {
     this.adService.getAds().subscribe((list : Ad[])=>{
       this.ads = list;
+    });
+
+    this.notificationService.getNotifications(this.user.id)
+    .subscribe(notificationsList => {
+      console.log(notificationsList);
+      this.unseenNotifications = notificationsList.findIndex((n:any)=>!n.viewed)!=-1;
     });
   }
 
