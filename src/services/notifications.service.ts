@@ -14,11 +14,12 @@ export class NotificationsService {
     this.http = httpClient;
   }
 
-  getNotifications(userId : number) {
+  getNotifications(userId : number): Observable<any> {
     return this.http.get(this.url + "/notification/"+userId);
   }
 
   notificationViewed(notificationId:number) {
-    return this.http.get(this.url + '/notification-view/'+ notificationId);
+    console.log('here'+notificationId);
+    return this.http.get("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/notification-view/"+ notificationId);
   }
 }

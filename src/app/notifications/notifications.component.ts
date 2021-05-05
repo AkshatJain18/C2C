@@ -13,7 +13,7 @@ export class NotificationsComponent implements OnInit {
   unseenNotifications : boolean = false;
   notificationsOpened : boolean = false;
   myDate: string = "2021-05-04T12:54:20";
-  notifications:any;
+  notifications:any[] = [];
 
   constructor(private notificationsService: NotificationsService,private router:Router) { }
 
@@ -30,7 +30,24 @@ export class NotificationsComponent implements OnInit {
   }
 
   openNotification(adId : number, notificationId:number) {
-    this.notificationsService.notificationViewed(notificationId);
+    this.notificationsOpened = !this.notificationsOpened;
+    this.notificationsService.notificationViewed(notificationId)
+    .subscribe(
+      (res) => {
+        const notification = this.notifications.find(n=> n.notificationId== notificationId);
+        notification.viewed = true;
+        console.log(notification);
+      }
+    );
+    this.notificationsService.getNotifications(this.userDetails.id)
+    .subscribe(notificationsList =>
+      {this.notifications = notificationsList;
+      console.log(notificationsList);
+      for(var i=0;i<this.notifications.length;i++) {
+        if(!this.notifications[i].viewed) {
+          this.unseenNotifications = true;
+        }
+      }});
     this.router.navigateByUrl('ads/'+adId);
   }
 

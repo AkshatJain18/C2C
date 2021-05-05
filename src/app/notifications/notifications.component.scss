@@ -29,8 +29,10 @@
     position: absolute;
     z-index: 1;
     width: 25%;
+    max-height: 25rem;
     margin-top: 0.8rem;
     margin-left: -4rem;
+    overflow-y: scroll;
 
     .menu-item {
       cursor: pointer;
@@ -58,6 +60,15 @@
       }
     }
 
+  }
+
+  .notifications-tab::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+
+  .notifications-tab::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    @extend .bg-purple;
   }
 
 }
