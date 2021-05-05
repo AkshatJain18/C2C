@@ -1,6 +1,7 @@
 @import "../../styles.scss";
 
 .tab{
+    border-left: 5px solid transparent;
     @extend .d-flex,.align-items-center,.justify-content-between,.p-4,.border-bottom,.cursor-pointer;
 }
 
