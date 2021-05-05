@@ -12,17 +12,11 @@ export class AppComponent {
 
   constructor(public nav:NavbarService,private router:Router){
     router.events.subscribe(()=>{
-      console.log(this.router.url);
       if(this.router.url == '/sign-in' || this.router.url == '/sign-up'){
         this.nav.hide();
       }else{
         this.nav.show();
       }
     });
-  }
-
-  @HostListener('click')
-  clicked(){
-    console.log("clicked!");
   }
 }

@@ -7,7 +7,7 @@ export class Ad {
   categoryId : number;
   description : string;
   initialPrice : number;
-  currentBidPrice : string;
+  finalPrice : number;
   sellerId : string;
   productAge: string;
   auctionDeadline : string;
@@ -32,7 +32,7 @@ export class Ad {
     this.img1Url = ad.img1Url;
     this.img2Url = ad.img2Url;
     this.img3Url = ad.img3Url;
-    this.currentBidPrice = ad.currentBidPrice;
+    this.finalPrice = ad.finalPrice;
     this.adCreated = ad.adCreated;
     this.views = ad.views;
   }

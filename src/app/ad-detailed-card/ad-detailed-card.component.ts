@@ -24,6 +24,16 @@ export class AdDetailedCardComponent implements OnInit {
     });
   }
 
+  deleteAd(adId:any){
+    this.adService.deleteAd(adId).subscribe((res)=>{
+      alert("ad deleted!");
+    },
+    (err)=>{
+      alert("could not delete ad!");
+      console.log(err);
+    })
+  }
+
   ngOnInit(): void {
     this.ad = this.dataService.getAd();
   }

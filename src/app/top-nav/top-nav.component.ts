@@ -50,7 +50,6 @@ export class TopNavComponent implements OnInit {
   }
 
   updateKeyword(){
-    this.isMenuOpen = false;
     this.searchService.setKeyword(this.searchKeyword);
     this.search();
   }

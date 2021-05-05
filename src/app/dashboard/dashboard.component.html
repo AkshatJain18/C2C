@@ -1,0 +1,18 @@
+<div class="main-container">
+    <div class="d-flex flex-column mx-auto">
+        <div class="d-flex align-items-center">
+            <span [ngClass]="{'active':isSoldOpen}" (click)="isSoldOpen=!isSoldOpen" class="card p-2 cursor-pointer shadow text-center">Sold</span>
+            <span [ngClass]="{'active':!isSoldOpen}" (click)="isSoldOpen=!isSoldOpen" class="card p-2 cursor-pointer shadow text-center ml-2">Bought</span>
+        </div>
+        <div *ngIf="isSoldOpen" class="d-flex flex-column mt-4 w-100 mx-auto" style="row-gap: 10px;">
+            <ng-container *ngFor="let ad of soldAds" class="w-100">
+                <app-ad-detailed-card *ngIf="setAd(ad)" class="w-100"></app-ad-detailed-card>
+            </ng-container>
+        </div>
+        <div *ngIf="!isSoldOpen" class="d-flex flex-column mt-4 w-100 mx-auto" style="row-gap: 10px;">
+            <ng-container *ngFor="let ad of boughtAds" class="w-100">
+                <app-ad-detailed-card *ngIf="setAd(ad)" class="w-100"></app-ad-detailed-card>
+            </ng-container>
+        </div>
+    </div>
+</div>

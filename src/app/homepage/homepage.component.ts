@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Options } from "@angular-slider/ngx-slider";
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AwsCloudMapServiceDiscovery } from 'aws-sdk/clients/appmesh';
 import { AdService } from 'src/services/ad.service';
 import { Router } from '@angular/router';
 import { Ad } from 'src/models/Ad';
@@ -58,8 +55,8 @@ export class HomepageComponent implements OnInit {
     this.categoryService.getCategories().subscribe(
     (categoryList)=>{
       this.categories = categoryList;
-      this.categories = this.categories.slice(0,5);
       this.categories = this.categories.sort((x:any,y:any)=>y.adCountInCategory-x.adCountInCategory);
+      this.categories = this.categories.slice(0,5);
     },
     (error)=>{
       console.log(error);

@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { CountdownModule } from 'ngx-countdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { AdDetailedCardComponent } from './ad-detailed-card/ad-detailed-card.com
 import { SavedAdsComponent } from './saved-ads/saved-ads.component';
 import { MyAdsComponent } from './my-ads/my-ads.component';
 import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -43,6 +45,7 @@ import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.componen
     SavedAdsComponent,
     MyAdsComponent,
     SlideoutPanelComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.componen
     NgbModule,
     HttpClientModule,
     FormsModule,
-    MomentModule
+    MomentModule,
+    CountdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

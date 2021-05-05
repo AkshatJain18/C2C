@@ -20,7 +20,6 @@ export class MyAdsComponent implements OnInit {
   }
 
   setAd(ad:Ad){
-    console.log(ad);
     this.dataService.setAd(ad);
     return true;
   }
