@@ -9,6 +9,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SavedAdsComponent } from './saved-ads/saved-ads.component';
 import { MyAdsComponent } from './my-ads/my-ads.component';
 import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HelpComponent } from './help/help.component';
 
 const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },
@@ -19,6 +22,8 @@ const routes: Routes = [
   {path:'sign-up', component: SignUpComponent},
   {path:'create-ad', component: CreateAdComponent},
   {path:'my-stats/action/:actionNo', component: SlideoutPanelComponent},
+  {path:'user-profile', component: UserProfileComponent},
+  {path:'help', component: HelpComponent},
   { path: '**', component: HomepageComponent },
 ];
 

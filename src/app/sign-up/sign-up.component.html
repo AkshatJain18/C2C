@@ -3,7 +3,7 @@
   <div class="sign-up-page shadow-lg w3-animate-zoom">
 
     <div class="sign-up-container">
-      <img src="../../assets/peddler-logo.png" class="logo" alt="" height="50" width="130">
+      <img src="../../assets/PEDDLER_free-file (5).png" class="logo" alt="" height="50" width="130">
       <div class="form-container">
         <p class="header text-secondary">Welcome!</p>
         <p class="login-prompt font-weight-bold">Create account to get started</p>
@@ -52,10 +52,11 @@
           </div>
           <span class="text-danger  pw-validation-message mt-2" *ngIf="!signUpForm.get('password')?.valid && signUpForm.get('password')?.touched">*Password must contain: <br> -atleast 8 characters <br> -an alphabet <br> -a number <br> -a special character</span>
           <div class="mt-3 checkBox-container">
-            <label class="checkBox text-dark"><input type="checkbox" formControlName="checkBox"> Accept <a class="font-weight-bold" href="#">terms and conditions</a></label><br>
+            <label class="checkBox text-dark"><input type="checkbox" formControlName="checkBox"> Accept <a class="font-weight-bold terms-link" href="#">terms and conditions</a></label><br>
             <span class="text-danger mt-n4" *ngIf="signUpForm.hasError('required', 'checkBox') && signUpForm.get('checkBox')?.touched">*Required</span>
           </div>
-          <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">Create Account</button>
+          <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">
+            <i class="fa fa-user-plus"></i> Create Account</button>
           <span class="text-danger mt-2" *ngIf="!signUpForm.valid && signUpForm.touched">*Please enter valid data</span>
         </form>
         <a class="text-dark already-user-link font-weight-bold" routerLink='/'>Already a user?</a>
@@ -65,3 +66,4 @@
   </div>
 
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

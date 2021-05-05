@@ -1,3 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+html,body{
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f1f1f1;
+}
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
 .font-mulish {
   //font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   //font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -32,7 +45,7 @@
   font-weight: bold;
 }
 
-.text-blue{
+.text-navyblue{
   color:#3646a6;
 }
 
@@ -52,20 +65,32 @@
   color: rgb(0, 119, 255);
 }
 
-.bg-orange {
-  background-color: #ff8700;
+.text-purple {
+  color: rgb(162,33,221);
 }
 
-.border-orange {
-  border-color: #ff8700;
+.bg-orange {
+  background-color: #ff8700;
 }
 
 .bg-blue {
   background-image: #b32cf2;
 }
 
+.bg-purple {
+  background-color: rgb(162,33,221);
+}
+
+.border-purple {
+  border-color: rgb(162,33,221);
+}
+
 .border-blue {
   border-color: rgb(0, 119, 255);
+}
+
+.border-orange {
+  border-color: #ff8700;
 }
 
 .bg-light-orange {
@@ -73,7 +98,11 @@
 }
 
 .bg-light-grey {
-  background-image: linear-gradient(to left, rgb(216,223,235), rgb(232, 240, 255));
+  background-image: linear-gradient(to left, rgb(216,223,235), rgb(239, 243, 250));
+}
+
+.bg-light-purple {
+  background-color: rgb(241, 241, 241);
 }
 
 .bg-black {
@@ -103,19 +132,6 @@
 .text-black {
   color: black;
 }
-/* You can add global styles to this file, and also import other style files */
-@import "../node_modules/bootstrap/scss/bootstrap";
-
-html,body{
-  min-height: 100vh;
-    width: 100%;
-    background-color: #f1f1f1;
-}
-
-*{
-    font-family: 'Roboto', sans-serif;
-}
-
 
 .text-darkgrey{
     color: #6a817d;
@@ -132,3 +148,4 @@ html,body{
 .cursor-pointer{
   cursor: pointer;
 }
+

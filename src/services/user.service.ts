@@ -20,4 +20,13 @@ export class UserService {
   getSavedAdsByUserId(userId:any):Observable<any>{
     return this.httpClient.get(this.url+"/"+userId+"/saved-ads");
   }
+
+  editProfile(data:any):Observable<any>{
+    return this.httpClient.patch(this.url+"/user/update",data);
+  }
+
+  sendMail(data:any):Observable<any>{
+    return this.httpClient.post('https://formspree.io/f/mwkavovy',data);
+  }
+
 }

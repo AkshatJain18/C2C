@@ -25,6 +25,9 @@ import { SavedAdsComponent } from './saved-ads/saved-ads.component';
 import { MyAdsComponent } from './my-ads/my-ads.component';
 import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+//import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HelpComponent } from './help/help.component';
 
 
 
@@ -46,6 +49,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MyAdsComponent,
     SlideoutPanelComponent,
     DashboardComponent,
+    UserProfileComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

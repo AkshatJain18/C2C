@@ -14,13 +14,10 @@ export class SignUpComponent implements OnInit {
 
   signUpForm !: FormGroup;
 
-  http : HttpClient;
-
   user = new User({});
 
-  constructor(httpClient:HttpClient,private formBuiler : FormBuilder,private authService: AuthService,private router:Router) {
+  constructor(private formBuiler : FormBuilder,private authService: AuthService,private router:Router) {
     this.buildSignUpForm(new User({}));
-    this.http = httpClient;
   }
 
   ngOnInit(): void {
@@ -33,7 +30,7 @@ export class SignUpComponent implements OnInit {
       lastName : new FormControl(user.lastName,[Validators.required,Validators.maxLength(20)]),
       address : new FormControl(user.address,Validators.required),
       emailId : new FormControl(user.emailId,[Validators.required,Validators.email,Validators.pattern(/^([\w.-]+)@(\[(\d{1,3}\.){3}|(?!hotmail|gmail|googlemail|yahoo|gmx|ymail|outlook|bluewin|protonmail|t\-online|web\.|online\.|aol\.|live\.)(([a-zA-Z\d-]+\.)+))([a-zA-Z]{2,4}|\d{1,3})(\]?)$/)]),
-      phone : new FormControl(user.state,[Validators.required, Validators.maxLength(10)]),
+      phone : new FormControl(user.phone,[Validators.required, Validators.maxLength(10)]),
       pinCode : new FormControl(user.pinCode, Validators.required),
       password : new FormControl(user.password,[Validators.required, Validators.minLength(8),
                     Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)]),
@@ -41,7 +38,7 @@ export class SignUpComponent implements OnInit {
       checkBox : [false, Validators.requiredTrue]
     }
     ,{
-      validator: this.MustMatch('password','confirmPassword')
+      validator: this.authService.MustMatch('password','confirmPassword')
     }
     )
   }
@@ -77,6 +74,6 @@ export class SignUpComponent implements OnInit {
           return null;
       }
     }
-}
+  }
 
 }

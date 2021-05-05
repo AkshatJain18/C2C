@@ -10,6 +10,7 @@ export class NavbarService {
 
   constructor() { this.visible = false; this.isMenuVisible = false}
 
+
   hide() { this.visible = false; }
 
   show() { this.visible = true; }

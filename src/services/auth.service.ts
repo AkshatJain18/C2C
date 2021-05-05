@@ -20,4 +20,8 @@ export class AuthService {
    signUp(data: any): Observable<any> {
      return this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/signup",data);
    }
+
+   MustMatch(p:any,cp:any){
+     return true;
+   }
 }

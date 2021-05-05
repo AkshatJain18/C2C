@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  @extend .bg-light-grey;
+  @extend .bg-light-purple;
 
   .sign-up-page {
     width: 70%;
@@ -72,7 +72,7 @@
             input, textarea {
               border: none;
               outline: none;
-              border-bottom: 0.12rem solid rgb(102, 187, 187);
+              border-bottom: 0.1rem solid rgb(207, 197, 205);
             }
 
             textarea::-webkit-scrollbar {
@@ -81,7 +81,7 @@
 
             textarea::-webkit-scrollbar-thumb {
               border-radius: 1rem;
-              @extend .bg-blue;
+              @extend .bg-purple;
             }
 
             .checkBox {
@@ -101,7 +101,7 @@
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
             margin-top: 2rem;
             border: none;
-            @extend .text-small, .bg-blue;
+            @extend .text-small, .bg-purple;
           }
           button:hover {
             box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
@@ -116,6 +116,11 @@
           }
           .checkBox-container, .pw-validation-message {
             width: 70%;
+
+            .terms-link {
+              @extend .text-purple;
+            }
+
           }
         }
 
@@ -137,7 +142,7 @@
 
   .sign-up-page::-webkit-scrollbar-thumb {
     border-radius: 1rem;
-    @extend .bg-blue;
+    @extend .bg-purple;
   }
 
 
