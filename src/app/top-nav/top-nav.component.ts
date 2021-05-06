@@ -50,7 +50,6 @@ export class TopNavComponent implements OnInit {
   }
 
   onCreateAdClick(){
-    this.isMenuOpen = false;
     if(this.isLoggedIn){
       this.router.navigateByUrl('/create-ad');
     }else{

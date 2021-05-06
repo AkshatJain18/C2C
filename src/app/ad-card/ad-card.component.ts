@@ -18,10 +18,13 @@ export class AdCardComponent implements OnInit {
   isSaveLoaded:boolean = false;
 
   isLoggedIn:boolean;
+  timeRemaining!: number;
+  isAuction!:boolean;
 
   constructor(private dataService:DataService,private userService:UserService,private adService:AdService) {
     this.isLoggedIn = localStorage.getItem('user')!=null;
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
+    this.isAuction = false;
   }
 
   saveAd(ad:any){
@@ -56,7 +59,8 @@ export class AdCardComponent implements OnInit {
   
   ngOnInit(): void {
     this.ad = this.dataService.getAd();
-
+    this.isAuction = this.ad.adType == 3;
+    this.timeRemaining = (new Date(this.ad.auctionDeadline).getTime()-new Date().getTime())/1000;
     if(this.isLoggedIn){
       if(localStorage.getItem('savedAds')!=null){
         this.savedAds = JSON.parse(localStorage.getItem('savedAds')!);

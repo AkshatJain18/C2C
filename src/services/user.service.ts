@@ -30,7 +30,7 @@ export class UserService {
   }
 
   editProfile(data:any):Observable<any>{
-    return this.httpClient.patch(this.url+"/user/update",data);
+    return this.httpClient.patch(this.url+"/update",data);
   }
 
   sendMail(data:any):Observable<any>{

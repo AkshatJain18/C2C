@@ -48,7 +48,7 @@ export class UserProfileComponent implements OnInit {
       firstName : new FormControl(user.firstName,[Validators.required,Validators.maxLength(20)]),
       lastName : new FormControl(user.lastName,[Validators.required,Validators.maxLength(20)]),
       address : new FormControl(user.address,Validators.required),
-      phone : new FormControl(user.phone,[Validators.required, Validators.maxLength(10)]),
+      phone : new FormControl(user.phone,[Validators.required, Validators.minLength(10),Validators.maxLength(10)]),
       pinCode : new FormControl(user.pinCode, Validators.required),
       password : new FormControl(user.password,[Validators.required, Validators.minLength(8),
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)]),
@@ -56,10 +56,10 @@ export class UserProfileComponent implements OnInit {
       confirmPassword : new FormControl(user.password),
       picture : new FormControl(user.picture)
     }
-    /*,{
+    ,{
       validator: [this.authService.MustMatch('password','confirmPassword'),
                   this.checkPassword('currentPassword')]
-    }*/
+    }
     )
   }
 
@@ -70,7 +70,7 @@ export class UserProfileComponent implements OnInit {
         console.log(res);
         localStorage.setItem("user",JSON.stringify(res));
         console.log(localStorage.getItem("user"));
-        this.router.navigateByUrl('user-profile');
+        alert("changes saved!");
       },
       (err)=>{
         console.log(err);

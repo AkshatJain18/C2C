@@ -9,9 +9,11 @@ export class Ad {
   initialPrice : number;
   finalPrice : number;
   sellerId : string;
+  buyerId: string;
   productAge: string;
   auctionDeadline : string;
   adCreated : string;
+  sold:boolean;
   views : number;
   img1Url : string;
   img2Url : string;
@@ -27,7 +29,9 @@ export class Ad {
     this.description = ad.description;
     this.initialPrice = ad.initialPrice;
     this.sellerId = ad.sellerId;
+    this.buyerId = ad.buyerId;
     this.productAge = ad.productAge;
+    this.sold = ad.sold;
     this.auctionDeadline = ad.auctionDeadline;
     this.img1Url = ad.img1Url;
     this.img2Url = ad.img2Url;

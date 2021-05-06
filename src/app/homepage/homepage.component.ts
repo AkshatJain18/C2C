@@ -39,6 +39,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     this.adService.getAds().subscribe((adList) => {
       this.ads = adList;
+      this.ads = this.ads.filter(ad=>!ad.sold);
       this.ads.forEach(ad=>this.trendingAds.push(ad));
       this.ads.forEach(ad=>this.recentlyAddedAds.push(ad));
       this.ads.forEach(ad=>this.donationAds.push(ad));

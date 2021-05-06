@@ -81,6 +81,7 @@ export class AdvertisementListComponent implements OnInit {
     this.searchService.searchKeyword.subscribe(item => this.searchKeyword = item);
     this.adService.getAds().subscribe(adList => {
       this.ads = adList;this.ads.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
+      this.ads = this.ads.filter(ad=>ad.sold==false);
     });
     this.categoryService.getCategories().subscribe(categoryList => this.categories = categoryList);
   }

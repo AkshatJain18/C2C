@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Ad } from 'src/models/Ad';
 import { User } from 'src/models/User';
+import { AdService } from 'src/services/ad.service';
 import { DataService } from 'src/services/data.service';
 import { UserService } from 'src/services/user.service';
 
@@ -15,13 +17,15 @@ export class SavedAdsComponent implements OnInit {
   user!:User;
   isLoading:boolean = true;
 
-  constructor(private dataService:DataService,private userService:UserService) {
+  constructor(private dataService:DataService,private router:Router,private adService:AdService,private userService:UserService) {
     this.user = JSON.parse(localStorage.getItem('user')!);
   }
 
-  setAd(ad:Ad){
-    this.dataService.setAd(ad);
-    return true;
+  unsaveAd(adId:any,event:any){
+    event.stopPropagation();
+    this.adService.unsaveAdForUser(adId,this.user.id).subscribe((res)=>{
+      this.savedAds = this.savedAds.filter(ad=>ad.adId!=adId);
+    });
   }
 
   ngOnInit(): void {

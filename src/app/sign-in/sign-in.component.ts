@@ -43,10 +43,10 @@ export class SignInComponent implements OnInit {
       (data:any) => {
         console.log(data);
         this.user = data;
-        localStorage.setItem("user",JSON.stringify(data));
         if(data===null){
           this.errorInSignIn=true; 
         }else{
+          localStorage.setItem("user",JSON.stringify(data));
           this.router.navigateByUrl('/homepage');
         }
       },

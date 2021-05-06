@@ -29,6 +29,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HelpComponent } from './help/help.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { ContactSellerComponent } from './advertisement-detail/contact-seller/contact-seller.component';
 
 
 
@@ -52,7 +53,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
     DashboardComponent,
     UserProfileComponent,
     HelpComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    ContactSellerComponent
   ],
   imports: [
     BrowserModule,

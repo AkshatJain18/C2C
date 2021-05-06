@@ -11,6 +11,7 @@
         .carousel{
             height: 400px;
             width: 700px;
+
             background-color: white;
             @extend .card;
 
@@ -30,15 +31,44 @@
             width: 40%;
             @extend .card,.shadow;
 
-            .item-price{
-                @extend .text-dark;
-                font-size: 25px;
+
+            .tabs-container{
+                border-bottom: 1px solid lightseagreen;
+
+                .active-tab{
+                    color: #b32cf2;
+                    font-weight: 700;
+                    border-bottom: 3px solid #b32cf2;
+                }
             }
 
-            .item-name{
-                @extend .text-medium;
-                color: #6a817d;
+
+            .item-price{
+                color: #b32cf2;
+                font-weight: 700;
+                font-size: 20px;
+            }
+
+            .item-name{                
+                font-weight: 700;
+                @extend .text-capitalize;
+                font-size: 24px;
             }
         }
     }
+}
+
+.blur {
+    opacity: 0.2;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.end{
+    display: flex;
+    margin-top: auto;
 }

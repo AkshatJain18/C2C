@@ -19,9 +19,15 @@ export class MyAdsComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
   }
 
-  setAd(ad:Ad){
-    this.dataService.setAd(ad);
-    return true;
+  deleteAd(adId:any,event:any){
+    event.stopPropagation();
+    this.adService.deleteAd(adId).subscribe((res)=>{
+      this.myAds = this.myAds.filter(ad=>ad.adId!=adId);
+    },
+    (err)=>{
+      alert("could not delete ad!");
+      console.log(err);
+    })
   }
 
   ngOnInit(): void {
