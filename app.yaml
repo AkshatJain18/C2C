@@ -22,6 +22,14 @@ handlers:
     static_files: dist/c2c-marketplace/\1
     upload: dist/c2c-marketplace/(.+\.jpg)
 
+  - url: /(.+\.jpeg)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.jpeg)
+     
+  - url: /(.+\.webp)
+    static_files: dist/c2c-marketplace/\1
+    upload: dist/c2c-marketplace/(.+\.webp)
+    
   - url: /(.+\.svg)
     static_files: dist/c2c-marketplace/\1
     upload: dist/c2c-marketplace/(.+\.svg)
