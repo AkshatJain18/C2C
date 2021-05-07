@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   boughtAds:Ad[]= [];
   user:User;
   isSoldOpen:boolean = true;
+  rate:number = 1;
 
   constructor(private dataService:DataService,private userService:UserService,private adService:AdService) { 
     this.user = JSON.parse(localStorage.getItem('user')!) as User;

@@ -40,7 +40,7 @@ export class FilterPipe implements PipeTransform {
 
     priceFilter(ads:Ad[],startPrice:number,endPrice:number){
         return ads.filter(
-            ad => ad.initialPrice>=startPrice && ad.initialPrice<=endPrice
+            ad => ad.finalPrice>=startPrice && ad.finalPrice<=endPrice
         )
     }
 

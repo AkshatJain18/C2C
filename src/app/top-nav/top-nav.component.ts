@@ -87,6 +87,7 @@ export class TopNavComponent implements OnInit {
     .subscribe(notificationsList => {
       console.log(notificationsList);
       this.unseenNotifications = notificationsList.findIndex((n:any)=>!n.viewed)!=-1;
+      this.dataService.setUnseenNotifications(this.unseenNotifications);
     });
   }
 

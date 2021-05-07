@@ -30,6 +30,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HelpComponent } from './help/help.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ContactSellerComponent } from './advertisement-detail/contact-seller/contact-seller.component';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 
 
@@ -67,7 +68,8 @@ import { ContactSellerComponent } from './advertisement-detail/contact-seller/co
     HttpClientModule,
     FormsModule,
     MomentModule,
-    CountdownModule
+    CountdownModule,
+    BarRatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
