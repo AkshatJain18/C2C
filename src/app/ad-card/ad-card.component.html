@@ -9,8 +9,7 @@
             <div *ngIf="isAuction" class="d-flex mt-2 align-items-center">
                 <span *ngIf="timeRemaining<86400" class="text-small">Auction ends in</span>
                 <span *ngIf="timeRemaining>=86400" class="text-small">Auction ends on</span>
-                <span *ngIf="timeRemaining>86400" class="font-700 text-small ml-2">{{ad.auctionDeadline | date :
-                  'short'}}</span>
+                <span *ngIf="timeRemaining>86400" class="font-700 text-large ml-2">{{ad.auctionDeadline | date}}</span>
                 <countdown *ngIf="timeRemaining<86400" class="text-large font-700 ml-2"
                   [config]="{ leftTime: timeRemaining,format: 'HH:mm:ss'}"></countdown>
               </div>

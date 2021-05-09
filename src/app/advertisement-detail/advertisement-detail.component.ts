@@ -37,7 +37,6 @@ export class AdvertisementDetailComponent implements OnInit {
   constructor(private router: Router,private notificationService:NotificationsService,private adService:AdService,private userService:UserService,private categoryService:CategoryService,private auctionService:AuctionService,private activatedRoute:ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.adId = params.get('adId') as string; 
-      this.fetchData();
     });
     this.isLoggedIn = localStorage.getItem('user')!=null;
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
@@ -107,6 +106,7 @@ export class AdvertisementDetailComponent implements OnInit {
   }
 
   isAdSaved(adId:any){
+    console.log(this.savedAds);
     return this.savedAds.findIndex(ad=>ad.adId==adId)!=-1;
   }
 
@@ -117,8 +117,7 @@ export class AdvertisementDetailComponent implements OnInit {
     this.isAuctionOver = this.timeRemaining<=0;
   }
 
-  fetchData(){
-    console.log("fetching!");
+  ngOnInit(): void {
     this.adService.getAdById(this.adId).subscribe(adItem => {
       this.ad = adItem;
       this.extractDetails();
@@ -135,9 +134,9 @@ export class AdvertisementDetailComponent implements OnInit {
     //fetching all the saved ads for the user
     this.userService.getSavedAdsByUserId(this.user.id).subscribe((savedAds)=>{
       this.savedAds = savedAds;
+      console.log(this.savedAds);
+    },(error)=>{
+      console.log(error);
     });
-  }
-
-  ngOnInit(): void {
   }
 }

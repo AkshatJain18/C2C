@@ -8,6 +8,7 @@ export class Ad {
   description : string;
   initialPrice : number;
   finalPrice : number;
+  sellerRating: number = 0;
   sellerId : string;
   buyerId: string;
   productAge: string;
@@ -29,6 +30,7 @@ export class Ad {
     this.description = ad.description;
     this.initialPrice = ad.initialPrice;
     this.sellerId = ad.sellerId;
+    this.sellerRating = ad.sellerRating;
     this.buyerId = ad.buyerId;
     this.productAge = ad.productAge;
     this.sold = ad.sold;

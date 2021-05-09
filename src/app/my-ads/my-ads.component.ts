@@ -25,8 +25,8 @@ export class MyAdsComponent implements OnInit {
       this.myAds = this.myAds.filter(ad=>ad.adId!=adId);
     },
     (err)=>{
-      alert("could not delete ad!");
-      console.log(err);
+      this.myAds = this.myAds.filter(ad=>ad.adId!=adId);
+      //console.log(err);
     })
   }
 

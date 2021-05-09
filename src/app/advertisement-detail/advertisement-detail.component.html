@@ -40,11 +40,11 @@
           <span *ngIf="!isAuction" class="item-price mt-3">₹ {{ad.initialPrice}}</span>
           <div *ngIf="isAuction" class="d-flex align-items-center mt-3">
             <span class="item-price">₹ {{ad.finalPrice}}</span>
-            <span *ngIf="!isAuctionOver && buyer==null" class="text-dark ml-3">base price</span>
-            <span *ngIf="!isAuctionOver && buyer!=null" class="text-dark ml-3">current bid by <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
-            <span *ngIf="isAuctionOver && buyer!=null" class="text-dark ml-3">sold to <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
-            <img *ngIf="!buyer.picture" height="20px" width="20px" class="circle border ml-2" src="../../assets/sample-profile-pic.jpg">
-            <img *ngIf="buyer.picture" height="20px" width="20px" class="circle border ml-2" src={{buyer.picture}}>
+            <span *ngIf="!isAuctionOver && buyer==null" class="text-dark ml-2">base price</span>
+            <span *ngIf="!isAuctionOver && buyer!=null" class="text-dark ml-2">current bid by <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
+            <span *ngIf="isAuctionOver && buyer!=null" class="text-dark ml-2">sold to <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
+            <img *ngIf="buyer!=null && !buyer.picture" height="20px" width="20px" class="circle border ml-2" src="../../assets/sample-profile-pic.jpg">
+            <img *ngIf="buyer!=null && buyer.picture" height="20px" width="20px" class="circle border ml-2" src={{buyer.picture}}>
           </div>
         </div>
 
