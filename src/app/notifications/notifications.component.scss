@@ -15,9 +15,33 @@
       cursor: pointer;
       border-left: 3px solid transparent;
 
-      .title {
-        @extend .text-grey;
+      .notification-details {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        align-items: center;
+
+        i {
+          height: 3rem;
+          width: 3rem;
+          border: 0.1rem solid grey;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          @extend .bg-light-purple;
+        }
+
+        img {
+          height: 3rem;
+          width: 3rem;
+          border-radius: 50%;
+        }
+
+        .title {
+          @extend .text-grey;
+        }
       }
+
       .time {
         @extend .text-grey;
         font-size: xx-small;

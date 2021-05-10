@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { CountdownModule } from 'ngx-countdown';
-
+import { RatingModule } from 'ng-starrating';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -19,17 +19,17 @@ import { AdvertisementDetailComponent } from './advertisement-detail/advertiseme
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { MomentModule } from 'ngx-moment';
+import { ContactSellerComponent } from './advertisement-detail/contact-seller/contact-seller.component';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { HelpComponent } from './help/help.component';
 import { AdCardComponent } from './ad-card/ad-card.component';
 import { AdDetailedCardComponent } from './ad-detailed-card/ad-detailed-card.component';
 import { SavedAdsComponent } from './saved-ads/saved-ads.component';
 import { MyAdsComponent } from './my-ads/my-ads.component';
 import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-//import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { HelpComponent } from './help/help.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-import { ContactSellerComponent } from './advertisement-detail/contact-seller/contact-seller.component';
 import { BarRatingModule } from 'ngx-bar-rating';
 
 
@@ -55,7 +55,8 @@ import { BarRatingModule } from 'ngx-bar-rating';
     UserProfileComponent,
     HelpComponent,
     NotificationsComponent,
-    ContactSellerComponent
+    ContactSellerComponent,
+    ViewProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +70,7 @@ import { BarRatingModule } from 'ngx-bar-rating';
     FormsModule,
     MomentModule,
     CountdownModule,
+    RatingModule,
     BarRatingModule
   ],
   providers: [],

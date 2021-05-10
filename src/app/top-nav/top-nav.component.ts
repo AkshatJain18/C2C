@@ -71,7 +71,7 @@ export class TopNavComponent implements OnInit {
       this.closePopUps();
     }
   }
-  
+
   closePopUps(){
     this.isMenuOpen = false;
     this.isNotificationsOpen = false;

@@ -41,10 +41,10 @@
           <div *ngIf="isAuction" class="d-flex align-items-center mt-3">
             <span class="item-price">₹ {{ad.finalPrice}}</span>
             <span *ngIf="!isAuctionOver && buyer==null" class="text-dark ml-2">base price</span>
-            <span *ngIf="!isAuctionOver && buyer!=null" class="text-dark ml-2">current bid by <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
-            <span *ngIf="isAuctionOver && buyer!=null" class="text-dark ml-2">sold to <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
-            <img *ngIf="buyer!=null && !buyer.picture" height="20px" width="20px" class="circle border ml-2" src="../../assets/sample-profile-pic.jpg">
-            <img *ngIf="buyer!=null && buyer.picture" height="20px" width="20px" class="circle border ml-2" src={{buyer.picture}}>
+            <span *ngIf="!isAuctionOver && buyer!=null" class="text-dark ml-2 cursor-pointer" routerLink="/profile/{{buyer.id}}">current bid by <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
+            <span *ngIf="isAuctionOver && buyer!=null" class="text-dark ml-2 cursor-pointer" routerLink="/profile/{{buyer.id}}">sold to <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
+            <img *ngIf="buyer!=null && !buyer.picture" routerLink="/profile/{{buyer.id}}" height="20px" width="20px" class="circle cursor-pointer border ml-2" src="../../assets/sample-profile-pic.jpg">
+            <img *ngIf="buyer!=null && buyer.picture" height="20px" width="20px" class="circle border ml-2 cursor-pointer" routerLink="/profile/{{buyer.id}}" src={{buyer.picture}}>
           </div>
         </div>
 
@@ -70,7 +70,7 @@
 
 
       <span *ngIf="isAuction && isAuctionOver" class="mt-3 text-x-large font-700 text-danger">Auction
-        over!</span> 
+        over!</span>
 
       <div *ngIf="!isAuction" class="w-100 d-flex justify-content-between mt-3 mb-2">
         <button (click)="contactSellerVisible=!contactSellerVisible" class="btn-theme w-48">Call</button>
@@ -98,7 +98,7 @@
         <div *ngIf="isDetailVisible" class="d-flex flex-column mt-4">
           <div class="d-flex justify-content-between">
             <span class="text-darkgrey">Seller:</span>
-            <span class="text-dark font-700" style="margin-left: 5px;">{{seller.firstName+" "+seller.lastName}}</span>
+            <span (click)="visitProfile()" class="font-700 seller-name" style="margin-left: 5px;">{{seller.firstName+" "+seller.lastName}}</span>
           </div>
           <div class="d-flex mt-1 justify-content-between">
             <span class="text-darkgrey">Seller Rating:</span>
@@ -121,7 +121,7 @@
             <span class="text-dark font-700" style="margin-left: 5px;">{{ad.auctionDeadline | date : 'medium'}}</span>
           </div>
         </div>
-        
+
         <span *ngIf="!isDetailVisible" class="mt-4 d-flex flex-column text-darkgrey text-small">
           {{ad.description}}
         </span>

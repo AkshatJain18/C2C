@@ -2,7 +2,11 @@
   <div class="notifications-tab card">
     <span  *ngFor="let notification of notifications" (click)="openNotification(notification.adId, notification.notificationId)"
     [ngClass]="{'unseen bg-light':!notification.viewed}" class="menu-item p-3 border-bottom text-dark">
-      <p class="title" >{{notification.title}}</p>
+      <div class="notification-details">
+        <i *ngIf="!notification.img" class="fa fa-user fa-2x"></i>
+        <img [src]="notification.img" *ngIf="notification.img"  alt="">
+        <p class="title" >{{notification.title}}</p>
+      </div>
       <p class="time">{{notification.notificationTime | amTimeAgo }}</p>
     </span>
   </div>

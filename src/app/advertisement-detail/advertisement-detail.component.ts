@@ -36,7 +36,7 @@ export class AdvertisementDetailComponent implements OnInit {
 
   constructor(private router: Router,private notificationService:NotificationsService,private adService:AdService,private userService:UserService,private categoryService:CategoryService,private auctionService:AuctionService,private activatedRoute:ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.adId = params.get('adId') as string; 
+      this.adId = params.get('adId') as string;
     });
     this.isLoggedIn = localStorage.getItem('user')!=null;
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
@@ -58,7 +58,7 @@ export class AdvertisementDetailComponent implements OnInit {
         this.savedAds.push(ad);
       }else{
         alert("ad could not be saved");
-      } 
+      }
     });
   }
 
@@ -139,4 +139,10 @@ export class AdvertisementDetailComponent implements OnInit {
       console.log(error);
     });
   }
+
+  visitProfile() {
+    this.router.navigateByUrl('profile/'+this.ad.sellerId);
+  }
+
+
 }
