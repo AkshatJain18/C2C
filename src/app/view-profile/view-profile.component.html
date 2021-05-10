@@ -19,21 +19,21 @@
     </div>
     <div *ngIf="!contactTabOpened" class="stats-tab tab mt-4">
       <p class="label">No of products bought:</p>
-      <p class="value font-weight-bold">{{userDetails.buyCount}}</p>
+      <p class="value-num font-weight-bold">{{userDetails.buyCount}}</p>
       <p class="label">No of products sold:</p>
-      <p class="value font-weight-bold">{{userDetails.sellCount}}</p>
+      <p class="value-num font-weight-bold">{{userDetails.sellCount}}</p>
       <p class="label">No of products donated:</p>
-      <p class="value font-weight-bold">{{userDetails.donationsCount}}</p>
+      <p class="value-num font-weight-bold">{{userDetails.donationsCount}}</p>
       <p class="label">User Rating:</p>
       <!-- <p class="value font-weight-bold">{{userDetails.rating}}</p> -->
-      <star-rating class="value" [value]="userDetails.rating" [totalstars]="5" checkedcolor="#b32cf2" uncheckedcolor="rgb(200,200,200)" size="17px" [readonly]="true" ></star-rating>
+      <star-rating class="value-num" [value]="userDetails.rating" [totalstars]="5" checkedcolor="#b32cf2" uncheckedcolor="rgb(200,200,200)" size="17px" [readonly]="true" ></star-rating>
     </div>
   </div>
 
 
-  <div class="live-ads-tab card mt-4 mb-4">
-    <p class="font-weight-bold">Ads published by {{userDetails.firstName}} {{userDetails.lastName}}:</p>
-    <!-- <ng-container *ngFor="let ad of userAds"  class="w-100 ad-container">
+  <div class="live-ads-tab mt-2 mb-4">
+    <p class="font-weight-bold mb-4">Ads published by {{userDetails.firstName}} {{userDetails.lastName}}:</p>
+    <ng-container *ngFor="let ad of userAds"  class="w-100 ad-container">
       <div routerLink="/ads/{{ad.adId}}" *ngIf="!ad.sold" class="card w-100 cursor-pointer d-flex flex-column shadow p-4 w-100">
           <div class="d-flex w-100">
               <img class="item-image" src={{ad.img1Url}}>
@@ -54,12 +54,12 @@
               </div>
           </div>
       </div>
-  </ng-container> -->
-    <div class="ads-sub-container">
+  </ng-container>
+    <!-- <div class="ads-sub-container">
       <ng-container *ngFor="let ad of userAds">
         <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
       </ng-container>
-    </div>
+    </div> -->
     <p class="no-ads-message mt-3" *ngIf="userAds.length==0">No ads published by this user yet</p>
   </div>
 </div>

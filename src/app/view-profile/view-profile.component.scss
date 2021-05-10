@@ -7,7 +7,7 @@
   height: 100vh;
 
   .card {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding-bottom: 2rem;
     align-items: center;
   }
@@ -73,10 +73,16 @@
       grid-template-columns: 1fr 1fr;
       @extend .text-small;
 
-      // .label {
+      .label {
+        font-weight: bold;
 
-      // }
+      }
       .value {
+        text-align: left;
+        @extend .text-purple;
+      }
+
+      .value-num {
         text-align: center;
         @extend .text-purple;
       }
