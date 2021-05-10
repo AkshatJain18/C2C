@@ -20,6 +20,7 @@ export class HomepageComponent implements OnInit {
   trendingAds:Ad[] = [];
   recentlyAddedAds:Ad[] = [];
   donationAds:Ad[] = [];
+  auctionAds:Ad[] = [];
 
   savedAds:Ad[] = [];
 
@@ -40,11 +41,14 @@ export class HomepageComponent implements OnInit {
     this.adService.getAds().subscribe((adList) => {
       this.ads = adList;
       this.ads = this.ads.filter(ad=>!ad.sold);
-      this.ads.forEach(ad=>this.trendingAds.push(ad));
-      this.ads.forEach(ad=>this.recentlyAddedAds.push(ad));
-      this.ads.forEach(ad=>this.donationAds.push(ad));
+      this.trendingAds = this.ads.filter(ad=>ad.adType!=3);
+      this.recentlyAddedAds = this.ads.filter(ad=>ad.adType!=3);
+      this.donationAds = this.ads.filter(ad=>ad.adType!=3);
+      this.auctionAds = this.ads.filter(ad=>ad.adType==3);
 
       this.trendingAds.sort((x,y)=>y.views-x.views);
+      this.auctionAds.sort((x,y)=>y.views-x.views);
+
       this.trendingAds = this.trendingAds.filter(ad=>ad.adType!=1);
       this.recentlyAddedAds.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
       this.recentlyAddedAds = this.recentlyAddedAds.filter(ad=>ad.adType!=1);

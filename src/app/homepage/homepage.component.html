@@ -67,6 +67,18 @@
 
                 <div class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
+                        <label class="heading">Auction ads</label>
+                        <label routerLink = "/ads" class="view-all mt-2">view all</label>
+                    </div>
+                    <div class="ads-sub-container mt-2">
+                        <ng-container *ngFor="let ad of auctionAds | slice:0:4">
+                            <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div class="ad-row">
+                    <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Donation ads</label>
                         <label routerLink = "/ads" class="view-all mt-2">view all</label>
                     </div>
@@ -76,6 +88,7 @@
                         </ng-container>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

@@ -40,9 +40,11 @@
           <span *ngIf="!isAuction" class="item-price mt-3">₹ {{ad.initialPrice}}</span>
           <div *ngIf="isAuction" class="d-flex align-items-center mt-3">
             <span class="item-price">₹ {{ad.finalPrice}}</span>
-            <span *ngIf="!isAuctionOver && buyer==null" class="text-info ml-3">base price</span>
-            <span *ngIf="!isAuctionOver && buyer!=null" class="text-info ml-3">current bid by <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
-            <span *ngIf="isAuctionOver && buyer!=null" class="text-info ml-3">sold to <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
+            <span *ngIf="!isAuctionOver && buyer==null" class="text-dark ml-2">base price</span>
+            <span *ngIf="!isAuctionOver && buyer!=null" class="text-dark ml-2">current bid by <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
+            <span *ngIf="isAuctionOver && buyer!=null" class="text-dark ml-2">sold to <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
+            <img *ngIf="buyer!=null && !buyer.picture" height="20px" width="20px" class="circle border ml-2" src="../../assets/sample-profile-pic.jpg">
+            <img *ngIf="buyer!=null && buyer.picture" height="20px" width="20px" class="circle border ml-2" src={{buyer.picture}}>
           </div>
         </div>
 
@@ -60,12 +62,9 @@
         </svg>
       </div>
 
-      <div *ngIf="isAuction && !isAuctionOver" class="d-flex mt-2 align-items-center">
-        <span *ngIf="timeRemaining<86400" class="text-small">Auction ends in</span>
-        <span *ngIf="timeRemaining>=86400" class="text-small">Auction ends on</span>
-        <span *ngIf="timeRemaining>86400" class="font-700 text-small ml-2">{{ad.auctionDeadline | date :
-          'medium'}}</span>
-        <countdown *ngIf="timeRemaining<86400" class="text-large font-700 ml-2"
+      <div *ngIf="isAuction && !isAuctionOver && timeRemaining<86400" class="d-flex mt-3 align-items-center">
+        <span class="text-small">Auction ends in</span>
+        <countdown  class="text-large font-700 ml-2"
           [config]="{ leftTime: timeRemaining,format: 'HH:mm:ss'}"></countdown>
       </div>
 
@@ -79,10 +78,14 @@
       </div>
 
       <div *ngIf="isAuction && !isAuctionOver && isLoggedIn && user.id!=seller.id" class="d-flex flex-column mt-4">
-        <div class="w-100 d-flex justify-content-between">
-          <input type="number" [(ngModel)]="userBidPrice" class="w-48" placeholder="Enter your price">
+        <div *ngIf="!bidInProcess && !bidDone" class="w-100 d-flex justify-content-between">
+          <input type="tel" [(ngModel)]="userBidPrice" class="w-48 form-control" placeholder="Enter your price">
           <button (click)="bid()" class="btn-theme w-48">Bid</button>
         </div>
+        <p class="status" *ngIf="bidInProcess">
+          <i class="fa fa-spinner fa-pulse"></i> Bidding..</p>
+          <p class="status" *ngIf="bidDone">
+            <i class="fa fa-check"></i> Bid Done!</p>
         <label *ngIf="isBidClicked && userBidPrice<expectedBidPrice" class="text-small mt-1 text-danger">Next bid price
           should be at least {{expectedBidPrice}}</label>
       </div>
@@ -109,6 +112,10 @@
             <span class="text-darkgrey">Category:</span>
             <span class="text-dark font-700" style="margin-left: 5px;">{{category.categoryName}}</span>
           </div>
+          <div *ngIf="isAuction" class="d-flex mt-1 justify-content-between">
+            <span class="text-darkgrey">Auction Deadline:</span>
+            <span class="text-dark font-700" style="margin-left: 5px;">{{ad.auctionDeadline | date : 'medium'}}</span>
+          </div>
         </div>
 
         <span *ngIf="!isDetailVisible" class="mt-4 d-flex flex-column text-darkgrey text-small">
@@ -120,5 +127,6 @@
 </div>
 
 <div style="position: fixed;z-index: 1;" (click)="contactSellerVisible=false"  *ngIf="contactSellerVisible" class="w-100 shadow h-100 d-flex align-items-center justify-content-center">
-  <app-contact-seller class="w-25 h-75" [seller]="seller"></app-contact-seller>
+  <app-contact-seller class="w-25 w3-animate-bottom h-75" [seller]="seller"></app-contact-seller>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

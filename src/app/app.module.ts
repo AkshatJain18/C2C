@@ -30,6 +30,7 @@ import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 
 
@@ -69,7 +70,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
     FormsModule,
     MomentModule,
     CountdownModule,
-    RatingModule
+    RatingModule,
+    BarRatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

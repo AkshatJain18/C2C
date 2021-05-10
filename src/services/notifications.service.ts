@@ -18,8 +18,11 @@ export class NotificationsService {
     return this.http.get(this.url + "/notification/"+userId);
   }
 
+  sendNotificationEmail(notificationId:any):Observable<any>{
+    return this.http.get(this.url+"/notification/"+notificationId+"/mail");
+  }
+
   notificationViewed(notificationId:number) {
-    console.log('here'+notificationId);
     return this.http.get("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/notification-view/"+ notificationId);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-slideout-panel',
@@ -10,14 +10,15 @@ export class SlideoutPanelComponent implements OnInit {
 
   currentTab!:number;
 
-  constructor(private activatedRoute:ActivatedRoute) { 
+  constructor(private activatedRoute:ActivatedRoute,private router:Router) { 
     this.activatedRoute.paramMap.subscribe(params => {
       this.currentTab = parseInt(params.get('actionNo')!); 
     });
   }
 
   setCurrentTab(tab:number){
-    this.currentTab = tab;
+    //this.currentTab = tab;
+    this.router.navigateByUrl('my-stats/action/'+tab);
   }
 
   ngOnInit(): void {

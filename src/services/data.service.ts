@@ -7,6 +7,7 @@ import { Ad } from 'src/models/Ad';
 export class DataService {
 
   ad!:Ad;
+  unseenNotifications!:boolean;
   isNotificationsVisible!:boolean;
 
   constructor() { 
@@ -27,5 +28,13 @@ export class DataService {
 
   hideNotifications(){
     this.isNotificationsVisible = false;
+  }
+
+  isUnseenNotifications(){
+    return this.unseenNotifications;
+  }
+  
+  setUnseenNotifications(status:boolean){
+    this.unseenNotifications = status;
   }
 }

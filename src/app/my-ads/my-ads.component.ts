@@ -21,22 +21,19 @@ export class MyAdsComponent implements OnInit {
 
   deleteAd(adId:any,event:any){
     event.stopPropagation();
-    this.adService.deleteAd(adId).subscribe((res)=>{
+    this.adService.deleteAd(adId).subscribe(()=>{
       this.myAds = this.myAds.filter(ad=>ad.adId!=adId);
     },
     (err)=>{
-      alert("could not delete ad!");
-      console.log(err);
+      this.myAds = this.myAds.filter(ad=>ad.adId!=adId);
+      //console.log(err);
     })
   }
 
   ngOnInit(): void {
     this.adService.getAds().subscribe((adList)=>{
-      console.log(adList);
-      console.log(this.user.id);
       this.myAds =  adList.filter((ad:Ad)=>ad.sellerId==this.user.id);
       this.isLoading = false;
-      console.log(this.myAds);
     });
   }
 }

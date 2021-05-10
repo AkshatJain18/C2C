@@ -10,7 +10,7 @@
             <div *ngIf="isLoggedIn" class="d-flex flex-column">
                 <a (click)="isNotificationsOpen=!isNotificationsOpen;isMenuOpen=false;dataService.showNotifications()"  class="notification-icon" [ngClass]="{'active':isNotificationsOpen}">
                     <i class="fa fa-bell-o fa-lg" aria-hidden="true"></i>
-                    <span *ngIf="unseenNotifications" class="badge">
+                    <span *ngIf="dataService.isUnseenNotifications()" class="badge">
                       •
                     </span>
                 </a>
@@ -26,6 +26,7 @@
                     <span (click)="isMenuOpen=false" routerLink = '/my-stats/action/1' class="p-3 border-bottom menu-item text-dark cursor-pointer">Edit Profile</span>
                     <span (click)="isMenuOpen=false" routerLink = '/my-stats/action/2' class="p-3 border-bottom menu-item text-dark cursor-pointer">My Ads</span>
                     <span (click)="isMenuOpen=false" *ngIf="isLoggedIn" routerLink = '/my-stats/action/3' class="cursor-pointer menu-item text-dark p-3 border-bottom text-dark">Saved Ads</span>
+                    <span (click)="isMenuOpen=false" routerLink = '/my-stats/action/4' class="p-3 border-bottom menu-item text-dark cursor-pointer">Dashboard</span>
                     <span (click)="isMenuOpen=false" routerLink = '/my-stats/action/5' class="p-3 text-dark border-bottom cursor-pointer menu-item">Write to us </span>
                     <span (click)="isMenuOpen=false" class="cursor-pointer text-dark p-3 menu-item" *ngIf="isLoggedIn" (click)="onLogOutClick()" routerLink = "/sign-in">Logout</span>
                 </div>

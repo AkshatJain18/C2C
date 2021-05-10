@@ -68,8 +68,7 @@ export class TopNavComponent implements OnInit {
       //clicked inside top nav
     } else {
       //clicked outside top nav
-      this.isMenuOpen = false;
-      this.isNotificationsOpen = false;
+      this.closePopUps();
     }
   }
 
@@ -85,8 +84,9 @@ export class TopNavComponent implements OnInit {
 
     this.notificationService.getNotifications(this.user.id)
     .subscribe(notificationsList => {
-      console.log(notificationsList);
+      //console.log(notificationsList);
       this.unseenNotifications = notificationsList.findIndex((n:any)=>!n.viewed)!=-1;
+      this.dataService.setUnseenNotifications(this.unseenNotifications);
     });
   }
 

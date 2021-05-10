@@ -21,8 +21,13 @@ export class NotificationsComponent implements OnInit {
     this.notificationsService.getNotifications(this.userDetails.id)
       .subscribe(notificationsList => {
         this.notifications = notificationsList;
-        this.unseenNotifications = this.notifications.includes((n:any)=>!n.viewed);
+        this.checkIfUnseenNotifications();
       });
+  }
+
+  checkIfUnseenNotifications(){
+    this.unseenNotifications = this.notifications.findIndex((n:any)=>n.viewed==false)!=-1;
+    this.dataService.setUnseenNotifications(this.unseenNotifications);
   }
 
   openNotification(adId: number, notificationId: number) {
@@ -31,7 +36,7 @@ export class NotificationsComponent implements OnInit {
         (res) => {
           const notification = this.notifications.find(n => n.notificationId == notificationId);
           notification.viewed = true;
-          console.log(notification);
+          this.checkIfUnseenNotifications();
         }
       );
     this.router.navigateByUrl('ads/' + adId);

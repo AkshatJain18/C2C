@@ -20,7 +20,7 @@ export class AdvertisementListComponent implements OnInit {
   endPrice: number = 1000000;
   options: Options = {
     floor: 100,
-    ceil: 100000,
+    ceil: 1000000,
     step: 2000,
     showTicks: true
   };

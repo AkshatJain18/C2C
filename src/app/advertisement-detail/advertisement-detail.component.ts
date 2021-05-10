@@ -5,6 +5,7 @@ import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
 import { AuctionService } from 'src/services/auction.service';
 import { CategoryService } from 'src/services/category.service';
+import { NotificationsService } from 'src/services/notifications.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -30,11 +31,12 @@ export class AdvertisementDetailComponent implements OnInit {
   isBidClicked!:boolean;
   buyer!:User;
   contactSellerVisible!:boolean;
+  bidInProcess!:boolean;
+  bidDone!:boolean;
 
-  constructor(private router: Router,private adService:AdService,private userService:UserService,private categoryService:CategoryService,private auctionService:AuctionService,private activatedRoute:ActivatedRoute) {
+  constructor(private router: Router,private notificationService:NotificationsService,private adService:AdService,private userService:UserService,private categoryService:CategoryService,private auctionService:AuctionService,private activatedRoute:ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.adId = params.get('adId') as string;
-      this.fetchData();
     });
     this.isLoggedIn = localStorage.getItem('user')!=null;
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
@@ -70,31 +72,55 @@ export class AdvertisementDetailComponent implements OnInit {
     });
   }
 
+  sendEmailNotifications(notifications:any){
+    this.notificationService.sendNotificationEmail(notifications.id1).subscribe((res)=>{
+      console.log(res);
+    },(error)=>{
+      console.log(error);
+    });
+
+    if(notifications.id2){
+      this.notificationService.sendNotificationEmail(notifications.id2).subscribe((res)=>{
+        console.log(res);
+      },(error)=>{
+        console.log(error);
+      });
+    }
+  }
+
   bid(){
     this.isBidClicked = true;
     if(this.userBidPrice>=this.expectedBidPrice){
-      this.auctionService.bid(this.ad.adId,this.user.id,this.userBidPrice).subscribe((res: any)=>{
+      this.bidInProcess = true;
+      this.auctionService.bid(this.ad.adId,this.user.id,this.userBidPrice).subscribe((res)=>{
         console.log(res);
-        this.fetchData();
-        alert("Bid successfull!");
-      },(error: any)=>{
+        this.ad.finalPrice  = this.userBidPrice;
+        this.buyer  = this.user;
+        this.bidInProcess = false;
+        this.bidDone = true;
+        this.sendEmailNotifications(res);
+      },(error)=>{
         console.log(error);
       })
     }
   }
 
   isAdSaved(adId:any){
+    console.log(this.savedAds);
     return this.savedAds.findIndex(ad=>ad.adId==adId)!=-1;
   }
 
-  fetchData(){
-    console.log("fetching!");
+  extractDetails(){
+    this.isAuction = this.ad.adType == 3;
+    this.expectedBidPrice = (this.ad.finalPrice*110)/100;
+    this.timeRemaining = (new Date(this.ad.auctionDeadline).getTime()-new Date().getTime())/1000;
+    this.isAuctionOver = this.timeRemaining<=0;
+  }
+
+  ngOnInit(): void {
     this.adService.getAdById(this.adId).subscribe(adItem => {
       this.ad = adItem;
-      this.isAuction = this.ad.adType == 3;
-      this.expectedBidPrice = (this.ad.finalPrice*110)/100;
-      this.timeRemaining = (new Date(this.ad.auctionDeadline).getTime()-new Date().getTime())/1000;
-      this.isAuctionOver = this.timeRemaining<=0;
+      this.extractDetails();
       this.categoryService.getCategories().subscribe((categories)=>{
          this.category =  categories.find((c:any)=>c.categoryId == this.ad.categoryId);
       })
@@ -108,6 +134,9 @@ export class AdvertisementDetailComponent implements OnInit {
     //fetching all the saved ads for the user
     this.userService.getSavedAdsByUserId(this.user.id).subscribe((savedAds)=>{
       this.savedAds = savedAds;
+      console.log(this.savedAds);
+    },(error)=>{
+      console.log(error);
     });
   }
 
@@ -115,6 +144,5 @@ export class AdvertisementDetailComponent implements OnInit {
     this.router.navigateByUrl('profile/'+this.ad.sellerId);
   }
 
-  ngOnInit(): void {
-  }
+
 }
