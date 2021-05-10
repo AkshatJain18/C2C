@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   boughtAds:Ad[]= [];
   user:User;
   isSoldOpen:boolean = true;
+  nowRatedAds:Ad[] = [];
 
   constructor(private dataService:DataService,private ratingService:RatingService,private userService:UserService,private adService:AdService) { 
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
@@ -31,14 +32,21 @@ export class DashboardComponent implements OnInit {
     event.stopPropagation();
   }
 
-  onRateChange(sellerId:any,sellerRating:number){
-    this.ratingService.rateSeller(sellerId,sellerRating).subscribe((res)=>{
+  onRateChange(adId:any,sellerId:any,sellerRating:number){
+    this.ratingService.rateSeller(adId,sellerId,sellerRating).subscribe((res)=>{
+      const ad:Ad = this.boughtAds.find(ad=>ad.adId==adId)!;
+      ad!.rated = true;
+      this.nowRatedAds.push(ad);
       console.log(res);
     },(error)=>{
       //alert("error!");
       console.log(error);
     })  
   }   
+
+  isNowRated(adId:any){
+    return this.nowRatedAds.findIndex(ad=>ad.adId==adId)!=-1;
+  }
 
   ngOnInit(): void {
     this.userService.getSoldAdsByUserId(this.user.id).subscribe((ads)=>{

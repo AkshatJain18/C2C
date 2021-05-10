@@ -11,8 +11,8 @@ export class RatingService {
 
   constructor(private httpClient:HttpClient) { }
 
-  rateSeller(sellerId:any,rating:any):Observable<any>{
-    return this.httpClient.post(this.url + "/users/rating", { userId: sellerId, ratings: rating });
+  rateSeller(adId:any,sellerId:any,rating:any):Observable<any>{
+    return this.httpClient.post(this.url + "/users/rating", {adId:adId,userId: sellerId, ratings: rating });
   }
 
 }

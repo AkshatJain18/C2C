@@ -9,6 +9,7 @@ export class User {
   pinCode: number;
   password: string;
   picture: string;
+  rating : number;
 
   constructor(user:any) {
     this.id = user.id;
@@ -20,5 +21,6 @@ export class User {
     this.pinCode = user.pinCode;
     this.password = user.password;
     this.picture = user.picture;
+    this.rating = user.rating;
   }
 }

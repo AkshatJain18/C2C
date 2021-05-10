@@ -46,7 +46,8 @@
                                 <div class="d-flex align-items-center justify-content-between mt-1">
                                     <span class="text-medium text-dark">{{ad.description}}</span>
                                     <div class="d-flex align-items-center flex-column">
-                                        <ngb-rating [(rate)]="ad.sellerRating" (click)="stopPropogation($event)" (rateChange)="onRateChange(ad.sellerId,ad.sellerRating)" [max]="5">
+                                        <span *ngIf="isNowRated(ad.adId)" class="text-darkgrey text-small w3-animate-opacity">Thanks for the rating</span>
+                                        <ngb-rating *ngIf="!ad.rated" [(rate)]="ad.sellerRating" (click)="stopPropogation($event)" (rateChange)="onRateChange(ad.adId,ad.sellerId,ad.sellerRating)" [max]="5">
                                             <ng-template let-fill="fill" let-index="index">
                                               <span class="star" [class.filled]="fill === 100">&#9733;</span>
                                             </ng-template>

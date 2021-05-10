@@ -101,6 +101,10 @@
             <span class="text-dark font-700" style="margin-left: 5px;">{{seller.firstName+" "+seller.lastName}}</span>
           </div>
           <div class="d-flex mt-1 justify-content-between">
+            <span class="text-darkgrey">Seller Rating:</span>
+            <span class="text-dark font-700" style="margin-left: 5px;">{{seller.rating | number : '1.1-1'}}/5</span>
+          </div>
+          <div class="d-flex mt-1 justify-content-between">
             <span class="text-darkgrey">Brand Name:</span>
             <span class="text-dark font-700" style="margin-left: 5px;">{{ad.brandName}}</span>
           </div>

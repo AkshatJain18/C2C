@@ -15,6 +15,7 @@ export class Ad {
   auctionDeadline : string;
   adCreated : string;
   sold:boolean;
+  rated:boolean;
   views : number;
   img1Url : string;
   img2Url : string;
@@ -34,6 +35,7 @@ export class Ad {
     this.buyerId = ad.buyerId;
     this.productAge = ad.productAge;
     this.sold = ad.sold;
+    this.rated = ad.rated;
     this.auctionDeadline = ad.auctionDeadline;
     this.img1Url = ad.img1Url;
     this.img2Url = ad.img2Url;

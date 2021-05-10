@@ -1,7 +1,8 @@
 <div class="top-nav-container shadow-sm">
     <div class="top-nav">
         <div class="d-flex align-items-center w-50">
-            <span (click)="closePopUps()" routerLink = '/homepage' class="font-bold cursor-pointer text-x-large text-blue">Peddler</span>
+            
+            <span (click)="closePopUps()" routerLink = '/homepage' class="font-bold cursor-pointer text-x-large text-blue text-uppercase font-700">Peddler</span>
             <div class="d-flex align-items-center" style="margin-left: 25px;"> 
                 <input (click)="closePopUps()" type="search" style="margin-left: 10px;" (keyup)="updateKeyword()" [(ngModel)]="searchKeyword" placeholder="Search for items" class="searchInput ml-2" >
             </div>

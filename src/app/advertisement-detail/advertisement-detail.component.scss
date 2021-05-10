@@ -44,7 +44,7 @@
 
 
             .item-price{
-                color: #b32cf2;
+                @extend .text-dark;
                 font-weight: 700;
                 font-size: 20px;
             }
