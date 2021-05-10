@@ -3,11 +3,12 @@
 .ad-detail{
     @extend .bg-light;
     height: 100%;
+    padding: 50px;
 
     .ad-detail-container{
-        padding: 50px;
         display: flex;
-
+        height: 100%;
+        
         .carousel{
             height: 400px;
             width: 700px;
@@ -23,12 +24,22 @@
             }
         }
 
+        .tabs-container{
+            .tab{
+                padding: 10px 20px;
+            }
+            .active-tab{
+                color: #b32cf2;
+                font-weight: 700;
+                border-top: 3px solid transparent;
+                border-bottom: 3px solid #b32cf2;
+            }
+        }
+
         .ad-detail-sub-container{
             display: flex;
             flex-direction: column;
             padding: 20px 20px;
-            margin-left: 50px;
-            width: 40%;
             @extend .card,.shadow;
 
             .seller-name {
@@ -37,21 +48,8 @@
               text-decoration: underline;
             }
 
-
-            .tabs-container{
-                border-bottom: 1px solid lightseagreen;
-
-                .active-tab{
-                    color: #b32cf2;
-                    font-weight: 700;
-                    border-bottom: 3px solid #b32cf2;
-                }
-
-            }
-
-
             .item-price{
-                @extend .text-dark;
+                color: #b32cf2;
                 font-weight: 700;
                 font-size: 20px;
             }
