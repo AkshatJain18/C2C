@@ -31,6 +31,12 @@
             width: 40%;
             @extend .card,.shadow;
 
+            .seller-name {
+              color: #b32cf2;
+              cursor: pointer;
+              text-decoration: underline;
+            }
+
 
             .tabs-container{
                 border-bottom: 1px solid lightseagreen;
@@ -40,6 +46,7 @@
                     font-weight: 700;
                     border-bottom: 3px solid #b32cf2;
                 }
+
             }
 
 
@@ -49,7 +56,7 @@
                 font-size: 20px;
             }
 
-            .item-name{                
+            .item-name{
                 font-weight: 700;
                 @extend .text-capitalize;
                 font-size: 24px;

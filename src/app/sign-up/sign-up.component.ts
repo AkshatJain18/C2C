@@ -37,9 +37,9 @@ export class SignUpComponent implements OnInit {
       confirmPassword : new FormControl(null),
       checkBox : [false, Validators.requiredTrue]
     }
-    /*,{
+    ,{
       validator: this.authService.MustMatch('password','confirmPassword')
-    }*/
+    }
     )
   }
 

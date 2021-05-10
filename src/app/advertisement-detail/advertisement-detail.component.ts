@@ -33,7 +33,7 @@ export class AdvertisementDetailComponent implements OnInit {
 
   constructor(private router: Router,private adService:AdService,private userService:UserService,private categoryService:CategoryService,private auctionService:AuctionService,private activatedRoute:ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.adId = params.get('adId') as string; 
+      this.adId = params.get('adId') as string;
       this.fetchData();
     });
     this.isLoggedIn = localStorage.getItem('user')!=null;
@@ -56,7 +56,7 @@ export class AdvertisementDetailComponent implements OnInit {
         this.savedAds.push(ad);
       }else{
         alert("ad could not be saved");
-      } 
+      }
     });
   }
 
@@ -73,11 +73,11 @@ export class AdvertisementDetailComponent implements OnInit {
   bid(){
     this.isBidClicked = true;
     if(this.userBidPrice>=this.expectedBidPrice){
-      this.auctionService.bid(this.ad.adId,this.user.id,this.userBidPrice).subscribe((res)=>{
+      this.auctionService.bid(this.ad.adId,this.user.id,this.userBidPrice).subscribe((res: any)=>{
         console.log(res);
         this.fetchData();
         alert("Bid successfull!");
-      },(error)=>{
+      },(error: any)=>{
         console.log(error);
       })
     }
@@ -109,6 +109,10 @@ export class AdvertisementDetailComponent implements OnInit {
     this.userService.getSavedAdsByUserId(this.user.id).subscribe((savedAds)=>{
       this.savedAds = savedAds;
     });
+  }
+
+  visitProfile() {
+    this.router.navigateByUrl('profile/'+this.ad.sellerId);
   }
 
   ngOnInit(): void {

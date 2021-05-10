@@ -9,7 +9,7 @@ import { Ad } from 'src/models/Ad';
 export class AdService {
 
   private readonly url = "https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/ads";
-  
+
   constructor(private httpClient:HttpClient) {
 
   }
@@ -20,6 +20,10 @@ export class AdService {
 
   getAdById(id:String):Observable<any>{
     return this.httpClient.get(this.url+"/"+id);
+  }
+
+  getAdsBySellerId(sellerId:string):Observable<any>{
+    return this.httpClient.get(this.url+"/seller/"+sellerId);
   }
 
   saveAdForUser(adId:any,userId:any):Observable<any>{
