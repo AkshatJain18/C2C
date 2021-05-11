@@ -136,6 +136,10 @@
               "devServerTarget": "c2c-marketplace:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

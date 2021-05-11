@@ -31,6 +31,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from "src/environments/environment";
+import { ChatComponent } from './advertisement-detail//chat/chat.component';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 
 
@@ -56,9 +60,12 @@ import { BarRatingModule } from 'ngx-bar-rating';
     HelpComponent,
     NotificationsComponent,
     ContactSellerComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    ChatComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

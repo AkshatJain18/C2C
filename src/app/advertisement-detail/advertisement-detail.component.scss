@@ -1,5 +1,16 @@
 @import "../../styles.scss";
 
+
+.chat{
+    min-height: 60%;
+    width: 25%;
+    position: fixed;
+    z-index: 1;
+    bottom: 10px;
+    right: 10px;
+}
+
+
 .ad-detail{
     @extend .bg-light;
     height: 100%;
@@ -19,8 +30,6 @@
             img{
                 height: 400px;
                 width: 700px;
-                margin-left: auto;
-                margin-right: auto;
             }
         }
 

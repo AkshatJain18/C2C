@@ -1,0 +1,22 @@
+<div class="w-100 h-100 d-flex flex-column">
+    <div class="p-3 border-bottom bg-light">
+        <span class="text-medium font-700">Chat</span>
+    </div>
+    <div class="messages-container p-3 pb-0">
+        <ng-container *ngFor="let message of messages">
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-column ml-auto">
+                    <span *ngIf="message.senderId==user.id" class="sender-message">{{message.message}}</span>
+                    <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "short"}}</span>
+                </div>
+                <div *ngIf="message.senderId!=user.id" class="d-flex flex-column mr-auto">
+                    <span class="receiver-message">{{message.message}}</span>
+                    <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "short"}}</span>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="d-flex p-3 pt-0 mt-auto justify-content-between">
+        <input (keyup.enter)="addMessage()" placeholder="type your message..." [(ngModel)]="message" class="form-control w-100">
+    </div>
+</div>
