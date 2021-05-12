@@ -31,6 +31,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
@@ -56,7 +57,8 @@ import { BarRatingModule } from 'ngx-bar-rating';
     HelpComponent,
     NotificationsComponent,
     ContactSellerComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

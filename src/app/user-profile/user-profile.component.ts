@@ -28,8 +28,8 @@ export class UserProfileComponent implements OnInit {
 
   url: string;
 
-  constructor(private router:Router, private formBuiler : FormBuilder,private authService: AuthService, private userService: UserService) {
-    this.userDetails = JSON.parse(localStorage.getItem('user')!) as User; 
+  constructor(private router:Router, private formBuilder : FormBuilder,private authService: AuthService, private userService: UserService) {
+    this.userDetails = JSON.parse(localStorage.getItem('user')!) as User;
     this.buildEditProfileForm(this.userDetails);
     this.url=this.userDetails.picture;
   }
@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   buildEditProfileForm(user: User) {
-    this.editProfileForm = this.formBuiler.group({
+    this.editProfileForm = this.formBuilder.group({
       id : new FormControl(user.id,Validators.required),
       emailId : new FormControl(user.emailId,Validators.required),
       firstName : new FormControl(user.firstName,[Validators.required,Validators.maxLength(20)]),

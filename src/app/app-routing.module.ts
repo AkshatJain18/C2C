@@ -13,6 +13,7 @@ import { HelpComponent } from './help/help.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path:'create-ad', component: CreateAdComponent},
   {path:'my-stats/action/:actionNo', component: SlideoutPanelComponent},
   {path:'profile/:id', component: ViewProfileComponent},
-  { path: '**', component: HomepageComponent },
+  {path:'forgot-password', component:ForgotPasswordComponent},
+  { path: '**', component: HomepageComponent }
 ];
 
 @NgModule({

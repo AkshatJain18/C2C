@@ -12,7 +12,7 @@ export class AppComponent {
 
   constructor(public nav:NavbarService,private router:Router){
     router.events.subscribe(()=>{
-      if(this.router.url == '/sign-in' || this.router.url == '/sign-up'){
+      if(this.router.url == '/sign-in' || this.router.url == '/sign-up' || this.router.url == '/forgot-password'){
         this.nav.hide();
       }else{
         this.nav.show();
