@@ -33,8 +33,9 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { BarRatingModule } from 'ngx-bar-rating';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from "src/environments/environment";
-import { ChatComponent } from './advertisement-detail//chat/chat.component';
+import { ChatWindowComponent } from './advertisement-detail/chat-window/chat-window.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -61,7 +62,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     NotificationsComponent,
     ContactSellerComponent,
     ViewProfileComponent,
-    ChatComponent
+    ChatComponent,
+    ChatWindowComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

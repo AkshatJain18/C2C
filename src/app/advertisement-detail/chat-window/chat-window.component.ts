@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Ad } from 'src/models/Ad';
 import { ChatMessage } from 'src/models/ChatMessage';
 import { User } from 'src/models/User';
 import { ChatService } from 'src/services/chat.service';
 
 @Component({
   selector: 'app-user-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  templateUrl: './chat-window.component.html',
+  styleUrls: ['./chat-window.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatWindowComponent implements OnInit {
 
   messages:any[] = [];
   message!:any;
@@ -16,7 +17,7 @@ export class ChatComponent implements OnInit {
   chatId!:string;
 
   @Input()
-  adId!:any;
+  ad!:Ad;
 
   @Input()
   seller!:User;
@@ -32,7 +33,7 @@ export class ChatComponent implements OnInit {
       receiverId : this.seller.id,
       timestamp : new Date()+""
     };
-    this.chatService.addMessage(this.adId+"",this.chatId,chatMessage);
+    this.chatService.addMessage(this.ad.adId,this.user.id,this.seller.id,chatMessage);
   }
 
   fetchChatMessages(){
@@ -44,16 +45,8 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
-    if(this.seller.id = this.user.id){
-      this.chatService.getAdChats(this.adId+"").subscribe((chats)=>{
-        this.chatId = chats[0].chatId;
-        this.fetchChatMessages();
-      });
-    }else{
-      this.chatId = this.seller.id < this.user.id ? this.seller.id+"_"+this.user.id : this.user.id+"_"+this.seller.id;
-      this.fetchChatMessages();
-    }
+    this.chatId = this.seller.id < this.user.id ? this.ad.adId+"_"+this.seller.id+"_"+this.user.id :  this.ad.adId+"_"+this.user.id+"_"+this.seller.id;
+    this.fetchChatMessages();
   }
 
 }
