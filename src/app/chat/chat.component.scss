@@ -3,7 +3,6 @@
 .messages-container{
     overflow-y: scroll;
     row-gap: 15px;
-    height: 250px;
     display: flex;
     flex-direction: column;
 }
@@ -24,5 +23,5 @@
     font-size: 14px;
     max-width: 190px;
     min-width: 92px;
-    @extend .bg-light;
+    background-color: white;
 }

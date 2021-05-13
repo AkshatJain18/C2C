@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Ad } from 'src/models/Ad';
 import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
+import { ChatService } from 'src/services/chat.service';
 import { DataService } from 'src/services/data.service';
 import { NavbarService } from 'src/services/navbar.service';
 import { NotificationsService } from 'src/services/notifications.service';
@@ -24,8 +25,11 @@ export class TopNavComponent implements OnInit {
   isMenuOpen!:boolean;
   isNotificationsOpen!:boolean;
   unseenNotifications!: boolean;
+  unseenChatCount:number = 0;
+  chatCount:number = 0;
+  unseenChats:any[] = [];
 
-  constructor(private adService:AdService,public dataService:DataService,private notificationService:NotificationsService,private searchService:SearchService,private router:Router,private eRef: ElementRef) {
+  constructor(private adService:AdService,private chatService:ChatService,public dataService:DataService,private notificationService:NotificationsService,private searchService:SearchService,private router:Router,private eRef: ElementRef) {
     this.isLoggedIn = localStorage.getItem('user')!=null;
     this.isMenuOpen = false;
     this.isNotificationsOpen = false;
@@ -81,6 +85,23 @@ export class TopNavComponent implements OnInit {
     this.adService.getAds().subscribe((list : Ad[])=>{
       this.ads = list;
     });
+
+    this.chatService.getChatsByUserId(this.user.id+'').subscribe((chatIdList:any[])=>{
+      this.unseenChatCount = 0;
+
+      chatIdList.forEach((item)=>{
+        
+        this.chatService.getChatById(item.chatId).subscribe((chat)=>{
+
+          if(chat.seenBy.findIndex((id:any)=>id==this.user.id)==-1){
+            this.unseenChats.push(chat);
+          }else if(this.unseenChats.findIndex(c=>c.chatId==chat.chatId)!=-1){
+            this.unseenChats = this.unseenChats.filter(c=>c.chatId!=chat.chatId);
+          }
+        })
+
+      })
+    })
 
     this.notificationService.getNotifications(this.user.id)
     .subscribe(notificationsList => {

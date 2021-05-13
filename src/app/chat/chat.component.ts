@@ -17,6 +17,8 @@ export class ChatComponent implements OnInit {
   isBuyer!:boolean;
   currentChat!:any;
   message!:string;
+  chatCount!:number;
+  isLoaded:boolean = false;
 
   constructor(private chatService:ChatService,private adService:AdService,private userService:UserService) {
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
@@ -25,10 +27,19 @@ export class ChatComponent implements OnInit {
 
   setCurrentChat(chat:any){
     this.currentChat = chat;
+    if(!this.isChatSeenByUser(chat)){
+      chat.seenBy.push(this.user.id);
+      this.chatService.MarkChatSeenForUser(chat.chatId,this.user.id);
+    }
+  }
+
+  isChatSeenByUser(chat:any){
+    return chat.seenBy.findIndex((item:any)=>item==this.user.id)!=-1;
   }
 
   addMessage(){
     let receiverId = this.user.id==this.currentChat.sellerId?this.currentChat.buyerId:this.currentChat.sellerId;
+    
     const chatMessage = {
       message : this.message,
       senderId : this.user.id,
@@ -40,13 +51,16 @@ export class ChatComponent implements OnInit {
     this.message = "";
   }
 
-  ngOnInit(): void {
-    console.log(this.user);
+  fetchChats(){
     this.chatService.getChatsByUserId(this.user.id+"").subscribe((chatIdList)=>{
-      //this.chats = [];
+      this.chats = [];
+      this.chatCount = chatIdList.length;
+
       var itemsProcessed = 0;
       chatIdList.forEach(item=>{
+
         this.chatService.getChatById(item.chatId).subscribe((chat)=>{
+
           combineLatest([
             this.userService.getUserById(chat.buyerId),
             this.userService.getUserById(chat.sellerId),
@@ -60,16 +74,31 @@ export class ChatComponent implements OnInit {
 
             messages = messages.sort((c1:any,c2:any)=>new Date(c1.timestamp).getTime()-new Date(c2.timestamp).getTime());
             chat.messages = messages;
-            this.chats = this.chats.filter(c=>c.chatId!=chat.chatId);
 
-            console.log(chat);
-            this.chats.push(chat);
+            const chat1:any = this.chats.find(c=>c.chatId==chat.chatId);
 
-            itemsProcessed++;
-            if(itemsProcessed === chatIdList.length) {
-              
+            if(chat1==null){
+              this.chats.push(chat);
+              itemsProcessed++;
+            }else{
+              this.currentChat = chat1;
+              chat1.lastMessage = chat.lastMessage;
+              chat1.lastUpdated = chat.lastUpdated;
+              chat1.seenBy = chat.seenBy;  
               this.chats.sort((c1,c2)=>new Date(c2.lastUpdated).getTime()-new Date(c1.lastUpdated).getTime());
             }
+            
+            if(itemsProcessed == this.chatCount){
+              this.chats.sort((c1,c2)=>new Date(c2.lastUpdated).getTime()-new Date(c1.lastUpdated).getTime());
+              setTimeout(()=>{ 
+                this.setCurrentChat(this.chats[0]);
+                this.isLoaded = true;
+                itemsProcessed = 0;
+              }, 3000);
+            }
+            
+          },(error)=>{
+            console.log(error);
           })
         });
       });
@@ -78,4 +107,7 @@ export class ChatComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    this.fetchChats();
+  }
 }

@@ -17,6 +17,12 @@
                 </a>
                 <app-notifications *ngIf="isNotificationsOpen && dataService.isNotificationsVisible"></app-notifications>
             </div>
+            <div class="ml-5">
+                <img class="cursor-pointer" *ngIf="isLoggedIn" routerLink = '/chat' src="../../assets/messages-icon.png" height="20px" width="20px">
+                <span  class="badge">
+                    {{unseenChats.length}}
+                </span>
+            </div>
             <button *ngIf="isLoggedIn" class="ml-5" (click)="onCreateAdClick();closePopUps()">
                 Create Ads
             </button>

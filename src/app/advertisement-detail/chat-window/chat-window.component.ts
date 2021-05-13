@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Ad } from 'src/models/Ad';
 import { ChatMessage } from 'src/models/ChatMessage';
 import { User } from 'src/models/User';
@@ -16,13 +16,17 @@ export class ChatWindowComponent implements OnInit {
   user!:User;
   chatId!:string;
 
+  isChatOpen:boolean = true;
+
+  @Output() hideChatWindow = new EventEmitter<any>();
+
   @Input()
   ad!:Ad;
 
   @Input()
   seller!:User;
 
-  constructor(private chatService:ChatService) {
+  constructor(private chatService:ChatService,private eRef: ElementRef) {
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
   }
 
@@ -34,8 +38,19 @@ export class ChatWindowComponent implements OnInit {
       timestamp : new Date()+""
     };
     this.chatService.addMessage(this.ad.adId,this.user.id,this.seller.id,chatMessage);
+    this.message = "";
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event: { target: any; }) {
+    if(this.eRef.nativeElement.contains(event.target)) {
+      //clicked inside top nav
+    } else {
+      //clicked outside top nav
+      this.isChatOpen = false;
+    }
+  }
+  
   fetchChatMessages(){
     this.chatService.getMessagesByChatId(this.chatId).subscribe(res=>{
       this.messages = res;

@@ -1,14 +1,20 @@
-<div class="d-flex" style="padding: 50px;">
-    <div class="d-flex flex-column border-left" style="width: 40%;">
+<div *ngIf="!isLoaded" class="d-flex justify-content-center bg-light align-items-center w-100" style="height: 90vh;">
+    <div class="spinner-border " role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+
+<div *ngIf="isLoaded" class="card d-flex  flex-row bg-white" style="padding: 40px 40px;height: 500px;">
+    <div class="d-flex flex-column border shadow-lg" style="width: 40%;">
         <div class="bg-light justify-content-between border-bottom d-flex p-3">
             <div class="d-flex align-items-center">
                 <span class="font-700 text-large">INBOX</span>
-                <span class="circle bg-light border font-700 text-medium ml-2">4</span>
             </div>
         </div>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column" style="overflow-y: scroll;">
             <ng-container *ngFor="let chat of chats">
-                <div [class.bg-light]="currentChat && currentChat.chatId==chat.chatId" (click)="setCurrentChat(chat)" class="p-3 cursor-pointer border-bottom">
+                <div [class.bg-light]="(currentChat && currentChat.chatId==chat.chatId)" (click)="setCurrentChat(chat)" class="p-3 cursor-pointer border-bottom">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
                             <img src={{chat.ad!.img1Url}} height="60px" width="60px">
@@ -18,20 +24,24 @@
                                     <span *ngIf="chat.buyer!.id!=user.id" class="text-dark font-700 text-medium">{{chat.buyer!.firstName + " " + chat.buyer.lastName}}</span>
                                     <span class="text-small">{{chat.ad!.productName}}</span>
                                 </div>
-                                <span class="mt-2 text-darkgrey text-small">{{chat.lastMessage.message}}</span>
+                                <span *ngIf="chat.lastMessage.message.length<30" class="mt-2 text-darkgrey text-small">{{chat.lastMessage.message}}</span>
+                                <span *ngIf="chat.lastMessage.message.length>30" class="mt-2 text-darkgrey text-small">{{chat.lastMessage.message.slice(0,30)}}...</span>
                             </div>
                         </div>
-                        <span class="text-darkgrey text-small">{{chat.lastUpdated | date}}</span>
+                        <div class="d-flex flex-column h-100">
+                            <span class="text-darkgrey text-small">{{chat.lastUpdated | date}}</span>
+                            <span *ngIf="!isChatSeenByUser(chat)" class="text-small mt-3 font-700">New message!</span>
+                        </div>
                     </div>
                 </div>
             </ng-container>
         </div>
     </div> 
 
-    <div *ngIf="currentChat" class="d-flex border bg-light flex-column" style="width: 60%;">
+    <div *ngIf="currentChat" class="d-flex bg-light shadow-lg border flex-column" style="width: 60%;">
         <div class="p-3 card border-bottom">
             <div class="d-flex align-items-center">
-                <img src="../../assets/jeep2.jpg" height="30px" width="30px">
+                <img src={{currentChat.ad!.img1Url}} height="30px" width="30px">
                 <div class="d-flex flex-column ml-3">
                     <div class="d-flex flex-column">
                         <span *ngIf="currentChat.seller!.id!=user.id" class="text-dark font-700 text-medium">{{currentChat.seller!.firstName + " " + currentChat.seller.lastName}}</span>
@@ -48,19 +58,19 @@
         </div>
         <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="messages-container p-3 pb-0">
             <ng-container *ngFor="let message of currentChat.messages">
-                <div class="d-flex flex-column">
-                    <div class="d-flex flex-column ml-auto">
-                        <span *ngIf="message.senderId==user.id" class="sender-message">{{message.message}}</span>
+                <div  class="d-flex flex-column">
+                    <div *ngIf="message.senderId==user.id" class="d-flex flex-column ml-auto">
+                        <span  class="sender-message shadow">{{message.message}}</span>
                         <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "short"}}</span>
                     </div>
-                    <div *ngIf="message.senderId!=user.id" class="d-flex flex-column mr-auto">
-                        <span class="receiver-message">{{message.message}}</span>
+                    <div *ngIf="message.receiverId==user.id" class="d-flex flex-column mr-auto">
+                        <span class="receiver-message shadow">{{message.message}}</span>
                         <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "short"}}</span>
                     </div>
                 </div>
             </ng-container>
         </div>
-        <div class="d-flex p-3 pt-0 mt-auto justify-content-between">
+        <div class="d-flex p-3 mt-auto justify-content-between">
             <input (keyup.enter)="addMessage()" placeholder="type your message..." [(ngModel)]="message" class="form-control w-100">
         </div>
     </div>
