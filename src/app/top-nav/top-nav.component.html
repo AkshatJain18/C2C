@@ -17,9 +17,9 @@
                 </a>
                 <app-notifications *ngIf="isNotificationsOpen && dataService.isNotificationsVisible"></app-notifications>
             </div>
-            <div class="ml-5">
-                <img class="cursor-pointer" *ngIf="isLoggedIn" routerLink = '/chat' src="../../assets/messages-icon.png" height="20px" width="20px">
-                <span  class="badge">
+            <div *ngIf="isLoggedIn" class="ml-5 d-flex align-items-center">
+                <img class="cursor-pointer" *ngIf="isLoggedIn" routerLink = '/chat' src="../../assets/messages-icon.png" height="18px" width="18px">
+                <span *ngIf="unseenChats.length>0" class="text-danger font-700 text-x-small mb-3" style="margin-left: 2px;">
                     {{unseenChats.length}}
                 </span>
             </div>

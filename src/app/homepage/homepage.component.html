@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ad-row">
+                <div *ngIf="recentlyAddedAds.length>0" class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Latest ads</label>
                         <label routerLink = "/ads" class="view-all mt-2">view all</label>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                <div class="ad-row">
+                <div *ngIf="trendingAds.length>0" class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Trending ads</label>
                         <label routerLink = "/ads" class="view-all mt-2">view all</label>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
 
-                <div class="ad-row">
+                <div *ngIf="auctionAds.length>0" class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Auction ads</label>
                         <label routerLink = "/ads" class="view-all mt-2">view all</label>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <div class="ad-row">
+                <div *ngIf="donationAds.length>0" class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Donation ads</label>
                         <label routerLink = "/ads" class="view-all mt-2">view all</label>

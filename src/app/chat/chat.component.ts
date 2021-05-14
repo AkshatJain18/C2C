@@ -56,6 +56,10 @@ export class ChatComponent implements OnInit {
       this.chats = [];
       this.chatCount = chatIdList.length;
 
+      if(this.chatCount ==0){
+        this.isLoaded = true;
+      }
+
       var itemsProcessed = 0;
       chatIdList.forEach(item=>{
 
@@ -80,11 +84,7 @@ export class ChatComponent implements OnInit {
             if(chat1==null){
               this.chats.push(chat);
               itemsProcessed++;
-            }else{
-              if(chat.lastMessage.senderId == this.user.id){
-                this.currentChat = chat1;
-              }
-              
+            }else{              
               chat1.lastMessage = chat.lastMessage;
               chat1.lastUpdated = chat.lastUpdated;
               chat1.seenBy = chat.seenBy;  

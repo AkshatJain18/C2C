@@ -2,7 +2,7 @@
   <div style="position: fixed;z-index: 1;" (click)="contactSellerVisible=false"  *ngIf="contactSellerVisible" class="w-100 shadow h-100 d-flex align-items-center justify-content-center">
     <app-contact-seller class="w-25 w3-animate-bottom h-75" [seller]="seller"></app-contact-seller>
   </div>
-  <app-user-chat *ngIf="isChatOpen" class="chat card shadow" [ad]="ad" [seller]="seller"></app-user-chat>
+  <app-user-chat (hideChatWindow)="isChatOpen=false" *ngIf="isChatOpen" class="chat card shadow" [ad]="ad" [seller]="seller"></app-user-chat>
 
   <div [ngClass]="{'blur':contactSellerVisible}" class="ad-detail w-100">
     <div class="ad-detail-container" >

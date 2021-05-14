@@ -16,8 +16,6 @@ export class ChatWindowComponent implements OnInit {
   user!:User;
   chatId!:string;
 
-  isChatOpen:boolean = true;
-
   @Output() hideChatWindow = new EventEmitter<any>();
 
   @Input()
@@ -47,15 +45,19 @@ export class ChatWindowComponent implements OnInit {
       //clicked inside top nav
     } else {
       //clicked outside top nav
-      this.isChatOpen = false;
+      //this.isChatOpen = false;
+      //this.closeChatWindow();
     }
+  }
+
+  closeChatWindow(){
+    this.hideChatWindow.emit();
   }
   
   fetchChatMessages(){
     this.chatService.getMessagesByChatId(this.chatId).subscribe(res=>{
       this.messages = res;
       this.messages.sort((x,y)=>new Date(x.timestamp).getTime()-new Date(y.timestamp).getTime());
-      console.log(this.messages);
     });
   }
 
