@@ -1,7 +1,7 @@
 @import '../../styles.scss';
 
 .messages-container{
-    overflow-y: scroll;
+    overflow-y: auto;
     row-gap: 15px;
     display: flex;
     flex-direction: column;

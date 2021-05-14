@@ -14,11 +14,11 @@ export class ChatComponent implements OnInit {
 
   user!:User;
   chats:any[] = [];
-  isBuyer!:boolean;
   currentChat!:any;
   message!:string;
   chatCount!:number;
   isLoaded:boolean = false;
+  isError:boolean = false;
 
   constructor(private chatService:ChatService,private adService:AdService,private userService:UserService) {
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
@@ -81,7 +81,10 @@ export class ChatComponent implements OnInit {
               this.chats.push(chat);
               itemsProcessed++;
             }else{
-              this.currentChat = chat1;
+              if(chat.lastMessage.senderId == this.user.id){
+                this.currentChat = chat1;
+              }
+              
               chat1.lastMessage = chat.lastMessage;
               chat1.lastUpdated = chat.lastUpdated;
               chat1.seenBy = chat.seenBy;  
@@ -104,6 +107,7 @@ export class ChatComponent implements OnInit {
       });
     },(err)=>{
       console.log(err);
+      this.isError = true;
     });
   }
 
