@@ -5,7 +5,7 @@
     flex-direction: column;
     background-color: white;
     cursor: pointer;
-    @extend .card,.shadow-sm;
+    @extend .card,.shadow;
 
     .item-photo{
       height: 180px;

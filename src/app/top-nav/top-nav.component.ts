@@ -81,6 +81,28 @@ export class TopNavComponent implements OnInit {
     this.isNotificationsOpen = false;
   }
 
+  showNotification(notification:any){
+    const notification1 = new Notification("New notification from C2C", {
+        body: notification.title,
+        icon: "https://res.cloudinary.com/hashedin/image/upload/v1620383130/fgimlhzyak8c3wobpcxz.jpg"
+    });
+    notification1.addEventListener("click",()=>{
+      this.router.navigateByUrl('/ads/'+notification.adId);
+    })
+  }
+
+  sendNotification(notification:any){
+    if(Notification.permission === "granted"){      
+      this.showNotification(notification);
+    }else if (Notification.permission != "denied"){
+      Notification.requestPermission().then(permission => {
+          if(permission === "granted"){  
+            this.showNotification(notification);
+          }  
+      });
+    }
+  }
+ 
   ngOnInit(): void {
     this.adService.getAds().subscribe((list : Ad[])=>{
       this.ads = list;
@@ -90,25 +112,30 @@ export class TopNavComponent implements OnInit {
       this.unseenChatCount = 0;
 
       chatIdList.forEach((item)=>{
-        
         this.chatService.getChatById(item.chatId).subscribe((chat)=>{
-
           if(chat.seenBy.findIndex((id:any)=>id==this.user.id)==-1){
             this.unseenChats.push(chat);
           }else if(this.unseenChats.findIndex(c=>c.chatId==chat.chatId)!=-1){
             this.unseenChats = this.unseenChats.filter(c=>c.chatId!=chat.chatId);
           }
         })
-
       })
     })
 
     this.notificationService.getNotifications(this.user.id)
     .subscribe(notificationsList => {
-      //console.log(notificationsList);
       this.unseenNotifications = notificationsList.findIndex((n:any)=>!n.viewed)!=-1;
       this.dataService.setUnseenNotifications(this.unseenNotifications);
     });
-  }
 
+    this.notificationService.getFireStoreNotifications(this.user.id).subscribe((notifications:any[])=>{
+      //this.unseenNotifications = notificationsList.findIndex((n:any)=>!n.viewed)!=-1;
+      notifications.forEach(notification=>{
+        if(!notification.isDisplayed){
+          this.notificationService.markNotificationAsDisplayed(notification);
+          this.sendNotification(notification);
+        }
+      });
+    })
+  }
 }

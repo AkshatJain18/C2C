@@ -90,17 +90,39 @@ export class AdvertisementDetailComponent implements OnInit {
     }
   }
 
+  addNotificationToFireStore(notification:any){
+    this.notificationService.postNotificationToFireStore({​​​​​​​​
+      "notificationId": 222,
+      "title": "Suhaib zxcd wants to buy your product sdfsdf",
+      "notificationTime": "2021-05-04T18:54:41.838823",
+      "adId": 158,
+      "userId": 66,
+      "img": null,
+      "viewed": false
+    }​​​​​​​​);
+  }
+
   bid(){
     this.isBidClicked = true;
     if(this.userBidPrice>=this.expectedBidPrice){
       this.bidInProcess = true;
       this.auctionService.bid(this.ad.adId,this.user.id,this.userBidPrice).subscribe((res)=>{
-        console.log(res);
         this.ad.finalPrice  = this.userBidPrice;
         this.buyer  = this.user;
         this.bidInProcess = false;
         this.bidDone = true;
         this.sendEmailNotifications(res);
+        const notification = {​​​​​​​​
+          "notificationId": 222,
+          "title": "Suhaib zxcd wants to buy your product sdfsdf",
+          "notificationTime": "2021-05-04T18:54:41.838823",
+          "adId": 158,
+          "userId": 66,
+          "img": null,
+          "viewed": false,
+          isDisplayed:false,
+        }​​​​​​​​;
+        this.addNotificationToFireStore(notification);
       },(error)=>{
         console.log(error);
       })
