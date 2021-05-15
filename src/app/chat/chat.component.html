@@ -65,16 +65,21 @@
                 </div>
             </div>
             <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="messages-container p-3 pb-0">
-                <ng-container *ngFor="let message of currentChat.messages">
-                    <div  class="d-flex flex-column">
-                        <div *ngIf="message.senderId==user.id" class="d-flex flex-column ml-auto">
-                            <span  class="sender-message shadow">{{message.message}}</span>
-                            <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "short"}}</span>
-                        </div>
-                        <div *ngIf="message.receiverId==user.id" class="d-flex flex-column mr-auto">
-                            <span class="receiver-message shadow">{{message.message}}</span>
-                            <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "short"}}</span>
-                        </div>
+                <ng-container *ngFor="let key of currentChat.messagesMap.keys()">
+                    <div class="d-flex flex-column">
+                        <span class="text-darkgrey text-small ml-auto mr-auto">{{key}}</span>
+                        <ng-container *ngFor="let message of currentChat.messagesMap.get(key)">
+                            <div class="d-flex flex-column mt-3">
+                                <div *ngIf="message.senderId==user.id" class="d-flex flex-column ml-auto">
+                                    <span  class="sender-message shadow">{{message.message}}</span>
+                                    <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "shortTime"}}</span>
+                                </div>
+                                <div *ngIf="message.receiverId==user.id" class="d-flex flex-column mr-auto">
+                                    <span class="receiver-message shadow">{{message.message}}</span>
+                                    <span class="message-time mt-1 text-darkgrey text-x-small">{{message.timestamp+"" | date : "shortTime"}}</span>
+                                </div>
+                            </div>
+                        </ng-container>
                     </div>
                 </ng-container>
             </div>

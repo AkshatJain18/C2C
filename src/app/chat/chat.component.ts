@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, forkJoin } from 'rxjs';
 import { User } from 'src/models/User';
@@ -22,7 +23,6 @@ export class ChatComponent implements OnInit {
 
   constructor(private chatService:ChatService,private adService:AdService,private userService:UserService) {
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
-    //this.isBuyer = this.user.id == chat.buyerId;
   }
 
   setCurrentChat(chat:any){
@@ -51,8 +51,37 @@ export class ChatComponent implements OnInit {
     this.message = "";
   }
 
+  getMessagesMap(messages:any[]):Map<string,any[]>{
+    let datepipe = new DatePipe('en-US'); // Use your own locale
+
+    let todayDate = datepipe.transform(new Date()+"", 'dd-MM-yyyy')!;
+
+    let yesterdayDate:any = new Date();
+    yesterdayDate.setDate(yesterdayDate.getDate()-1);
+    yesterdayDate = datepipe.transform(yesterdayDate, 'dd-MM-yyyy')!;
+
+    messages = messages.sort((c1:any,c2:any)=>new Date(c1.timestamp).getTime()-new Date(c2.timestamp).getTime());
+    let map = new Map<string,any[]>();
+    messages.forEach((message)=>{
+      let dateKey = '';
+      dateKey = datepipe.transform(message.timestamp, 'dd-MM-yyyy')!;
+      if(dateKey==todayDate){
+        dateKey = 'today'
+      }else if(dateKey==yesterdayDate){
+        dateKey = 'yesterday'
+      }
+      if(map.has(dateKey)){
+        map.get(dateKey)!.push(message);
+      }else{
+        map.set(dateKey,[message]);
+      }
+    })
+    return map;
+  }
+
   fetchChats(){
-    this.chatService.getChatsByUserId(this.user.id+"").subscribe((chatIdList)=>{
+    this.chatService.getChatsByUserId(this.user.id+""
+    ).subscribe((chatIdList)=>{
       this.chats = [];
       this.chatCount = chatIdList.length;
 
@@ -78,6 +107,10 @@ export class ChatComponent implements OnInit {
 
             messages = messages.sort((c1:any,c2:any)=>new Date(c1.timestamp).getTime()-new Date(c2.timestamp).getTime());
             chat.messages = messages;
+
+            let map = new Map<string,any[]>();
+            
+            chat.messagesMap = this.getMessagesMap(messages);
 
             const chat1:any = this.chats.find(c=>c.chatId==chat.chatId);
 

@@ -12,7 +12,7 @@
 
 .ad-detail{
     @extend .bg-light;
-    height: 100%;
+    min-height: 100%;
     padding: 50px;
 
     .ad-detail-container{
