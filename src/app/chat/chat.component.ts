@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, forkJoin } from 'rxjs';
+import { combineLatest, forkJoin, Subscription } from 'rxjs';
 import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
 import { ChatService } from 'src/services/chat.service';
@@ -20,6 +20,7 @@ export class ChatComponent implements OnInit {
   chatCount!:number;
   isLoaded:boolean = false;
   isError:boolean = false;
+  subscriptions:Subscription = new Subscription();
 
   constructor(private chatService:ChatService,private adService:AdService,private userService:UserService) {
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
@@ -47,6 +48,8 @@ export class ChatComponent implements OnInit {
       timestamp : new Date()+""
     };
 
+    this.currentChat.messages.push(chatMessage);
+    this.currentChat.messagesMap = this.getMessagesMap(this.currentChat.messages);
     this.chatService.addMessage(this.currentChat.adId,this.currentChat.buyerId,this.currentChat.sellerId,chatMessage);
     this.message = "";
   }
@@ -69,6 +72,8 @@ export class ChatComponent implements OnInit {
         dateKey = 'today'
       }else if(dateKey==yesterdayDate){
         dateKey = 'yesterday'
+      }else{
+        dateKey = datepipe.transform(message.timestamp, 'mediumDate')!;
       }
       if(map.has(dateKey)){
         map.get(dateKey)!.push(message);
@@ -84,15 +89,26 @@ export class ChatComponent implements OnInit {
     ).subscribe((chatIdList)=>{
       this.chats = [];
       this.chatCount = chatIdList.length;
-
       if(this.chatCount ==0){
         this.isLoaded = true;
       }
-
       var itemsProcessed = 0;
       chatIdList.forEach(item=>{
 
-        this.chatService.getChatById(item.chatId).subscribe((chat)=>{
+        const subscription = this.chatService.getChatById(item.chatId).subscribe((chat)=>{
+
+          const chat1:any = this.chats.find(c=>c.chatId==chat.chatId);
+
+          if(chat1!=null){
+            //update the chat
+            chat1.lastMessage = chat.lastMessage;
+            chat1.lastUpdated = chat.lastUpdated;
+            chat1.seenBy = chat.seenBy;  
+
+            if(this.currentChat.chatId==chat1.chatId){
+              this.setCurrentChat(chat1);
+            }
+          }
 
           combineLatest([
             this.userService.getUserById(chat.buyerId),
@@ -104,24 +120,20 @@ export class ChatComponent implements OnInit {
             chat.buyer = buyer;
             chat.seller = seller;
             chat.ad = ad;
-
             messages = messages.sort((c1:any,c2:any)=>new Date(c1.timestamp).getTime()-new Date(c2.timestamp).getTime());
             chat.messages = messages;
-
-            let map = new Map<string,any[]>();
-            
             chat.messagesMap = this.getMessagesMap(messages);
-
-            const chat1:any = this.chats.find(c=>c.chatId==chat.chatId);
-
-            if(chat1==null){
+            if(!this.chats.find(c=>c.chatId==chat.chatId)){
               this.chats.push(chat);
               itemsProcessed++;
-            }else{              
-              chat1.lastMessage = chat.lastMessage;
-              chat1.lastUpdated = chat.lastUpdated;
-              chat1.seenBy = chat.seenBy;  
-              this.chats.sort((c1,c2)=>new Date(c2.lastUpdated).getTime()-new Date(c1.lastUpdated).getTime());
+            }else{   
+              if(chat.messages.length>chat1.messages.length){
+                chat1.messages = chat.messages;
+                chat1.messagesMap = chat.messagesMap;
+              }
+              chat1.ad = ad;
+
+              this.chats.sort((c1,c2)=>new Date(c2.lastUpdated).getTime()-new Date(c1.lastUpdated).getTime()); 
             }
             
             if(itemsProcessed == this.chatCount){
@@ -136,6 +148,7 @@ export class ChatComponent implements OnInit {
           },(error)=>{
             console.log(error);
           })
+          this.subscriptions.add(subscription);
         });
       });
     },(err)=>{
@@ -146,5 +159,9 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchChats();
+  }
+
+  ngOnDestroy(){
+    this.subscriptions.unsubscribe();
   }
 }

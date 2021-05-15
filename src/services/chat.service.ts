@@ -39,9 +39,11 @@ export class ChatService {
   MarkChatSeenForUser(chatId:any,userId:any){
     this.chatsCollection.doc(chatId).get().subscribe((chat)=>{
       let seenBy:any[]=chat.data().seenBy as any[];
-      seenBy = seenBy.filter(s=>s!=userId);
-      seenBy.push(userId);
-      this.chatsCollection.doc(chatId).update({seenBy:seenBy});
+      let index = seenBy.findIndex(s=>s==userId);
+      if(index==-1){
+        seenBy.push(userId);
+        this.chatsCollection.doc(chatId).update({seenBy:seenBy});
+      }
     });
   }
 
@@ -68,10 +70,13 @@ export class ChatService {
     if(chat1 == null){
       this.usersCollection.doc(message.senderId+"").collection<any>('chats').doc(chatId).set({chatId:chatId});
       this.usersCollection.doc(message.receiverId+"").collection<any>('chats').doc(chatId).set({chatId:chatId});
+      this.chatsCollection.doc(chatId).set(chat).then((res)=>{
+        this.chatsCollection.doc(chatId).collection<any>('messages').add(message);
+      });
+    }else{
+      this.chatsCollection.doc(chatId).update(chat).then((res)=>{
+        this.chatsCollection.doc(chatId).collection<any>('messages').add(message);
+      });
     }
-
-    this.chatsCollection.doc(chatId).set(chat).then((res)=>{
-      this.chatsCollection.doc(chatId).collection<any>('messages').add(message);
-    });
   }
 }

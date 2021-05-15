@@ -19,23 +19,23 @@ import { AdvertisementDetailComponent } from './advertisement-detail/advertiseme
 import { FilterPipe } from 'src/pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { MomentModule } from 'ngx-moment';
-import { ContactSellerComponent } from './advertisement-detail/contact-seller/contact-seller.component';
-import { ViewProfileComponent } from './view-profile/view-profile.component';
-import { HelpComponent } from './help/help.component';
+import { ContactSellerComponent } from '../app/advertisement-detail/contact-seller/contact-seller.component';
+import { ViewProfileComponent } from '../app/view-profile/view-profile.component';
+import { HelpComponent } from '../app/help/help.component';
 import { AdCardComponent } from './ad-card/ad-card.component';
 import { AdDetailedCardComponent } from './ad-detailed-card/ad-detailed-card.component';
 import { SavedAdsComponent } from './saved-ads/saved-ads.component';
 import { MyAdsComponent } from './my-ads/my-ads.component';
 import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { NotificationsComponent } from './notifications/notifications.component';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from "src/environments/environment";
-import { ChatWindowComponent } from './advertisement-detail/chat-window/chat-window.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ChatWindowComponent } from './advertisement-detail/chat-window/chat-window.component';
 import { ChatComponent } from './chat/chat.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 

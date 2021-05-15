@@ -6,15 +6,10 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { CreateAdComponent } from './create-ad/create-ad.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-// import { SavedAdsComponent } from './saved-ads/saved-ads.component';
-// import { MyAdsComponent } from './my-ads/my-ads.component';
 import { CarouselComponent } from './carousel/carousel.component';
-import { HelpComponent } from './help/help.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SlideoutPanelComponent } from './slideout-panel/slideout-panel.component';
-import { ViewProfileComponent } from './view-profile/view-profile.component';
-import { ChatWindowComponent } from './advertisement-detail/chat-window/chat-window.component';
 import { ChatComponent } from './chat/chat.component';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
 
 const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },
