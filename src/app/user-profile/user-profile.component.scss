@@ -3,6 +3,7 @@
 .user-profile-page {
   @extend .font-mulish, .text-large, .bg-light-purple;
   display: flex;
+  min-height: 100%;
   justify-content: center;
   flex-direction: column;
   align-items: center;

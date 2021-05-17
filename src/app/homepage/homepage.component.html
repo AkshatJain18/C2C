@@ -44,7 +44,7 @@
                 <div *ngIf="recentlyAddedAds.length>0" class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Latest ads</label>
-                        <label routerLink = "/ads" class="view-all mt-2">view all</label>
+                        <label routerLink = "/ads/sortType/1" class="view-all mt-2">view all</label>
                     </div>
                     <div class="ads-sub-container mt-2">
                         <ng-container *ngFor="let ad of recentlyAddedAds | slice:0:4">
@@ -56,7 +56,7 @@
                 <div *ngIf="trendingAds.length>0" class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Trending ads</label>
-                        <label routerLink = "/ads" class="view-all mt-2">view all</label>
+                        <label routerLink = "/ads/sortType/2" class="view-all mt-2">view all</label>
                     </div>
                     <div class="ads-sub-container mt-2">
                         <ng-container *ngFor="let ad of trendingAds | slice:0:4">
@@ -68,7 +68,7 @@
                 <div *ngIf="auctionAds.length>0" class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Auction ads</label>
-                        <label routerLink = "/ads" class="view-all mt-2">view all</label>
+                        <label routerLink = "/ads/adType/3" class="view-all mt-2">view all</label>
                     </div>
                     <div class="ads-sub-container mt-2">
                         <ng-container *ngFor="let ad of auctionAds | slice:0:4">
@@ -80,7 +80,7 @@
                 <div *ngIf="donationAds.length>0" class="ad-row">
                     <div class="d-flex align-items-center justify-content-between">
                         <label class="heading">Donation ads</label>
-                        <label routerLink = "/ads" class="view-all mt-2">view all</label>
+                        <label routerLink = "/ads/adType/1" class="view-all mt-2">view all</label>
                     </div>
                     <div class="ads-sub-container mt-2">
                         <ng-container *ngFor="let ad of donationAds | slice:0:4">

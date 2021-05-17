@@ -15,6 +15,8 @@ const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },
   { path: 'ads', component: AdvertisementListComponent},
   { path: 'ads/category/:categoryId', component: AdvertisementListComponent},
+  { path: 'ads/adType/:adType', component: AdvertisementListComponent},
+  { path: 'ads/sortType/:sortType', component: AdvertisementListComponent},
   { path: 'ads/:adId', component: AdvertisementDetailComponent},
   {path: 'sign-in', component: SignInComponent},
   {path:'sign-up', component: SignUpComponent},
@@ -26,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

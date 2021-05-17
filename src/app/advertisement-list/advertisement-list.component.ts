@@ -44,6 +44,11 @@ export class AdvertisementListComponent implements OnInit {
       if(params.has('categoryId')){
         const categoryId = params.get('categoryId') as unknown as number; 
         this.selectedCategories.push(categoryId);
+      }else if(params.has('adType')){
+        this.adType = params.get('adType') as unknown as number;
+      }else if(params.has('sortType')){
+        this.sortOption = params.get('sortType') as unknown as number;
+        this.sortList();
       }
     });
   }

@@ -55,7 +55,7 @@ export class AdvertisementDetailComponent implements OnInit {
   }
 
   toogleSoldStatus(){
-    if(this.ad.sold){
+    if(!this.ad.sold){
       this.adService.markAdSold(this.ad.adId).subscribe((res)=>{
         this.ad.sold = true;
       },(error)=>{
@@ -90,20 +90,12 @@ export class AdvertisementDetailComponent implements OnInit {
     });
   }
 
-  sendEmailNotifications(notifications:any){
-    this.notificationService.sendNotificationEmail(notifications[0].notificationId).subscribe((res)=>{
+  sendEmailNotifications(notification:any){
+    this.notificationService.sendNotificationEmail(notification.notificationId).subscribe((res)=>{
       console.log(res);
     },(error)=>{
       console.log(error);
     });
-
-    if(notifications.id2){
-      this.notificationService.sendNotificationEmail(notifications[1].notificationId).subscribe((res)=>{
-        console.log(res);
-      },(error)=>{
-        console.log(error);
-      });
-    }
   }
 
   addNotificationToFireStore(notification:any){
@@ -120,9 +112,12 @@ export class AdvertisementDetailComponent implements OnInit {
         this.buyer  = this.user;
         this.bidInProcess = false;
         this.bidDone = true;
-        this.sendEmailNotifications(res);
+        this.sendEmailNotifications(res[0]);
         this.addNotificationToFireStore(res[0]);
-        this.addNotificationToFireStore(res[1]);
+        if(res.length==2){
+          this.sendEmailNotifications(res[1]);
+          this.addNotificationToFireStore(res[1]);
+        }
       },(error)=>{
         console.log(error);
       })

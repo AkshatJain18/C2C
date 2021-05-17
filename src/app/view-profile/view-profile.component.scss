@@ -4,7 +4,7 @@
   @extend .font-mulish, .text-large, .bg-light-purple;
   display: flex;
   justify-content: space-evenly;
-  height: 100vh;
+  min-height: 100%;
 
   .card {
     margin-bottom: 1rem;

@@ -123,6 +123,7 @@ export class ChatComponent implements OnInit {
             messages = messages.sort((c1:any,c2:any)=>new Date(c1.timestamp).getTime()-new Date(c2.timestamp).getTime());
             chat.messages = messages;
             chat.messagesMap = this.getMessagesMap(messages);
+            
             if(!this.chats.find(c=>c.chatId==chat.chatId)){
               this.chats.push(chat);
               itemsProcessed++;

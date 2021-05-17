@@ -1,12 +1,10 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ad } from 'src/models/Ad';
 import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
 import { ChatService } from 'src/services/chat.service';
 import { DataService } from 'src/services/data.service';
-import { NavbarService } from 'src/services/navbar.service';
 import { NotificationsService } from 'src/services/notifications.service';
 import { SearchService } from 'src/services/search.service';
 
@@ -129,11 +127,11 @@ export class TopNavComponent implements OnInit {
     });
 
     this.notificationService.getFireStoreNotifications(this.user.id).subscribe((notifications:any[])=>{
-      this.unseenNotifications = notifications.findIndex((n:any)=>!n.viewed)!=-1;
+      //this.unseenNotifications = notifications.findIndex((n:any)=>!n.viewed)!=-1;
       notifications.forEach(notification=>{
         if(!notification.isDisplayed){
-          this.notificationService.markNotificationAsDisplayed(notification);
           this.sendNotification(notification);
+          this.notificationService.markNotificationAsDisplayed(notification);
         }
       });
     })
