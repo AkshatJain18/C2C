@@ -129,7 +129,7 @@ export class TopNavComponent implements OnInit {
     });
 
     this.notificationService.getFireStoreNotifications(this.user.id).subscribe((notifications:any[])=>{
-      //this.unseenNotifications = notificationsList.findIndex((n:any)=>!n.viewed)!=-1;
+      this.unseenNotifications = notifications.findIndex((n:any)=>!n.viewed)!=-1;
       notifications.forEach(notification=>{
         if(!notification.isDisplayed){
           this.notificationService.markNotificationAsDisplayed(notification);
