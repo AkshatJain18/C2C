@@ -91,15 +91,8 @@ export class AdvertisementDetailComponent implements OnInit {
   }
 
   addNotificationToFireStore(notification:any){
-    this.notificationService.postNotificationToFireStore({​​​​​​​​
-      "notificationId": 222,
-      "title": "Suhaib zxcd wants to buy your product sdfsdf",
-      "notificationTime": "2021-05-04T18:54:41.838823",
-      "adId": 158,
-      "userId": 66,
-      "img": null,
-      "viewed": false
-    }​​​​​​​​);
+    notification.isDisplayed = false;
+    this.notificationService.postNotificationToFireStore(notification);
   }
 
   bid(){
@@ -112,17 +105,8 @@ export class AdvertisementDetailComponent implements OnInit {
         this.bidInProcess = false;
         this.bidDone = true;
         this.sendEmailNotifications(res);
-        const notification = {​​​​​​​​
-          "notificationId": 222,
-          "title": "Suhaib zxcd wants to buy your product sdfsdf",
-          "notificationTime": "2021-05-04T18:54:41.838823",
-          "adId": 158,
-          "userId": 66,
-          "img": null,
-          "viewed": false,
-          isDisplayed:false,
-        }​​​​​​​​;
-        this.addNotificationToFireStore(notification);
+        this.addNotificationToFireStore(res[0]);
+        this.addNotificationToFireStore(res[1]);
       },(error)=>{
         console.log(error);
       })
