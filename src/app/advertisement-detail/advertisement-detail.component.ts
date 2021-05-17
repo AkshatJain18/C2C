@@ -54,6 +54,22 @@ export class AdvertisementDetailComponent implements OnInit {
     };
   }
 
+  toogleSoldStatus(){
+    if(this.ad.sold){
+      this.adService.markAdSold(this.ad.adId).subscribe((res)=>{
+        this.ad.sold = true;
+      },(error)=>{
+        console.log(error);
+      });
+    }else{
+      this.adService.markAdUnSold(this.ad.adId).subscribe((res)=>{
+        this.ad.sold = false;
+      },(error)=>{
+        console.log(error);
+      });
+    }
+  }
+
   saveAd(ad:any){
     this.adService.saveAdForUser(ad.adId,this.user.id).subscribe((flag)=>{
       if(flag){
@@ -75,14 +91,14 @@ export class AdvertisementDetailComponent implements OnInit {
   }
 
   sendEmailNotifications(notifications:any){
-    this.notificationService.sendNotificationEmail(notifications.id1).subscribe((res)=>{
+    this.notificationService.sendNotificationEmail(notifications[0].notificationId).subscribe((res)=>{
       console.log(res);
     },(error)=>{
       console.log(error);
     });
 
     if(notifications.id2){
-      this.notificationService.sendNotificationEmail(notifications.id2).subscribe((res)=>{
+      this.notificationService.sendNotificationEmail(notifications[1].notificationId).subscribe((res)=>{
         console.log(res);
       },(error)=>{
         console.log(error);

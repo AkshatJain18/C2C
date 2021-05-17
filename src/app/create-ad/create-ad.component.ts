@@ -63,10 +63,10 @@ export class CreateAdComponent implements OnInit {
     this.createAdForm = new FormGroup({
       adType : new FormControl(ad.adType, Validators.required),
       adTitle : new FormControl(ad.adTitle,[Validators.required, Validators.minLength(5), Validators.maxLength(20)]),
-      productName : new FormControl(ad.productName, [Validators.required, Validators.maxLength(15)]),
+      productName : new FormControl(ad.productName, [Validators.required]),
       brandName : new FormControl(ad.brandName, [Validators.required, Validators.maxLength(15)]),
       categoryId : new FormControl(ad.categoryId,Validators.required),
-      description : new FormControl(ad.description, [Validators.required, Validators.maxLength(30)]),
+      description : new FormControl(ad.description, [Validators.required]),
       initialPrice : new FormControl(ad.initialPrice,Validators.required),
       sellerId : new FormControl(this.userDetails.id,Validators.required),
       productAge : new FormControl(ad.productAge),

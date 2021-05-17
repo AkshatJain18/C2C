@@ -68,6 +68,12 @@
             </svg>
           </div>
     
+          <div class="d-flex align-items-center mt-3" *ngIf="!isAuction && user.id==seller.id">
+            <input (change)="toogleSoldStatus()" [checked]="ad.sold" type="checkbox" height="30px" width="30px">
+            <span *ngIf="!ad.sold" class="text-dark text-small text-blue ml-2">Mark it as <b class="text-blue">SOLD</b> !</span>
+            <span *ngIf="ad.sold" class="text-dark text-small text-blue ml-2">Mark it as <b class="text-blue">UNSOLD</b> !</span>
+          </div>
+
           <div *ngIf="isAuction && !isAuctionOver && timeRemaining<86400" class="d-flex mt-3 align-items-center">
             <span class="text-small">Auction ends in</span>
             <countdown  class="text-large font-700 ml-2"
