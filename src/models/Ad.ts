@@ -17,6 +17,7 @@ export class Ad {
   sold:boolean;
   rated:boolean;
   views : number;
+  bidDifference: number;
   img1Url : string;
   img2Url : string;
   img3Url : string;
@@ -37,6 +38,7 @@ export class Ad {
     this.sold = ad.sold;
     this.rated = ad.rated;
     this.auctionDeadline = ad.auctionDeadline;
+    this.bidDifference = ad.bidDifference;
     this.img1Url = ad.img1Url;
     this.img2Url = ad.img2Url;
     this.img3Url = ad.img3Url;

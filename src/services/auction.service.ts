@@ -13,6 +13,10 @@ export class AuctionService {
 
   }
 
+  reconductAuction(adId:any):Observable<any>{
+    return this.httpClient.get(this.url+"/ads/"+adId+"/reauction");
+  }
+
   bid(bidAdId:any,bidBuyerId:any,bidPrice:any):Observable<any>{
     return this.httpClient.post(this.url+"/bid",{bidAdId:bidAdId,bidBuyerId:bidBuyerId,bidPrice:bidPrice});
   }

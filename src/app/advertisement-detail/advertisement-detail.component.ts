@@ -146,16 +146,19 @@ export class AdvertisementDetailComponent implements OnInit {
       this.userService.getUserById(this.ad.buyerId).subscribe(userItem => this.buyer = userItem);
     });
 
-    //increase view count for this ad
-    this.adService.postAdView(this.adId).subscribe();
 
-    //fetching all the saved ads for the user
-    this.userService.getSavedAdsByUserId(this.user.id).subscribe((savedAds)=>{
-      this.savedAds = savedAds;
-      console.log(this.savedAds);
-    },(error)=>{
-      console.log(error);
-    });
+    if(this.isLoggedIn){
+      //increase view count for this ad
+      this.adService.postAdView(this.adId).subscribe();
+
+      //fetching all the saved ads for the user
+      this.userService.getSavedAdsByUserId(this.user.id).subscribe((savedAds)=>{
+        this.savedAds = savedAds;
+        console.log(this.savedAds);
+      },(error)=>{
+        console.log(error);
+      });
+    }
   }
 
   visitProfile(){

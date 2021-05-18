@@ -37,6 +37,10 @@ export class HomepageComponent implements OnInit {
     return true;
   }
 
+  isAuctionOver(ad:Ad){
+    return new Date(ad.auctionDeadline)<new Date();
+  }
+
   ngOnInit(): void {
     this.adService.getAds().subscribe((adList) => {
       this.ads = adList;
@@ -44,7 +48,7 @@ export class HomepageComponent implements OnInit {
       this.trendingAds = this.ads.filter(ad=>ad.adType!=3);
       this.recentlyAddedAds = this.ads.filter(ad=>ad.adType!=3);
       this.donationAds = this.ads.filter(ad=>ad.adType!=3);
-      this.auctionAds = this.ads.filter(ad=>ad.adType==3);
+      this.auctionAds = this.ads.filter(ad=>ad.adType==3 && !this.isAuctionOver(ad));
 
       this.trendingAds.sort((x,y)=>y.views-x.views);
       this.auctionAds.sort((x,y)=>y.views-x.views);

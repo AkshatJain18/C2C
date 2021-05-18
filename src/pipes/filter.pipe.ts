@@ -45,6 +45,7 @@ export class FilterPipe implements PipeTransform {
     }
 
     transform(ads: Ad[], searchKeyword: string, adType:number,selectedCategories:number[],startPrice:number,endPrice:number): any[]{     
+        
         ads = this.searchFilter(ads,searchKeyword);
         ads = this.categoriesFilter(ads,selectedCategories);
         ads = this.adTypeFilter(ads,adType);

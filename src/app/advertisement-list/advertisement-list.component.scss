@@ -38,11 +38,13 @@
 
               .buy-donate-sub-container{
                   display: flex;
+                  flex-flow: row wrap;
                   column-gap: 8px;
+                  row-gap: 10px;
 
                   .tab{
                       border: 2px solid gray;
-                      @extend .text-center,.text-capitalize;
+                      @extend .text-center,.text-capitalize,.text-small;
                       padding: 5px;
                       cursor: pointer;
                   }

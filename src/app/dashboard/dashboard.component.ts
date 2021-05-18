@@ -5,6 +5,8 @@ import { AdService } from 'src/services/ad.service';
 import { DataService } from 'src/services/data.service';
 import { UserService } from 'src/services/user.service';
 import { RatingService } from 'src/services/rating.service';
+import { AuctionService } from 'src/services/auction.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +21,7 @@ export class DashboardComponent implements OnInit {
   isSoldOpen:boolean = true;
   nowRatedAds:Ad[] = [];
 
-  constructor(private dataService:DataService,private ratingService:RatingService,private userService:UserService,private adService:AdService) { 
+  constructor(private dataService:DataService,private router:Router,private auctionService:AuctionService,private ratingService:RatingService,private userService:UserService,private adService:AdService) { 
     this.user = JSON.parse(localStorage.getItem('user')!) as User;
   }
 
@@ -30,6 +32,16 @@ export class DashboardComponent implements OnInit {
   
   stopPropogation(event:any){
     event.stopPropagation();
+  }
+
+  reconductAuction(adId:any){
+    this.auctionService.reconductAuction(adId).subscribe((res)=>{
+      alert("success!");
+      this.router.navigateByUrl('/ads/'+adId);
+    },(error)=>{
+      console.log(error);
+      alert("error occured!");
+    })
   }
 
   onRateChange(adId:any,sellerId:any,sellerRating:number){

@@ -36,8 +36,6 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("sign in");
-    console.log(this.signInForm.value);
     this.authService.signIn(this.signInForm.value)
     .subscribe(
       (data:any) => {
@@ -50,7 +48,7 @@ export class SignInComponent implements OnInit {
           this.router.navigateByUrl('/homepage');
         }
       },
-      (err) => { this.errorInSignIn = true },
+      (err) => { console.log(err);this.errorInSignIn = true },
       () => console.log('done loading user')
     )
     this.signedIn = true;

@@ -34,6 +34,7 @@ export class AdvertisementListComponent implements OnInit {
   selectedCategories:number[] = [];
   categories:any[] = [];
   searchKeyword:string = "";
+  withinCompany:boolean=false;
   
   constructor(private adService:AdService,private categoryService:CategoryService,private searchService:SearchService,private router:Router,public dataService:DataService,private activatedRoute:ActivatedRoute) {
     this.adType = 2;
@@ -62,6 +63,10 @@ export class AdvertisementListComponent implements OnInit {
     return true;
   }
 
+  isAuctionOver(ad:Ad){
+    return new Date(ad.auctionDeadline)<new Date();
+  }
+
   addOrRemoveCategory(id:number){
     if(this.selectedCategories.findIndex(c=>c==id)==-1){
       this.selectedCategories.push(id);
@@ -86,7 +91,9 @@ export class AdvertisementListComponent implements OnInit {
     this.searchService.searchKeyword.subscribe(item => this.searchKeyword = item);
     this.adService.getAds().subscribe(adList => {
       this.ads = adList;this.ads.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
-      this.ads = this.ads.filter(ad=>ad.sold==false);
+      this.ads = this.ads.filter(ad=>{
+        return ad.sold==false && (ad.adType==3?!this.isAuctionOver(ad):true);
+      });
     });
     this.categoryService.getCategories().subscribe(categoryList => this.categories = categoryList);
   }
