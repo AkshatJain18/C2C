@@ -1,22 +1,28 @@
-<div class="create-ad-page mt-3">
-  <p class="main-header font-weight-bolder card">Post Your Ad</p>
-  <div class="choose-type-card card shadow-sm">
+<div class="create-ad-page mt-1 pt-4 pb-4">
+  <p *ngIf="!isUpdate" class="main-header font-weight-bolder card">Post Your Ad</p>
+  <p *ngIf="isUpdate" class="main-header font-weight-bolder card">Update Your Ad</p>
+  <div *ngIf="!isUpdate" class="choose-type-card card shadow-sm">
     <div class="left-tab">
       <p class="choose-type-header font-weight-bold">What do you want to do with your product ?</p>
       <div class="ad-type-buttons">
-        <button class="btn btn-primary" (click)="toggleAdType(adTypes.sell)" [ngClass]="{'active':adType==adTypes.sell}">
+        <button [disabled]="isUpdate && adType!=adTypes.sell" class="btn btn-primary" (click)="toggleAdType(adTypes.sell)" [ngClass]="{'active':adType==adTypes.sell}">
           <i  class="fa fa-money fa-3x">
             <p>Sell</p>
           </i>
         </button>
-        <button class="btn btn-primary" (click)="toggleAdType(adTypes.auction)" [ngClass]="{'active':adType==adTypes.auction}">
+        <button [disabled]="isUpdate && adType!=adTypes.auction" class="btn btn-primary" (click)="toggleAdType(adTypes.auction)" [ngClass]="{'active':adType==adTypes.auction}">
           <i  class="fa fa-gavel fa-3x">
             <p>Auction</p>
           </i>
         </button>
-        <button class="btn btn-primary" (click)="toggleAdType(adTypes.donate)" [ngClass]="{'active':adType==adTypes.donate}">
+        <button [disabled]="isUpdate && adType!=adTypes.donate" class="btn btn-primary" (click)="toggleAdType(adTypes.donate)" [ngClass]="{'active':adType==adTypes.donate}">
           <i  class="fa fa-gift fa-3x">
             <p>Donate</p>
+          </i>
+        </button>
+        <button [disabled]="isUpdate && adType!=adTypes.rent" class="btn btn-primary" (click)="toggleAdType(adTypes.rent)" [ngClass]="{'active':adType==adTypes.rent}">
+          <i  class="fa fa-hourglass-start fa-3x">
+            <p>Rent</p>
           </i>
         </button>
       </div>
@@ -32,6 +38,10 @@
     <div class=" w3-animate-right right-tab" *ngIf="adType == adTypes.donate">
       <p class="ad-type-title text-light font-weight-bold">DONATE:</p>
       <p class="text-light">Make someone's day by giving away your <br> product for free</p>
+    </div>
+    <div class=" w3-animate-right right-tab" *ngIf="adType == adTypes.rent">
+      <p class="ad-type-title text-light font-weight-bold">RENT:</p>
+      <p class="text-light">Set a daily charge and lend a product <br> that you currently don't need</p>
     </div>
   </div>
   <div class="form-container">
@@ -57,7 +67,7 @@
           <div>
             <label for="Type">Category:</label><br>
             <!-- <input type="text" formControlName="type"> -->
-            <select formControlName="categoryId">
+            <select [attr.disabled]="isUpdate?'':null" formControlName="categoryId">
               <option *ngFor="let category of categories" value={{category.categoryId}}>{{category.categoryName}}</option>
             </select><br>
             <span class="text-danger" *ngIf="!createAdForm.get('categoryId')?.valid && createAdForm.get('categoryId')?.touched">Choose Category</span>
@@ -69,13 +79,23 @@
           </div>
           <div *ngIf="adType==adTypes.sell">
             <label>Selling Price (₹):</label><br>
-            <input type="number" formControlName="initialPrice"><br>
+            <input [attr.disabled]="isUpdate?'':null" type="number" formControlName="initialPrice"><br>
+            <span class="text-danger" *ngIf="!createAdForm.get('initialPrice')?.valid && createAdForm.get('initialPrice')?.touched">*This field is mandatory</span>
+          </div>
+          <div *ngIf="adType==adTypes.rent">
+            <label>Daily charge (₹):</label><br>
+            <input [attr.disabled]="isUpdate?'':null" type="number" formControlName="initialPrice"><br>
             <span class="text-danger" *ngIf="!createAdForm.get('initialPrice')?.valid && createAdForm.get('initialPrice')?.touched">*This field is mandatory</span>
           </div>
           <div *ngIf="adType==adTypes.auction">
             <label>Set a starting bid (₹):</label><br>
-            <input type="number" formControlName="initialPrice"><br>
+            <input [attr.disabled]="isUpdate?'':null" type="number" formControlName="initialPrice"><br>
             <span class="text-danger" *ngIf="!createAdForm.get('initialPrice')?.valid && createAdForm.get('initialPrice')?.touched">*This field is mandatory</span>
+          </div>
+          <div *ngIf="adType==adTypes.auction">
+            <label>Set a bid difference:</label><br>
+            <input type="number" formControlName="bidDifference"><br>
+            <span class="text-danger" *ngIf="!createAdForm.get('bidDifference')?.valid && createAdForm.get('bidDifference')?.touched">*This field is mandatory</span>
           </div>
           <div *ngIf="adType==adTypes.auction">
             <label>Days Until Auction Ends:</label><br>
@@ -104,12 +124,12 @@
             <div class="images" *ngIf="imageSelected[1]">
               <img  [src]="url[1]" alt="">
             </div>
-            <input #myInput1 id="file-upload-1" type="file" (change)="onSelectFile($event,1)">
-            <label *ngIf="imageSelected[1]" (click)="removeImage(1)" class="remove-button text-danger">
+            <input  #myInput1 id="file-upload-1" type="file" (change)="onSelectFile($event,1)">
+            <label *ngIf="imageSelected[1] && !isUpdate" (click)="removeImage(1)" class="remove-button text-danger">
               <i class="fa fa-trash"></i></label>
           </a>
 
-          <a class="image-link text-secondary">
+          <a class="image-link image-2 text-secondary">
             <label>Image 2:</label>
             <label for="file-upload-2" *ngIf="!imageSelected[2]" class="custom-file-upload">
               <i  class="fa fa-camera fa-4x add-image">
@@ -140,8 +160,10 @@
           </a>
         </div>
         <span class="text-danger mt-2" *ngIf="!createAdForm.get('img1Url')?.valid && image1Touched && imageRemoved">Please provide a cover photo</span>
-        <button type="submit" [disabled]="!createAdForm.valid" class="btn btn-primary">
+        <button *ngIf="!isUpdate" type="submit" [disabled]="!createAdForm.valid" class="btn btn-primary">
           <i class="fa fa-upload"></i> Post Ad</button>
+        <button *ngIf="isUpdate" type="submit" [disabled]="!createAdForm.valid" class="btn btn-primary">
+           Update</button>
         <span class="text-danger mt-2 mb-5" *ngIf="!createAdForm.valid && createAdForm.touched">*Please enter valid data</span>
       </div>
     </form>

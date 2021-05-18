@@ -45,6 +45,10 @@ export class AdService {
   markAdUnSold(adId:any):Observable<any>{
     return this.httpClient.patch(this.url+"/"+adId+"/marked-unsold",{});
   }
+  
+  updateAd(ad:Ad,adId:any): Observable<any> {
+    return this.httpClient.patch(this.url+'/'+adId+'/edit',ad);
+  }
 
   deleteAd(adId:any):Observable<any>{
     return this.httpClient.delete(this.url+"/"+adId+"/delete");

@@ -4,7 +4,8 @@
     </div>
     <div class="ad-details">
         <div routerLink="/ads/{{ad.adId}}" class="ad-details-container">
-            <span class="item-price">₹ {{ad.finalPrice}}</span>
+            <span *ngIf="ad.adType!=4" class="item-price">₹ {{ad.finalPrice}}</span>
+            <span *ngIf="ad.adType==4" class="item-price">₹ {{ad.finalPrice}}/day </span>
             <span class="item-name mt-1">{{ad.productName}}</span>
             <div *ngIf="isAuction" class="d-flex mt-2 align-items-center">
                 <span *ngIf="timeRemaining<86400" class="text-small">Auction ends in</span>

@@ -36,6 +36,11 @@ export class MyAdsComponent implements OnInit {
     })
   }
 
+  editAd(adId:any,event:any){
+    event.stopPropagation();
+    this.router.navigateByUrl("/ads/update/"+adId);
+  }
+
   isAuctionOver(ad:Ad){
     return new Date(ad.auctionDeadline)<new Date();
   }

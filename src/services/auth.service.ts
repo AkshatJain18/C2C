@@ -19,7 +19,19 @@ export class AuthService {
    }
 
    signUp(data: any): Observable<any> {
-     return this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/signup",data);
+    return this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/signup",data);
+   }
+
+   generateOTP(data: any): Observable<any> {
+    return this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/users/otp",data);
+   }
+
+   validateOTP(data:any): Observable<any> {
+     return this.http.patch("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/users/reset-password",data);
+   }
+
+   getSignUpOTP(data:any): Observable<any> {
+     return this.http.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/users/signup/otp",data);
    }
 
    MustMatch(controlName: string, matchingControlName: string) {

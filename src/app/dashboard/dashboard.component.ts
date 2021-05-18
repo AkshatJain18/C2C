@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
 
   reconductAuction(adId:any){
     this.auctionService.reconductAuction(adId).subscribe((res)=>{
-      alert("success!");
+      alert("Auction restarted!");
       this.router.navigateByUrl('/ads/'+adId);
     },(error)=>{
       console.log(error);

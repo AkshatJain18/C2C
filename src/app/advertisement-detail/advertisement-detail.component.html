@@ -43,7 +43,10 @@
               <div class="d-flex mt-1">
                 <span class="text-small text-darkgrey">{{ad.views}} views</span>
               </div>
-              <span *ngIf="!isAuction" class="item-price mt-3">₹ {{ad.initialPrice}}</span>
+              <div *ngIf="!isAuction" class="d-flex align-items-center mt-3">
+                <span  class="item-price">₹ {{ad.initialPrice}}</span>
+                <span *ngIf="ad.adType==4" class="text-dark text-medium ml-2">per day</span>
+              </div> 
               <div *ngIf="isAuction" class="d-flex align-items-center mt-3">
                 <span class="item-price">₹ {{ad.finalPrice}}</span>
                 <span *ngIf="isAuctionOver && buyer==null" class="text-dark ml-2">unsold</span>

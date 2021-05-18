@@ -45,5 +45,6 @@ export class Ad {
     this.finalPrice = ad.finalPrice;
     this.adCreated = ad.adCreated;
     this.views = ad.views;
+    this.bidDifference = ad.bidDifference;
   }
 }

@@ -80,6 +80,9 @@ export class TopNavComponent implements OnInit {
   }
 
   showNotification(notification:any){
+    if(!notification.img){
+      notification.img = "../../assets/sample-profile-pic.jpg";
+    }
     const notification1 = new Notification("New notification from C2C", {
         body: notification.title,
         icon: notification.img

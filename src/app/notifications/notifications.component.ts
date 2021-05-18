@@ -12,15 +12,17 @@ export class NotificationsComponent implements OnInit {
 
   userDetails = JSON.parse(localStorage.user);
   unseenNotifications: boolean = false;
-  myDate: string = "2021-05-04T12:54:20";
   notifications: any[] = [];
+  notificationsLoading : boolean = false;
 
   constructor(private notificationsService: NotificationsService,public dataService:DataService, private router: Router) { }
 
   ngOnInit(): void {
+    this.notificationsLoading=true;
     this.notificationsService.getNotifications(this.userDetails.id)
       .subscribe(notificationsList => {
         this.notifications = notificationsList;
+        this.notificationsLoading = false;
         this.checkIfUnseenNotifications();
       });
   }
