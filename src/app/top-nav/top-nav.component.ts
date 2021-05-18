@@ -82,7 +82,7 @@ export class TopNavComponent implements OnInit {
   showNotification(notification:any){
     const notification1 = new Notification("New notification from C2C", {
         body: notification.title,
-        icon: "https://res.cloudinary.com/hashedin/image/upload/v1620383130/fgimlhzyak8c3wobpcxz.jpg"
+        icon: notification.img
     });
     notification1.addEventListener("click",()=>{
       this.router.navigateByUrl('/ads/'+notification.adId);

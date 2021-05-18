@@ -51,7 +51,6 @@
                     </select>
                 </div>
             </div>
-            
             <div class="ads-sub-container">
                 <ng-container *ngFor="let ad of ads  | filter : searchKeyword : adType : selectedCategories : startPrice : endPrice">
                     <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>

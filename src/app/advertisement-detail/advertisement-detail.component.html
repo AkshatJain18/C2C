@@ -46,6 +46,7 @@
               <span *ngIf="!isAuction" class="item-price mt-3">₹ {{ad.initialPrice}}</span>
               <div *ngIf="isAuction" class="d-flex align-items-center mt-3">
                 <span class="item-price">₹ {{ad.finalPrice}}</span>
+                <span *ngIf="isAuctionOver && buyer==null" class="text-dark ml-2">unsold</span>
                 <span *ngIf="!isAuctionOver && buyer==null" class="text-dark ml-2">base price</span>
                 <span *ngIf="!isAuctionOver && buyer!=null" class="text-dark ml-2 cursor-pointer" routerLink="/profile/{{buyer.id}}">current bid by <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
                 <span *ngIf="isAuctionOver && buyer!=null" class="text-dark ml-2 cursor-pointer" routerLink="/profile/{{buyer.id}}">sold to <b>{{buyer.firstName+" "+buyer.lastName}}</b></span>
@@ -81,7 +82,7 @@
           </div>
     
     
-          <span *ngIf="isAuction && isAuctionOver" class="mt-2 text-large font-700 text-danger">AUCTION
+          <span *ngIf="isAuction && isAuctionOver" class="mt-2 text-medium font-700 text-danger">AUCTION
             OVER !</span>
     
           <div *ngIf="isLoggedIn && !isAuction && seller.id!=user.id" class="w-100 d-flex justify-content-between mt-3 mb-2">

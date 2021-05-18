@@ -15,11 +15,11 @@
                         <span class="text-medium text-darkgrey mt-1">{{ad.adTitle}}</span>
                       </div>
                       <div class="d-flex flex-column">
-                        <div *ngIf="ad.adType==3 && isAuctionOver(ad)" (click)="stopPropogation($event);reconductAuction(ad.adId)" class="d-flex mb-2 align-items-center">
+                        <img height="16px" width="12px" class="_2Nq6Qc ml-auto cursor-pointer" *ngIf="!ad.sold" (click)="deleteAd(ad.adId,$event)" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTS0xLjUuNWgxNXYxNWgtMTV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0MyQzJDMiIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMSAxMy44MzNjMCAuOTE3Ljc1IDEuNjY3IDEuNjY3IDEuNjY3aDYuNjY2Yy45MTcgMCAxLjY2Ny0uNzUgMS42NjctMS42Njd2LTEwSDF2MTB6bTEwLjgzMy0xMi41SDguOTE3TDguMDgzLjVIMy45MTdsLS44MzQuODMzSC4xNjdWM2gxMS42NjZWMS4zMzN6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=">
+                        <div *ngIf="ad.adType==3 && isAuctionOver(ad)" (click)="stopPropogation($event);reconductAuction(ad.adId)" class="d-flex mt-3 align-items-center">
                           <img src="../../assets/undo-icon.png" height="18px" width="18px">
                           <span class="ml-1 text-blue text-small cursor-pointer">Reconduct Auction</span>
                         </div>
-                        <img height="16px" width="12px" class="_2Nq6Qc ml-auto cursor-pointer mt-1" *ngIf="!ad.sold" (click)="deleteAd(ad.adId,$event)" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTS0xLjUuNWgxNXYxNWgtMTV6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0MyQzJDMiIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNMSAxMy44MzNjMCAuOTE3Ljc1IDEuNjY3IDEuNjY3IDEuNjY3aDYuNjY2Yy45MTcgMCAxLjY2Ny0uNzUgMS42NjctMS42Njd2LTEwSDF2MTB6bTEwLjgzMy0xMi41SDguOTE3TDguMDgzLjVIMy45MTdsLS44MzQuODMzSC4xNjdWM2gxMS42NjZWMS4zMzN6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=">
                       </div>
                     </div>
                     <div class="d-flex flex-column mt-3">
