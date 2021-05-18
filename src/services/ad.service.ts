@@ -38,6 +38,10 @@ export class AdService {
     return this.httpClient.post("https://c2c-backend-dot-hu18-groupa-angular.et.r.appspot.com/insertAd",ad);
   }
 
+  updateAd(ad:Ad,adId:any): Observable<any> {
+    return this.httpClient.patch(this.url+'/'+adId+'/edit',ad);
+  }
+
   deleteAd(adId:any):Observable<any>{
     return this.httpClient.delete(this.url+"/"+adId+"/delete");
   }

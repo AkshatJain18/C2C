@@ -5,12 +5,13 @@ import axios from 'axios';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CategoryService } from 'src/services/category.service';
 import { AdService } from 'src/services/ad.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 enum adtypes {
   donate = 1,
   sell = 2,
-  auction = 3
+  auction = 3,
+  rent = 4
 }
 
 @Component({
@@ -26,6 +27,10 @@ export class CreateAdComponent implements OnInit {
 
 
   createAdForm !: FormGroup;
+
+  isUpdate : boolean = false;
+  updateAdId !: string;
+  updateAdDetails !: Ad;
 
   adTypes = adtypes;
 
@@ -45,12 +50,39 @@ export class CreateAdComponent implements OnInit {
   CLOUDINARY_UPLOAD_PRESET = "cbtxrrbg";
   userDetails = JSON.parse(localStorage.user);
 
-  constructor(private formBuiler : FormBuilder,private router:Router,private categoryService:CategoryService,private adService:AdService) {
+  constructor(private formBuiler : FormBuilder,private router:Router,private categoryService:CategoryService,
+    private adService:AdService, private activatedRoute : ActivatedRoute) {
     this.buildCreateAdForm(new Ad({
       adType:this.adTypes.sell,
-      auctionDealdine:"",
+      auctionDeadline:"2021-05-12T16:58:00",
+      bidDifference:"1"
     }));
     console.log(this.createAdForm.value);
+    this.activatedRoute.paramMap.subscribe(params => {
+      if(params.has('adId')){
+        this.isUpdate = true;
+        this.updateAdId = params.get('adId') as string;
+        this.adService.getAdById(this.updateAdId).subscribe(
+          data => {
+            this.updateAdDetails = data;
+            console.log(this.updateAdDetails);
+            this.url=['',this.updateAdDetails.img1Url,this.updateAdDetails.img2Url,this.updateAdDetails.img3Url];
+            for(var i=1;i<4;i++) {
+              if(this.url[i])
+              {
+                this.imageSelected[i]=true;
+              }
+            }
+            if(this.updateAdDetails.adType!=adtypes.auction) {
+              this.updateAdDetails.auctionDeadline="2021-05-12T16:58:00";
+              this.updateAdDetails.bidDifference=1;
+            }
+            this.buildCreateAdForm(this.updateAdDetails);
+            this.adType= this.updateAdDetails.adType;
+          }
+        )
+      }
+    });
    }
 
   ngOnInit(): void {
@@ -68,9 +100,10 @@ export class CreateAdComponent implements OnInit {
       categoryId : new FormControl(ad.categoryId,Validators.required),
       description : new FormControl(ad.description, [Validators.required, Validators.maxLength(30)]),
       initialPrice : new FormControl(ad.initialPrice,Validators.required),
+      bidDifference : new FormControl(ad.bidDifference, Validators.required),
       sellerId : new FormControl(this.userDetails.id,Validators.required),
       productAge : new FormControl(ad.productAge),
-      auctionDeadline : new FormControl(ad.auctionDeadline),
+      auctionDeadline : new FormControl(ad.auctionDeadline,Validators.required),
       img1Url : new FormControl(ad.img1Url, Validators.required),
       img2Url : new FormControl(ad.img2Url),
       img3Url : new FormControl(ad.img3Url)
@@ -80,16 +113,27 @@ export class CreateAdComponent implements OnInit {
   onSubmit() {
     if(this.createAdForm.valid){
       console.log(this.createAdForm.value);
-      this.adService.postAd(this.createAdForm.value).subscribe(
-        (res)=>{
-          console.log(res);
-          alert("ad added!");
-          this.router.navigateByUrl('ads/'+res.adId);
-        },
-        (err)=>{
-          console.log(err);
-        }
-      );
+      if(!this.isUpdate) {
+        this.adService.postAd(this.createAdForm.value).subscribe(
+          (res)=>{
+            console.log(res);
+            alert("ad added!");
+            this.router.navigateByUrl('ads/'+res.adId);
+          },
+          (err)=>{
+            console.log(err);
+          }
+        );
+      }
+      else {
+        this.adService.updateAd(this.createAdForm.value,this.updateAdDetails.adId).subscribe(
+          (res)=>{
+            console.log(res);
+            alert("ad updated!");
+            this.router.navigateByUrl('ads/'+res.adId);
+          }
+        );
+      }
     }
   }
 
@@ -98,17 +142,13 @@ export class CreateAdComponent implements OnInit {
     for(var i=1;i<=3;i++) {
       this.removeImage(i);
     }
-    if(type===this.adTypes.sell) {
-      this.adType = this.adTypes.sell;
-      this.createAdForm.get('auctionDeadline')?.setValue("");
-    }
-    else if(type===this.adTypes.auction) {
-      this.adType = this.adTypes.auction;
-    }
-    else {
-     this.adType = this.adTypes.donate;
-      this.createAdForm.get('initialPrice')?.setValue(0);
-      this.createAdForm.get('auctionDeadline')?.setValue("");
+    this.adType = type;
+    if(type!=this.adTypes.auction) {
+      this.createAdForm.get('auctionDeadline')?.setValue("2021-05-12T16:58:00");
+      this.createAdForm.get('bidDifference')?.setValue("1");
+      if(type==this.adTypes.donate) {
+        this.createAdForm.get('initialPrice')?.setValue(0);
+      }
     }
   }
 

@@ -23,6 +23,7 @@ const routes: Routes = [
   {path: 'sign-in', component: SignInComponent},
   {path:'sign-up', component: SignUpComponent},
   {path:'create-ad', component: CreateAdComponent},
+  {path: 'ads/update/:adId', component: CreateAdComponent},
   {path:'my-stats/action/:actionNo', component: SlideoutPanelComponent},
   {path:'profile/:id', component: ViewProfileComponent},
   {path:'forgot-password', component:ForgotPasswordComponent},

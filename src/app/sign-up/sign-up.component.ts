@@ -13,6 +13,11 @@ import { Router } from '@angular/router';
 export class SignUpComponent implements OnInit {
 
   signUpForm !: FormGroup;
+  otpForm !: FormGroup;
+
+  otp !: number;
+
+  isOtpGenerated : boolean = false;
 
   user = new User({});
 
@@ -35,12 +40,38 @@ export class SignUpComponent implements OnInit {
       password : new FormControl(user.password,[Validators.required, Validators.minLength(8),
                     Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)]),
       confirmPassword : new FormControl(null),
-      checkBox : [false, Validators.requiredTrue]
+      checkBox : new FormControl(false, Validators.requiredTrue)
     }
     ,{
       validator: this.authService.MustMatch('password','confirmPassword')
     }
     )
+  }
+
+  buildOtpForm() {
+    this.otpForm = this.formBuiler.group({
+      otpGenerated : new FormControl(null,Validators.required)
+    },{
+      validator: this.otpMustMatch('otpGenerated')
+    })
+  }
+
+  onOtpGen() {
+    console.log(this.signUpForm.value);
+    const data = {
+                    "email": this.signUpForm.get('emailId')?.value
+                 }
+    console.log(data);
+    this.authService.getSignUpOTP(data)
+    .subscribe(
+      (data)=> {
+        this.isOtpGenerated = true;
+        this.buildOtpForm();
+        console.log(data);
+        this.otp = data.message;
+      }
+    );
+
   }
 
   onSubmit() {
@@ -56,22 +87,21 @@ export class SignUpComponent implements OnInit {
     )
   }
 
-  MustMatch(controlName: string, matchingControlName: string) {
+  otpMustMatch(otpGenerated:string) {
     return (formGroup: FormGroup) => {
-        const control = formGroup.controls[controlName];
-        const matchingControl = formGroup.controls[matchingControlName];
+      const control = formGroup.controls[otpGenerated];
 
-        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-          // return if another validator has already found an error on the matchingControl
-          return null;
+    if(!this.otp) {
+      return null;
+    }
+
+    // set error on matchingControl if validation fails
+    if (control.value !== this.otp) {
+        control.setErrors({ otpMustMatch: true });
+        return ({otpMustMatch: true})
       }
-
-      // set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-          matchingControl.setErrors({ mustMatch: true });
-          return ({mustMatch: true})
-      } else {
-          return null;
+    else {
+      return null;
       }
     }
   }

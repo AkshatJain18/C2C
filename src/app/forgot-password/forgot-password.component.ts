@@ -15,8 +15,10 @@ export class ForgotPasswordComponent implements OnInit {
   emailForm !: FormGroup;
   newPasswordForm !: FormGroup;
   otpGenerated : boolean = false;
+  otpGenLoading : boolean = false;
   signedIn : boolean = false;
   errorInOtpGen : boolean = false;
+  errorInOtpValidation : boolean = false;
   form1data : any;
   form2data : any;
 
@@ -24,7 +26,6 @@ export class ForgotPasswordComponent implements OnInit {
   fieldTextType: boolean = false;
   constructor(private authService: AuthService,private router:Router, private formBuilder: FormBuilder) {
     this.buildEmailForm(new User({}));
-    this.buildEditProfileForm(new User({}));
   }
 
   ngOnInit(): void {
@@ -32,18 +33,19 @@ export class ForgotPasswordComponent implements OnInit {
 
   buildEmailForm(user:User){
     this.emailForm = new FormGroup({
-      emailId : new FormControl(user.emailId,[Validators.required,Validators.email]),
+      email : new FormControl(user.emailId,[Validators.required,Validators.email]),
       password : new FormControl(null),
-      OTP : new FormControl(null)
+      otp : new FormControl(null)
     })
   }
 
-  buildEditProfileForm(user: User) {
+  buildEditProfileForm(user: User, emailId:string) {
     this.newPasswordForm = this.formBuilder.group({
+      email : new FormControl(emailId,[Validators.required,Validators.email]),
       password : new FormControl(user.password,[Validators.required, Validators.minLength(8),
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)]),
       confirmPassword : new FormControl(user.password),
-      OTP : new FormControl(null, [Validators.required,Validators.maxLength(6)])
+      otp : new FormControl(null, [Validators.required,Validators.maxLength(4)])
     }
     ,{
       validator: this.authService.MustMatch('password','confirmPassword')
@@ -53,15 +55,19 @@ export class ForgotPasswordComponent implements OnInit {
 
   onSubmitEmailForm() {
     console.log("otp gen");
-    console.log(this.emailForm.value);
-    this.otpGenerated= true;
+    this.otpGenLoading = true;
     this.authService.generateOTP(this.emailForm.value)
     .subscribe(
       (data:any) => {
+        this.otpGenLoading = false;
         console.log(data);
         this.form1data = data;
         if(data===null){
           this.errorInOtpGen=true;
+        }
+        if(data.response==true) {
+          this.otpGenerated= true;
+          this.buildEditProfileForm(new User({}),this.emailForm.get('email')?.value );
         }
       }
     )
@@ -70,13 +76,13 @@ export class ForgotPasswordComponent implements OnInit {
   onSubmitNewPasswordForm() {
     console.log("otp check");
     console.log(this.newPasswordForm.value);
-    this.authService.validateOTP(this.emailForm.value)
+    this.authService.validateOTP(this.newPasswordForm.value)
     .subscribe(
       (data:any) => {
         console.log(data);
         this.form2data = data;
         if(data===null){
-          this.errorInOtpGen=true;
+          this.errorInOtpValidation=true;
         }
       }
     )

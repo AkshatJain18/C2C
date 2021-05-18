@@ -285,3 +285,78 @@
 .create-ad-page::-webkit-scrollbar {
   width: 1px;
 }
+@media only screen and (max-width:600px) {
+  .create-ad-page {
+
+    .choose-type-card {
+
+      .ad-type-buttons {
+
+        button {
+          width: 4.5rem;
+          height: 4.5rem;
+
+          i {
+            font-size: 1.3rem;
+
+            p {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+
+    .form-container {
+
+      form {
+
+        .form-card-1 {
+
+          .input-fields {
+            grid-template-columns: 1fr;
+            margin-left: 0rem;
+          }
+        }
+
+        .form-card-2 {
+
+          button {
+            width: 40%;
+          }
+
+          .upload-images-tab {
+            justify-content: space-between;
+            width: 90%;
+
+            .image-link {
+
+              i.add-image {
+                font-size: 20px;
+                width: 5rem;
+                height: 4.5rem;
+
+                p {
+                  font-size: 10px;
+                }
+              }
+
+              .images {
+                width: 5rem;
+                height: 4.5rem;
+
+                img {
+                  height: 80px;
+                }
+              }
+            }
+            .image-2 {
+              margin-left: -1.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

@@ -6,8 +6,9 @@
       <img src="../../assets/PEDDLER_free-file (7).png" class="logo" alt="" height="50" width="130">
       <div class="form-container">
         <p class="header text-secondary">Welcome!</p>
-        <p class="login-prompt font-weight-bold">Create account to get started</p>
-        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <p *ngIf="!isOtpGenerated" class="login-prompt font-weight-bold">Create account to get started</p>
+        <p *ngIf="isOtpGenerated" class="login-prompt font-weight-bold">Verify your Email Id</p>
+        <form [formGroup]="signUpForm" (ngSubmit)="onOtpGen()">
           <div class="input-fields">
             <div>
               <label>First Name:</label><br>
@@ -21,7 +22,7 @@
             </div>
             <div>
               <label>Email ID:</label><br>
-              <input type="text" formControlName="emailId"><br>
+              <input [attr.disabled]="isOtpGenerated?'':null" type="text" formControlName="emailId"><br>
               <span class="text-danger" *ngIf="!signUpForm.get('emailId')?.valid && signUpForm.get('emailId')?.touched">*Enter a valid company Email ID</span>
             </div>
             <div>
@@ -55,11 +56,20 @@
             <label class="checkBox text-dark"><input type="checkbox" formControlName="checkBox"> Accept <a class="font-weight-bold terms-link" href="#">terms and conditions</a></label><br>
             <span class="text-danger mt-n4" *ngIf="signUpForm.hasError('required', 'checkBox') && signUpForm.get('checkBox')?.touched">*Required</span>
           </div>
-          <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">
-            <i class="fa fa-user-plus"></i> Create Account</button>
+          <button *ngIf="!isOtpGenerated" type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">
+             Verify email <i class="fa fa-arrow-right"></i></button>
           <span class="text-danger mt-2" *ngIf="!signUpForm.valid && signUpForm.touched">*Please enter valid data</span>
         </form>
-        <a class="text-dark already-user-link font-weight-bold" routerLink='/'>Already a user?</a>
+        <form *ngIf="isOtpGenerated" [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+          <div>
+            <label>Enter Otp sent to your Email ID:</label><br>
+            <input type="text" formControlName="otpGenerated"><br>
+            <span class="text-danger" *ngIf="!otpForm.get('otpGenerated')?.valid && otpForm.get('otpGenerated')?.touched && otpForm.hasError('otpMustMatch')">*Please enter the correct Otp</span>
+          </div>
+          <button type="submit" [disabled]="!otpForm.valid" class="btn btn-primary">
+            <i class="fa fa-user-plus"></i> Create Account</button>
+        </form>
+        <a class="text-dark already-user-link font-weight-bold" routerLink='/sign-in'>Already a user?</a>
       </div>
     </div>
 

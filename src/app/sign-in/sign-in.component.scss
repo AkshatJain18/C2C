@@ -111,6 +111,19 @@
   }
 
 }
+@media only screen and (max-width: 600px) {
+  .box-container {
+    .sign-in-page {
+      width: 90%;
+      height: 80%;
+      grid-template-columns: 1fr;
+
+      app-carousel {
+        display: none;
+      }
+    }
+  }
+}
 
 
 

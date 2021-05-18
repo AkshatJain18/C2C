@@ -52,6 +52,12 @@
           align-items: center;
           justify-content: center;
 
+          input, textarea {
+            border: none;
+            outline: none;
+            border-bottom: 0.1rem solid rgb(207, 197, 205);
+          }
+
           label {
             @extend .text-x-small, .text-grey;
           }
@@ -146,4 +152,37 @@
   }
 
 
+}
+@media only screen and (max-width: 600px) {
+  .box-container {
+
+    .sign-up-page {
+      width: 90%;
+      height: 80%;
+
+      .sign-up-container {
+
+        .form-container {
+          margin-top: 15rem;
+
+          form {
+
+            button {
+              width: 60%;
+            }
+
+            .input-fields {
+              align-items: center;
+              display: flex;
+              flex-direction: column;
+            }
+
+            .checkBox-container {
+              margin-left: 3rem;
+            }
+          }
+        }
+      }
+    }
+  }
 }
