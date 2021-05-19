@@ -5,7 +5,7 @@ import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
 import { AuctionService } from 'src/services/auction.service';
 import { DataService } from 'src/services/data.service';
-import { createFalse } from 'typescript';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-my-ads',
@@ -27,12 +27,31 @@ export class MyAdsComponent implements OnInit {
   }
 
   reconductAuction(adId:any){
-    this.auctionService.reconductAuction(adId).subscribe((res)=>{
-      alert("success!");
-      this.router.navigateByUrl('/ads/'+adId);
-    },(error)=>{
-      console.log(error);
-      alert("error occured!");
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to reconduct this auction?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.auctionService.reconductAuction(adId).subscribe((res)=>{
+          Swal.fire(
+            'Restarted!',
+            'Your auction has been restartd.',
+            'success'
+          )
+          this.router.navigateByUrl('/ads/'+adId);
+        },(error)=>{
+          console.log(error);
+          Swal.fire(
+            'Error occured!',
+            'could not restart auction',
+            'error'
+          )
+        })
+      }
     })
   }
 
@@ -47,12 +66,32 @@ export class MyAdsComponent implements OnInit {
 
   deleteAd(adId:any,event:any){
     event.stopPropagation();
-    this.adService.deleteAd(adId).subscribe(()=>{
-      this.myAds = this.myAds.filter(ad=>ad.adId!=adId);
-    },
-    (err)=>{
-      this.myAds = this.myAds.filter(ad=>ad.adId!=adId);
-      //console.log(err);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this ad!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adService.deleteAd(adId).subscribe(()=>{
+          this.myAds = this.myAds.filter(ad=>ad.adId!=adId);
+          Swal.fire(
+            'Deleted!',
+            'Your ad has been deleted.',
+            'success'
+          )
+        },
+        (err)=>{
+          Swal.fire(
+            'Error occured!',
+            'could not delete ad',
+            'error'
+          )
+          console.log(err);
+        })
+      }
     })
   }
 

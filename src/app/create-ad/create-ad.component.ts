@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CategoryService } from 'src/services/category.service';
 import { AdService } from 'src/services/ad.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 enum adtypes {
   donate = 1,
@@ -117,10 +118,19 @@ export class CreateAdComponent implements OnInit {
         this.adService.postAd(this.createAdForm.value).subscribe(
           (res)=>{
             console.log(res);
-            alert("ad added!");
+            Swal.fire(
+              'Ad Posted!',
+              'Your ad has been posted',
+              'success'
+            )
             this.router.navigateByUrl('ads/'+res.adId);
           },
           (err)=>{
+            Swal.fire(
+              'Error Occured!',
+              'There is some error!',
+              'error'
+            )
             console.log(err);
           }
         );
@@ -129,7 +139,11 @@ export class CreateAdComponent implements OnInit {
         this.adService.updateAd(this.createAdForm.value,this.updateAdDetails.adId).subscribe(
           (res)=>{
             console.log(res);
-            alert("ad updated!");
+            Swal.fire(
+              'Ad Updated!',
+              'Your ad has been updated',
+              'success'
+            )
             this.router.navigateByUrl('ads/'+res.adId);
           }
         );

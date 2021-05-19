@@ -11,8 +11,8 @@
                     <span class="tab" (click)="setAdType(4)" [ngClass]="{'active-tab':adType==4}">Rent</span>
                 </div>
             </div>
-            <div class="d-flex align-items-center">
-                <input [checked]="withinCompany" (changed)="withinCompany=!withinCompany" type="checkbox">
+            <div (click)="toogleWithinCompanyFilter()" class="d-flex align-items-center cursor-pointer">
+                <input [checked]="withinCompany"  type="checkbox">
                 <span class="text-dark text-medium ml-2">See within company ads</span>
             </div>
             <div class="price-range-container" *ngIf="adType!=1">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="ads-sub-container">
-                <ng-container *ngFor="let ad of ads  | filter : searchKeyword : adType : selectedCategories : startPrice : endPrice">
+                <ng-container *ngFor="let ad of ads  | filter : companyName: searchKeyword : adType : selectedCategories : startPrice : endPrice">
                     <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
                 </ng-container>
             </div>

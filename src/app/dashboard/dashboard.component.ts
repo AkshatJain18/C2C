@@ -7,6 +7,7 @@ import { UserService } from 'src/services/user.service';
 import { RatingService } from 'src/services/rating.service';
 import { AuctionService } from 'src/services/auction.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,12 +36,31 @@ export class DashboardComponent implements OnInit {
   }
 
   reconductAuction(adId:any){
-    this.auctionService.reconductAuction(adId).subscribe((res)=>{
-      alert("Auction restarted!");
-      this.router.navigateByUrl('/ads/'+adId);
-    },(error)=>{
-      console.log(error);
-      alert("error occured!");
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to reconduct this auction?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.auctionService.reconductAuction(adId).subscribe((res)=>{
+          Swal.fire(
+            'Restarted!',
+            'Your auction has been restartd.',
+            'success'
+          )
+          this.router.navigateByUrl('/ads/'+adId);
+        },(error)=>{
+          console.log(error);
+          Swal.fire(
+            'Error occured!',
+            'could not restart auction',
+            'error'
+          )
+        })
+      }
     })
   }
 

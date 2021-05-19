@@ -14,6 +14,7 @@ export class Ad {
   productAge: string;
   auctionDeadline : string;
   adCreated : string;
+  companyName: string;
   sold:boolean;
   rated:boolean;
   views : number;
@@ -35,6 +36,7 @@ export class Ad {
     this.sellerRating = ad.sellerRating;
     this.buyerId = ad.buyerId;
     this.productAge = ad.productAge;
+    this.companyName = ad.companyName;
     this.sold = ad.sold;
     this.rated = ad.rated;
     this.auctionDeadline = ad.auctionDeadline;

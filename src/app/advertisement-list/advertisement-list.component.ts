@@ -35,6 +35,7 @@ export class AdvertisementListComponent implements OnInit {
   categories:any[] = [];
   searchKeyword:string = "";
   withinCompany:boolean=false;
+  companyName: string="";
   
   constructor(private adService:AdService,private categoryService:CategoryService,private searchService:SearchService,private router:Router,public dataService:DataService,private activatedRoute:ActivatedRoute) {
     this.adType = 2;
@@ -77,6 +78,15 @@ export class AdvertisementListComponent implements OnInit {
 
   isCategorySelected(categoryId:number){
     return this.selectedCategories.findIndex(c=>c==categoryId)!=-1;
+  }
+
+  toogleWithinCompanyFilter(){
+    this.withinCompany=!this.withinCompany;
+    if(!this.withinCompany){
+      this.companyName="";
+    }else{
+      this.companyName=this.user.companyName;
+    }
   }
 
   sortList(){

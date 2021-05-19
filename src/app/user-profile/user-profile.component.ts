@@ -5,6 +5,7 @@ import { User } from 'src/models/User';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-profile',
@@ -70,7 +71,11 @@ export class UserProfileComponent implements OnInit {
         console.log(res);
         localStorage.setItem("user",JSON.stringify(res));
         console.log(localStorage.getItem("user"));
-        alert("changes saved!");
+        Swal.fire(
+          'Updated!',
+          'Your profile has been updated.',
+          'success'
+        )
       },
       (err)=>{
         console.log(err);

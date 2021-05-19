@@ -12,6 +12,7 @@ export class User {
   rating : number;
   buyCount: number;
   sellCount: number;
+  companyName : string;
   donationsCount: number;
 
   constructor(user:any) {
@@ -28,5 +29,6 @@ export class User {
     this.sellCount = user.sellCount;
     this.donationsCount = user.donationsCount;
     this.rating = user.rating;
+    this.companyName = user.companyName;
   }
 }

@@ -5,6 +5,7 @@ import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
 import { DataService } from 'src/services/data.service';
 import { UserService } from 'src/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-saved-ads',
@@ -23,9 +24,33 @@ export class SavedAdsComponent implements OnInit {
 
   unsaveAd(adId:any,event:any){
     event.stopPropagation();
-    this.adService.unsaveAdForUser(adId,this.user.id).subscribe((res)=>{
-      this.savedAds = this.savedAds.filter(ad=>ad.adId!=adId);
-    });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to unsave this ad?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.adService.unsaveAdForUser(adId,this.user.id).subscribe((res)=>{
+          this.savedAds = this.savedAds.filter(ad=>ad.adId!=adId);
+          Swal.fire(
+            'Unsaved!',
+            'Your ad has been unsaved.',
+            'success'
+          )
+        },
+        (err)=>{
+          Swal.fire(
+            'Error occured!',
+            'could not unsave ad',
+            'error'
+          )
+          console.log(err);
+        });
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -34,5 +59,4 @@ export class SavedAdsComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
 }
