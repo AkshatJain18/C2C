@@ -128,7 +128,7 @@ export class ChatComponent implements OnInit {
             if(!this.chats.find(c=>c.chatId==chat.chatId)){
               this.chats.push(chat);
               itemsProcessed++;
-            }else{   
+            }else{                 
               if(chat.messages.length>chat1.messages.length){
                 chat1.messages = chat.messages;
                 chat1.messagesMap = chat.messagesMap;

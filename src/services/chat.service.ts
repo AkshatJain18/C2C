@@ -34,7 +34,6 @@ export class ChatService {
   getMessagesByChatId(chatId:string):Observable<any>{
     return this.chatsCollection.doc(chatId).collection<any>('messages').valueChanges();
   }
-
   
   MarkChatSeenForUser(chatId:any,userId:any){
     this.chatsCollection.doc(chatId).get().subscribe((chat)=>{
