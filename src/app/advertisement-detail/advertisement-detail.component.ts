@@ -133,7 +133,7 @@ export class AdvertisementDetailComponent implements OnInit {
     if(!this.ad.bidDifference){
       this.expectedBidPrice = (this.ad.finalPrice*110)/100;
     }else{
-      this.expectedBidPrice = this.ad.bidDifference;
+      this.expectedBidPrice = this.ad.finalPrice+this.ad.bidDifference;
     }
     this.timeRemaining = (new Date(this.ad.auctionDeadline).getTime()-new Date().getTime())/1000;
     this.isAuctionOver = this.timeRemaining<=0;
