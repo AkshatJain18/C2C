@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getSoldAdsByUserId(this.user.id).subscribe((ads)=>{
+    this.userService.getSoldAdsByUserId(this.user.id).subscribe((ads:[])=>{
       this.soldAds = ads;
     });
 

@@ -37,7 +37,7 @@ import { ChatComponent } from './chat/chat.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
+import {HttpClient} from '@angular/common/http'
 
 
 @NgModule({

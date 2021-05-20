@@ -2,9 +2,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "types": ["node","jasmine"],
+    "typeRoots": ["node_modules/@types"],
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -29,5 +28,8 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
