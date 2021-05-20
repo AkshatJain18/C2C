@@ -44,7 +44,7 @@
 
     <div class="ads-section">
         <div class="ads-container mt-3">
-            <div class="border-bottom mb-1 d-flex flex-row align-items-center" style="border-bottom: 2px solid #dee2e6 !important;">
+            <div class="border-bottom d-flex flex-row align-items-center" style="border-bottom: 2px solid #dee2e6 !important;">
                 <!--<span class="heading">All Ads</span>
                 <div class="d-flex ml-auto align-items-center">
                     <span class="heading">SORT BY</span>
@@ -54,12 +54,14 @@
                     </select>
                 </div>-->
                 <span class="heading p-2">SORT By</span>
-                <div class="d-flex ml-2">
+                <div class="d-flex ml-4">
                     <span (click)="sortOption=1;sortList()" [class.sort-active-tab]="sortOption==1" class="sort-tab">Recenty Added</span>
                     <span (click)="sortOption=2;sortList()" [class.sort-active-tab]="sortOption==2" class="sort-tab ml-3">Trending</span>
+                    <span (click)="sortOption=3;sortList()" [class.sort-active-tab]="sortOption==3" class="sort-tab ml-3">Price - Low to High</span>
+                    <span (click)="sortOption=4;sortList()" [class.sort-active-tab]="sortOption==4" class="sort-tab ml-3">Price - High to Low</span>
                 </div>
             </div>
-            <div class="ads-sub-container mt-4">
+            <div class="ads-sub-container" style="margin-top: 30px;">
                 <ng-container *ngFor="let ad of ads  | filter : companyName: searchKeyword : adType : selectedCategories : startPrice : endPrice">
                     <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
                 </ng-container>

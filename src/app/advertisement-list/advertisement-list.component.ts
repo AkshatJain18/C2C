@@ -96,8 +96,12 @@ export class AdvertisementListComponent implements OnInit {
   sortList(){
     if(this.sortOption==1){
       this.ads.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
-    }else{
+    }else if(this.sortOption==2){
       this.ads.sort((x,y)=>y.views-x.views);
+    }else if(this.sortOption==4){
+      this.ads.sort((x,y)=>y.finalPrice-x.finalPrice);
+    }else if(this.sortOption==3){
+      this.ads.sort((x,y)=>x.finalPrice-y.finalPrice);
     }
   }
 
