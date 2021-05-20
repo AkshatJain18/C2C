@@ -52,6 +52,10 @@ export class AdvertisementListComponent implements OnInit {
         this.sortOption = params.get('sortType') as unknown as number;
         this.sortList();
       }
+      if(!params.has('sortType')){
+        this.sortOption=1;
+        this.sortList();
+      }
     });
   }
 
@@ -100,7 +104,7 @@ export class AdvertisementListComponent implements OnInit {
   ngOnInit(): void {
     this.searchService.searchKeyword.subscribe(item => this.searchKeyword = item);
     this.adService.getAds().subscribe(adList => {
-      this.ads = adList;this.ads.sort((x,y)=>new Date(y.adCreated).getTime()-new Date(x.adCreated).getTime());
+      this.ads = adList;
       this.ads = this.ads.filter(ad=>{
         return ad.sold==false && (ad.adType==3?!this.isAuctionOver(ad):true);
       });

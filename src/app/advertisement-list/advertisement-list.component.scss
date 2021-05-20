@@ -6,25 +6,38 @@
   background-color: #f1f1f1;
   padding: 40px 40px;
 
+  .heading{
+    @extend .text-medium,.text-dark,.text-uppercase;
+    font-weight: bold
+  }
+
+  .sort-tab{
+    @extend .text-dark,.p-2,.text-uppercase,.text-medium,.cursor-pointer;
+  }
+
+  .sort-active-tab{
+    @extend .font-700,.cursor-pointer;;
+    color: #B32CF2 !important;
+    border-bottom: 2px solid #B32CF2;
+  }
+
   .filter-section{
       width: 25%;
       height: 100%;
-      padding: 30px;
-      @extend .card,.shadow;
-      
+      border-right: 0px solid #dee2e6;
+      display: flex;
+      flex-direction: column;
+      row-gap: 15px;
+        
       .filter-container{
-          margin-bottom: 70px;
           display: flex;
           flex-direction: column;
           row-gap: 30px;
-
-          .heading{
-              @extend .text-medium,.text-dark,.text-uppercase;
-              font-weight: bold
-          }
+          padding: 30px;
+          @extend .border,.card;
 
           .filter-name{
-              @extend .text-medium,.text-darkgrey,.text-capitalize;
+              @extend .heading;
           }
 
           .filter-value{
@@ -91,13 +104,11 @@
   .ads-section{
     width: 75%;
     margin-left: 20px;
-    padding: 30px;
-    @extend .card,.shadow;
-
+    padding: 0px 25px;
+    
     .ads-container{
       display: flex;
       flex-direction: column;
-      row-gap: 40px;
 
       .heading{
         @extend .text-medium,.text-dark,.text-uppercase;

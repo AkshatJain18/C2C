@@ -1,7 +1,6 @@
 <div class="ads-list-container">
     <div class="filter-section">
         <div class="filter-container">
-            <label class="heading">Ads Filter</label>
             <div class="buy-donate-container">
                 <label class="filter-name">Select One</label>
                 <div class="buy-donate-sub-container">
@@ -15,7 +14,9 @@
                 <input [checked]="withinCompany"  type="checkbox">
                 <span class="text-dark text-medium ml-2">See within company ads</span>
             </div>
-            <div class="price-range-container" *ngIf="adType!=1">
+        </div>
+        <div class="filter-container" *ngIf="adType!=1">
+            <div class="price-range-container" >
                 <label class="filter-name">Price range</label>
                 <div class="price-range-sub-container">
                     <div class="custom-slider">
@@ -27,6 +28,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="filter-container">
             <div class="category-container">
                 <label class="filter-name">Select Category</label>
                 <div class="category-sub-container">
@@ -40,18 +43,23 @@
     </div>
 
     <div class="ads-section">
-        <div class="ads-container">
-            <div class="d-flex justify-content-between">
-                <label class="heading">All ads</label>.
-                <div class="d-flex align-items-center">
+        <div class="ads-container mt-3">
+            <div class="border-bottom mb-1 d-flex flex-row align-items-center" style="border-bottom: 2px solid #dee2e6 !important;">
+                <!--<span class="heading">All Ads</span>
+                <div class="d-flex ml-auto align-items-center">
                     <span class="heading">SORT BY</span>
                     <select [(ngModel)]="sortOption" (change)="sortList()" style="margin-left: 20px;background: none;border: none;">
                         <option value="1">Recenty Added</option>
                         <option value="2">Trending</option>
                     </select>
+                </div>-->
+                <span class="heading p-2">SORT By</span>
+                <div class="d-flex ml-2">
+                    <span (click)="sortOption=1;sortList()" [class.sort-active-tab]="sortOption==1" class="sort-tab">Recenty Added</span>
+                    <span (click)="sortOption=2;sortList()" [class.sort-active-tab]="sortOption==2" class="sort-tab ml-3">Trending</span>
                 </div>
             </div>
-            <div class="ads-sub-container">
+            <div class="ads-sub-container mt-4">
                 <ng-container *ngFor="let ad of ads  | filter : companyName: searchKeyword : adType : selectedCategories : startPrice : endPrice">
                     <app-ad-card *ngIf="setAdCard(ad)"></app-ad-card>
                 </ng-container>
