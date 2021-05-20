@@ -139,6 +139,13 @@
       }
 
     }
+    .login-warning {
+      text-align: center;
+      background-color: rgb(243,216,218);
+      padding: 0.5rem;
+      border: 1px solid rgb(241, 167, 172);
+      @extend .text-x-small;
+    }
 
   }
   .sign-up-page::-webkit-scrollbar {
@@ -149,6 +156,15 @@
   .sign-up-page::-webkit-scrollbar-thumb {
     border-radius: 1rem;
     @extend .bg-purple;
+  }
+
+  .modal {
+    .modal-header {
+      .modal-title {
+        @extend .text-purple;
+      }
+    }
+
   }
 
 

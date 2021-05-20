@@ -39,7 +39,7 @@ export class MyAdsComponent implements OnInit {
         this.auctionService.reconductAuction(adId).subscribe((res)=>{
           Swal.fire(
             'Restarted!',
-            'Your auction has been restartd.',
+            'Your auction has been restarted.',
             'success'
           )
           this.router.navigateByUrl('/ads/'+adId);

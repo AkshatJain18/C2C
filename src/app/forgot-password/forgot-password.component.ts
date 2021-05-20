@@ -69,6 +69,9 @@ export class ForgotPasswordComponent implements OnInit {
           this.otpGenerated= true;
           this.buildEditProfileForm(new User({}),this.emailForm.get('email')?.value );
         }
+      },
+      (error)=> {
+        this.errorInOtpGen=true;
       }
     )
   }
@@ -84,6 +87,9 @@ export class ForgotPasswordComponent implements OnInit {
         if(data===null){
           this.errorInOtpValidation=true;
         }
+      },
+      (error)=> {
+        this.errorInOtpValidation=true;
       }
     )
   }

@@ -18,6 +18,8 @@ export class SignUpComponent implements OnInit {
   otp !: number;
 
   isOtpGenerated : boolean = false;
+  errorInOtpGen : boolean = false;
+  otpLoading : boolean = false;
 
   user = new User({});
 
@@ -58,6 +60,7 @@ export class SignUpComponent implements OnInit {
 
   onOtpGen() {
     console.log(this.signUpForm.value);
+    this.otpLoading = true;
     const data = {
                     "email": this.signUpForm.get('emailId')?.value
                  }
@@ -65,10 +68,17 @@ export class SignUpComponent implements OnInit {
     this.authService.getSignUpOTP(data)
     .subscribe(
       (data)=> {
+        if(data==null) {
+          this.errorInOtpGen = true;
+        }
         this.isOtpGenerated = true;
         this.buildOtpForm();
         console.log(data);
         this.otp = data.message;
+        this.otpLoading = false;
+      },
+      (error)=> {
+        this.errorInOtpGen = true;
       }
     );
 
