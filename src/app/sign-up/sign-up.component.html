@@ -8,6 +8,9 @@
         <p class="header text-secondary">Welcome!</p>
         <p *ngIf="!isOtpGenerated" class="login-prompt font-weight-bold">Create account to get started</p>
         <p *ngIf="isOtpGenerated" class="login-prompt font-weight-bold">Verify your Email Id</p>
+        <p class="login-warning text-danger" *ngIf="errorInOtpGen">Error in Otp generation <br> There may already be an account with this email</p>
+        <p class="status" *ngIf="otpLoading && !errorInOtpGen">
+          <i class="fa fa-spinner fa-pulse"></i> Sending OTP</p>
         <form [formGroup]="signUpForm" (ngSubmit)="onOtpGen()">
           <div class="input-fields">
             <div>
@@ -53,7 +56,7 @@
           </div>
           <span class="text-danger  pw-validation-message mt-2" *ngIf="!signUpForm.get('password')?.valid && signUpForm.get('password')?.touched">*Password must contain: <br> -atleast 8 characters <br> -an alphabet <br> -a number <br> -a special character</span>
           <div class="mt-3 checkBox-container">
-            <label class="checkBox text-dark"><input type="checkbox" formControlName="checkBox"> Accept <a class="font-weight-bold terms-link" href="#">terms and conditions</a></label><br>
+            <label class="checkBox text-dark"><input type="checkbox" formControlName="checkBox"> Accept <a class="font-weight-bold terms-link" data-toggle="modal" data-target="#exampleModalLong">terms and conditions</a></label><br>
             <span class="text-danger mt-n4" *ngIf="signUpForm.hasError('required', 'checkBox') && signUpForm.get('checkBox')?.touched">*Required</span>
           </div>
           <button *ngIf="!isOtpGenerated" type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">
@@ -73,6 +76,33 @@
       </div>
     </div>
 
+  </div>
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg mt-5" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">Terms and conditions</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            • This site does is solely built to provide a platform for employees to sell, buy, donate or rent a product. Any other services provided by any party has nothing to do with this platform. <br><br>
+
+            •This site helps a user to perform auctions for his/her products. The person whose bid wins the auction must compulsorily purchase the bided product. Failing to do can lead to termination of your account. <br><br>
+
+            •The platform peddler holds all rights and reserved on the trademark.<br><br>
+
+            •The platform peddler provides the option of chatting to its users and we expect everyone to follow a moral code of conduct while communicating with users. Use of language which can we offensive to anyone is strictly prohibited. Any discriminations based on race, color, caste or sex is strictly prohibited.<br><br>
+
+            •The platform does not take any responsibility about the quality, condition and price of product and we do not indulge in any kind of dealings. The users must pay any party on their own risk. We do not take any responsibility for any product or any money dealings.<br><br>
+
+            •Any language or references which can lead to any kind of harassment is strictly banned and can lead to serious consequences.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
