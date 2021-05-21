@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Ad } from 'src/models/Ad';
 import { User } from 'src/models/User';
 import { AdService } from 'src/services/ad.service';
@@ -26,6 +27,7 @@ export class TopNavComponent implements OnInit {
   unseenChatCount:number = 0;
   chatCount:number = 0;
   unseenChats:any[] = [];
+  subscription!:Subscription;
 
   constructor(private adService:AdService,private chatService:ChatService,public dataService:DataService,private notificationService:NotificationsService,private searchService:SearchService,private router:Router,private eRef: ElementRef) {
     this.isLoggedIn = localStorage.getItem('user')!=null;
@@ -129,7 +131,7 @@ export class TopNavComponent implements OnInit {
       this.dataService.setUnseenNotifications(this.unseenNotifications);
     });
 
-    this.notificationService.getFireStoreNotifications(this.user.id).subscribe((notifications:any[])=>{
+    this.subscription = this.notificationService.getFireStoreNotifications(this.user.id).subscribe((notifications:any[])=>{
       //this.unseenNotifications = notifications.findIndex((n:any)=>!n.viewed)!=-1;
       notifications.forEach(notification=>{
         if(!notification.isDisplayed){
@@ -138,5 +140,9 @@ export class TopNavComponent implements OnInit {
         }
       });
     })
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }

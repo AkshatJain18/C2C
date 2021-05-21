@@ -74,17 +74,6 @@ export class ChatWindowComponent implements OnInit {
     return map;
   }
 
-  @HostListener('document:click', ['$event'])
-  clickout(event: { target: any; }) {
-    if(this.eRef.nativeElement.contains(event.target)) {
-      //clicked inside top nav
-    } else {
-      //clicked outside top nav
-      //this.isChatOpen = false;
-      //this.closeChatWindow();
-    }
-  }
-
   closeChatWindow(){
     this.subscription.unsubscribe();
     this.hideChatWindow.emit();

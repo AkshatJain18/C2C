@@ -17,7 +17,13 @@
           <div class="images" *ngIf="imageSelected">
             <img  [src]="url" alt="">
           </div>
-          <div class="control-buttons">
+
+          <div class="d-flex align-items-center mt-2">
+            <span class="text-dark text-small">Your ID : </span>
+            <span class="text-blue text-small font-700 ml-1">{{userDetails.id}}</span>
+          </div>
+
+          <div class="control-buttons align-items-center">
             <label *ngIf="imageSelected" for="file-upload" class="custom-file-upload">
               <i class="fa fa-pencil"></i>
             </label>
